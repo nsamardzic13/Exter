@@ -36,4 +36,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sport(){
+        return $this->hasOne(Sport::class);
+    }
+
+    public function availability(){
+        return $this->hasOne(Availability::class);
+    }
+
+    public function hangout(){
+        return $this->hasOne(Hangout::class);
+    }
 }
