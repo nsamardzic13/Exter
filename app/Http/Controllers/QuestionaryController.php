@@ -9,20 +9,14 @@ use Illuminate\Http\Request;
 class QuestionaryController extends Controller
 {
     public function index(){
-        //$user = factory(\App\User::class)->create();
-        //OVO BI SE TREABLO POZVAT U TRENUTKU KAD JE USER NAPRAVLJEN
-        /*$user = auth()->user();
-        $sport = new Sport();
-        $user->sport()->save($sport);*/
         $user = auth()->user();
         $sportcolumns = $user->sport->getTableColumns();
-        //$sports->nth(1, 3);
-        //dd($sports);
         return view('questionary.index', compact('user', 'sportcolumns'));
     }
 
     public function store(Request $request){
         $user = auth()->user();
+        //THIS CODE IS IN CASE WE DONT WONT USER TO EDIT HIS CHOICES AFTER HIS FINISHED
         /*foreach ($request->sports as $sport){
             //dd($user->sport->$sport);
             $user->sport->$sport = 1;
@@ -50,7 +44,5 @@ class QuestionaryController extends Controller
             }
         }
         return redirect('/questionary');
-        //dd(Sport::where('user_id', $user->id)->get());
-        //dd($user->sport->basketball);
     }
 }
