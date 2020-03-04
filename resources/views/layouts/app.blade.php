@@ -23,7 +23,7 @@
     <div id="app">
         @include('nav')
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>

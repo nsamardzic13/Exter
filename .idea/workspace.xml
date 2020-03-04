@@ -3,11 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6bdc332a-f2ed-498d-b504-30138fbc1915" name="Default Changelist" comment="izvuko nav iz app.blade try 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/QuestionaryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/QuestionaryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_02_142145_create_hangouts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_02_142145_create_hangouts_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_02_142219_create_availabilities_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_02_142219_create_availabilities_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/questionary/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionary/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +201,7 @@
       <updated>1583076323595</updated>
       <workItem from="1583076334663" duration="9543000" />
       <workItem from="1583158532370" duration="21688000" />
-      <workItem from="1583254416414" duration="2456000" />
+      <workItem from="1583254416414" duration="13774000" />
     </task>
     <servers />
   </component>
@@ -242,9 +241,9 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1583076336204" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1583172287559">
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1583257819073">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1583172287559" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1583257819073" />
   </component>
 </project>

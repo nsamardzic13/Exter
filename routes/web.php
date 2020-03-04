@@ -17,4 +17,8 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/questionary', 'QuestionaryController@index');
-Route::post('/questionary', 'QuestionaryController@store');
+
+Route::get('/questionary/sports', 'SportsController@index');
+Route::post('/questionary/sports', 'SportsController@store');
+Route::get('/questionary/hangouts', 'HangoutsController@index');
+Route::get('/questionary/availability', 'AvailabilitiesController@index');

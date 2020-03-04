@@ -1,93 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="ml-2">{{ $user->name }}</h1>
-    <form action="/questionary" method="POST">
-        <div class="form-check">
-                @foreach($sportcolumns as $sportKey => $sportValue)
-                    @if($sportKey < 2 || $sportKey > count($sportcolumns)-3)
-                        @continue
-                    @endif
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck{{ $sportKey }}" name="sports[]" value="{{ $sportValue }}"
-                            {{ $user->sport[$sportValue] == true ? 'checked' : '' }}>
-                            <label class="custom-control-label" for="customCheck{{ $sportKey }}">{{ $sportValue }}</label>
-                        </div>
-            @endforeach
-        </div>
-        <button type="submit" class="btn btn-primary my-2 ml-3">Submit</button>
-        @csrf
-    </form>
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Questionary</h1>
+                <p class="lead text-muted">
+                    neki opis kratki slatki
+                </p>
+                <p>
+                    mozda jos nes
+                </p>
+            </div>
+        </section>
+        <div class="album py-4 bg-light">
+            <div class="container">
+                <div class="row">
 
-        <div class="container">
-            <div class="row hidden-md-up">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-block">
-                            <h4 class="card-title">Card title</h4>
-                            <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                            <p class="card-text p-y-1">Some quick example text to build on the card title .</p>
-                            <a href="#" class="card-link">link</a>
-                            <a href="#" class="card-link">Second link</a>
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="{{asset('images/sport.png')}}">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Mozda nesto tu
+                                </p>
+                                <div class="align-items-center">
+                                    <p class="text-center">
+                                        <a href="/questionary/sports"><button type="button" style="background-color: #FF8663;" class="btn btn-outline-danger btn-lg"><b>Ispuni</b></button></a>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-block">
-                            <h4 class="card-title">Card title</h4>
-                            <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                            <p class="card-text p-y-1">Some quick example text to build on the card title .</p>
-                            <a href="#" class="card-link">link</a>
-                            <a href="#" class="card-link">Second link</a>
+
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="{{asset('images/hangout.png')}}">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Mozda nesto tu
+                                </p>
+                                <div class="align-items-center">
+                                    <p class="text-center">
+                                        <a href="/questionary/hangouts"><button type="button" style="background-color: #FF8663;" class="btn btn-outline-danger btn-lg"><b>Ispuni</b></button></a>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-block">
-                            <h4 class="card-title">Card title</h4>
-                            <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                            <p class="card-text p-y-1">Some quick example text to build on the card title .</p>
-                            <a href="#" class="card-link">link</a>
-                            <a href="#" class="card-link">Second link</a>
+
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="{{asset('images/availability.png')}}">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Mozda nesto tu
+                                </p>
+                                <div class="align-items-center">
+                                    <p class="text-center">
+                                        <a href="/questionary/availability"><button type="button" style="background-color: #FF8663;" class="btn btn-outline-danger btn-lg"><b>Ispuni</b></button></a>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div><br>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-block">
-                            <h4 class="card-title">Card title</h4>
-                            <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                            <p class="card-text p-y-1">Some quick example text to build on the card title .</p>
-                            <a href="#" class="card-link">link</a>
-                            <a href="#" class="card-link">Second link</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-block">
-                            <h4 class="card-title">Card title</h4>
-                            <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                            <p class="card-text p-y-1">Some quick example text to build on the card title .</p>
-                            <a href="#" class="card-link">link</a>
-                            <a href="#" class="card-link">Second link</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-block">
-                            <h4 class="card-title">Card title</h4>
-                            <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                            <p class="card-text p-y-1">Some quick example text to build on the card title .</p>
-                            <a href="#" class="card-link">link</a>
-                            <a href="#" class="card-link">Second link</a>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
