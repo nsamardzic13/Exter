@@ -5,6 +5,7 @@
         <div class="container text-center">
             <h1 class="display-4" style="color: whitesmoke">Questionary</h1>
             <p class="lead" style="font-weight: revert; color: #343a40">Pick some of your favourite sports, and when and how you like to spend your free time</p>
+            <img src="{{ asset('images/quest/check.png') }}" style="height: 150px; width: 430px;">
             <hr>
         </div>
     </div>

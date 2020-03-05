@@ -58,7 +58,9 @@
 .bg-gradient-primary-to-secondary {
     background-color: #f53b57;
     background-image: linear-gradient(135deg, #e32743 0%, rgba(255, 121, 63, 0.8) 100%);
-    min-height: 305px !important;
-    margin: auto;
+    min-height: 200px !important;
+    padding-bottom: 5px;
+    margin-bottom: 0px;
+    //margin: auto;
     //height: 70px !important;
 }
