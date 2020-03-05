@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function hangout(){
         return $this->hasOne(Hangout::class);
     }
+
+    public function occasions(){
+        return $this->hasMany(Occasion::class);
+    }
 }
