@@ -24,3 +24,9 @@ Route::get('/questionary/hangouts', 'HangoutsController@index');
 Route::post('/questionary/hangouts', 'HangoutsController@store');
 Route::get('/questionary/availability', 'AvailabilitiesController@index');
 Route::post('/questionary/availability', 'AvailabilitiesController@store');
+
+
+Route::get('/events', 'OccasionsController@index');
+Route::get('/events/create', 'OccasionsController@create');
+Route::post('/events', 'OccasionsController@store');
+Route::get('/events/{occasion}', 'OccasionsController@show');
