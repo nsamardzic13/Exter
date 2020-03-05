@@ -18,11 +18,12 @@ class CreateAvailabilitiesTable extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->boolean('weekends')->default(0);
-            $table->boolean('work_days')->default(0);
-            $table->boolean('mornings')->default(0);
-            $table->boolean('afternoons')->default(0);
-            $table->boolean('evenings')->default(0);
+            $table->boolean('morning')->default(0);
+            $table->boolean('afternoon')->default(0);
+            $table->boolean('evening')->default(0);
+            $table->boolean('weekend')->default(0);
+            $table->boolean('workday')->default(0);
+
             $table->timestamps();
         });
     }

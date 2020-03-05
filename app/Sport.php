@@ -13,10 +13,7 @@ class Sport extends Model{
         return $this->belongsTo(User::class);
     }
 
-    public function getTableColumns()
-    {
-
+    public function getTableColumns(){
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
-
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Availability;
+use App\Hangout;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Sport;
@@ -72,7 +74,11 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         $sport = new Sport();
+        $hangout = new Hangout();
+        $availability = new Availability();
         $user->sport()->save($sport);
+        $user->hangout()->save($hangout);
+        $user->availability()->save($availability);
         return $user;
     }
 }

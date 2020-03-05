@@ -21,12 +21,12 @@ class CreateSportsTable extends Migration
             $table->boolean('football')->default(0);
             $table->boolean('basketball')->default(0);
             $table->boolean('handball')->default(0);
-            $table->boolean('water_polo')->default(0);
-            $table->boolean('squash')->default(0);
             $table->boolean('tennis')->default(0);
-            $table->boolean('badminton')->default(0);
+            $table->boolean('water-polo')->default(0);
             $table->boolean('cycling')->default(0);
-            $table->boolean('climbing')->default(0);
+            $table->boolean('squash')->default(0);
+            $table->boolean('hiking')->default(0);
+            $table->boolean('badminton')->default(0);
             $table->boolean('bowling')->default(0);
             $table->boolean('fitness')->default(0);
             $table->boolean('rugby')->default(0);

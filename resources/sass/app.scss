@@ -1,10 +1,64 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
+// Font-awesome
+@import 'node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+//Questionary buttons design
+.btn-outline-quest{
+    color: #FF8663;
+    background-color: #ffffff;
+    border-color: #FF8663;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+.btn-outline-quest:hover,
+.btn-outline-quest:active,
+.btn-outline-quest:focus,
 
+.btn-outline-quest.active{
+    background: #FF8663;
+    color: #ffffff;
+    border-color: #FF8663;
+    box-shadow: none !important;
+    outline: none !important;
+}
+//Css for cards in questionary
+.zoom:hover,
+.zoom.hover{
+    transform: scale(1.1);
+    transition: all ease 400ms;
+    border-color: #F56942;
+    border-width: 0.9px;
+}
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+//Css for paralax image in jumbotron
+.quest-parallax {
+    //background-image: url("public/images/thinking.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    //background-repeat: no-repeat;
+    //background-size: cover;
+    box-shadow: 0 0 8px 0 #0E0E0E;
+    height: 100%;
+}
+
+.bg-gradient-primary-to-secondary {
+    background-color: #f53b57;
+    background-image: linear-gradient(135deg, #e32743 0%, rgba(255, 121, 63, 0.8) 100%);
+    min-height: 305px !important;
+    margin: auto;
+    //height: 70px !important;
+}

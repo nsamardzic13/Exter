@@ -21,4 +21,6 @@ Route::get('/questionary', 'QuestionaryController@index');
 Route::get('/questionary/sports', 'SportsController@index');
 Route::post('/questionary/sports', 'SportsController@store');
 Route::get('/questionary/hangouts', 'HangoutsController@index');
+Route::post('/questionary/hangouts', 'HangoutsController@store');
 Route::get('/questionary/availability', 'AvailabilitiesController@index');
+Route::post('/questionary/availability', 'AvailabilitiesController@store');

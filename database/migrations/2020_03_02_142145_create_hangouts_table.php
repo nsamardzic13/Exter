@@ -18,13 +18,14 @@ class CreateHangoutsTable extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->boolean('movie_night')->default(0);
-            $table->boolean('game_night')->default(0);
-            $table->boolean('speed_dating')->default(0);
-            $table->boolean('pub_quiz')->default(0);
-            $table->boolean('open_mic_night')->default(0);
+            $table->boolean('movie-night')->default(0);
+            $table->boolean('game-night')->default(0);
+            $table->boolean('speed-dating')->default(0);
+            $table->boolean('pub quiz')->default(0);
+            $table->boolean('watching-games')->default(0);
+            $table->boolean('open-mic-night')->default(0);
             $table->boolean('camping')->default(0);
-            $table->boolean('drunk_activities')->default(0);
+            $table->boolean('drinking-activities')->default(0);
 
             $table->timestamps();
         });

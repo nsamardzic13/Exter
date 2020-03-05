@@ -40,6 +40,6 @@ class SportsController extends Controller{
                 $user->sport->save();
             }
         }
-        return redirect('/questionary');
+        return redirect('/questionary')->with('message', 'Your sport picks have been changed');
     }
 }

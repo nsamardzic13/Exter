@@ -10,4 +10,8 @@ class Hangout extends Model{
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function getTableColumns(){
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
 }
