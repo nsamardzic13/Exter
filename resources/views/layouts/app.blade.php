@@ -23,7 +23,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <link rel="shortcut icon" href="{{ asset('images/logo/titleicon.jpg') }}" />
+    <link rel="shortcut icon" href="{{ asset('images/logo/title-transp.png') }}" />
 </head>
 <body>
     <div id="app">
