@@ -22,6 +22,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link rel="shortcut icon" href="{{ asset('images/logo/titleicon.jpg') }}" />
 </head>
 <body>
     <div id="app">
@@ -31,5 +33,7 @@
             @yield('content')
         </main>
     </div>
+
+    @include('footer')
 </body>
 </html>

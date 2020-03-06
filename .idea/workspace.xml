@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/questionary/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/questionary/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -207,7 +208,11 @@
       <workItem from="1583158532370" duration="21688000" />
       <workItem from="1583254416414" duration="13908000" />
       <workItem from="1583329497052" duration="23023000" />
-      <workItem from="1583411072759" duration="19014000" />
+      <workItem from="1583411072759" duration="19143000" />
+      <workItem from="1583439680066" duration="176000" />
+      <workItem from="1583440373552" duration="293000" />
+      <workItem from="1583451435717" duration="1079000" />
+      <workItem from="1583493834644" duration="12371000" />
     </task>
     <servers />
   </component>
@@ -251,17 +256,19 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1237" height="160" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1583094057022" />
-    <state x="313" y="184" key="com.intellij.ide.util.TipDialog" timestamp="1583329496529">
+    <state x="313" y="184" key="com.intellij.ide.util.TipDialog" timestamp="1583493836753">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1583329496529" />
+    <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1583493836753" />
+    <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1583451449639" />
     <state x="507" y="207" width="250" height="278" key="jetbrains.javascript.buildTools.run-task-popup" timestamp="1583427672475">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="507" y="207" width="250" height="278" key="jetbrains.javascript.buildTools.run-task-popup/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1583427672475" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1583431340098">
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1583506992174">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1583431340098" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1583506992174" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1583451600137" />
   </component>
 </project>

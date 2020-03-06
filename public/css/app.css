@@ -22702,18 +22702,50 @@ a.text-dark:focus {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.quest-parallax {
-  background-attachment: fixed;
-  background-position: center;
-  box-shadow: 0 0 8px 0 #0E0E0E;
-  height: 100%;
-}
-
 .bg-gradient-primary-to-secondary {
   background-color: #f53b57;
   background-image: linear-gradient(135deg, #e32743 0%, rgba(255, 121, 63, 0.8) 100%);
   min-height: 200px !important;
   padding-bottom: 5px;
   margin-bottom: 0px;
+}
+
+/*.fill {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0.3;
+    left: 0;
+    background-size: cover;
+    //background-image: url('/public/images/quest/under.png');
+}*/
+
+footer {
+  color: #dae0e5;
+  background-color: #3f3f3f;
+  padding-top: 1rem;
+}
+
+hr.light {
+  border-top: 1px solid #d5d5d5;
+  width: 75%;
+  maring-top: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+hr.light-100 {
+  border-top: 1px solid #d5d5d5;
+  width: 100%;
+  maring-top: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.social a {
+  font-size: 3em;
+  padding: 2rem;
+}
+
+.footer-col {
+  height: 210px;
 }
 
