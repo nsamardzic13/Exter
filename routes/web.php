@@ -11,8 +11,10 @@
 |
 */
 
-
-Auth::routes();
+//Route if we dont use verify email
+//Auth::routes();
+//Rouse if we do
+Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
 
