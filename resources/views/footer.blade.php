@@ -16,7 +16,7 @@
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col-sm-4 footer-col">
-                <img src="{{ asset('images/logo/logo-transp.png') }}" style="width: 38%; height: 35%">
+                <img class="img-fluid" src="{{ asset('images/logo/logo-transp.png') }}" style="width: 30%; height: auto">
                 <hr class="light">
                 <p>exter@gmail.com</p>
                 <p>51000 Rijeka, Hrvatska</p>

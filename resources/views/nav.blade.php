@@ -1,16 +1,22 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar fixed-top navbar-expand-md navbar--color--ghost py-3 rounded" data-startColor="navbar--color--ghost" data-startSize="py-3" data-intoColor="navbar--color--white" data-intoSize="py-0">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Exter') }}
+            <img class="img-fluid" src="{{ asset('/images/logo/logo-transp-sm.png') }}" style="width: 60%; height: auto; overflow: hidden">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
+            <!-- <span style="color: whitesmoke" ><span class="navbar-toggler-icon"></span></span> -->
+            <i class="fas fa-angle-double-down fa-2x nav-toggle-icon"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-
+                <li class="nav-item">
+                    <a href="/questionary" class="nav-link"><b>Questionary</b></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/events" class="nav-link"><b>Events</b></a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->

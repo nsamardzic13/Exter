@@ -22708,6 +22708,7 @@ a.text-dark:focus {
   min-height: 200px !important;
   padding-bottom: 5px;
   margin-bottom: 0px;
+  padding-top: 45px;
 }
 
 /*.fill {
@@ -22747,5 +22748,53 @@ hr.light-100 {
 
 .footer-col {
   height: 210px;
+}
+
+.navbar {
+  border: none;
+  transition: 0.4s;
+  /* --- navbar sizes --- */
+  /* --- navbar colors --- */
+}
+
+.navbar-brand {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: #4b4b4b;
+  max-width: 200px;
+}
+
+.navbar--color--white {
+  background: #fff;
+}
+
+.navbar--color--ghost {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.navbar--color--ghost .navbar-brand,
+.navbar--color--ghost .navbar-text,
+.navbar--color--ghost .nav-toggle-icon,
+.navbar--color--ghost a {
+  color: #fff;
+}
+
+.navbar--color--white .nav-toggle-icon {
+  color: #FF8663;
+}
+
+.navbar--color--white a {
+  color: #4b4b4b;
+}
+
+.navbar--color--ghost .dropdown-menu {
+  background-color: #FF8663;
+}
+
+.space-for-nav {
+  background-color: #f53b57;
+  background-image: linear-gradient(135deg, #e32743 0%, rgba(255, 121, 63, 0.8) 100%);
+  min-height: 100px;
+  margin-bottom: 0px;
 }
 
