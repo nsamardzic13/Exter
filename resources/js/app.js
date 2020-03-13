@@ -89,3 +89,16 @@ setInterval(() => {
     }
     // take a breath.. hold event listener from firing for 100ms
 }, 100);
+
+
+function hideDays(){
+    document.getElementById('days').style.display = 'none';
+    document.getElementById('date').style.display = 'initial';
+}
+
+function hideDate(){
+    document.getElementById('date').style.display = 'none';
+    document.getElementById('days').style.display = 'initial';
+}
+
+
