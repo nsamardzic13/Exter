@@ -12,12 +12,12 @@
                             @csrf
 
                             <div class="form-group row">
-                                <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                                    @error('username')
+                                    @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -61,41 +61,24 @@
                                 </div>
                             </div>
 
-{{--                            <div class="form-group row">
-                                <label for="birth_year" class="col-md-4 col-form-label text-md-right">{{ __('Birth Year') }}</label>
-
-                                <div class="col-md-6">
-                                    <select name="birth_year" id="birth_year" class="form-control">
-                                        @foreach($years as $yr)
-                                            <option value="{{ $yr }}"> {{ $yr }} </option>
-                                        @endforeach
-                                    </select>
-
-                                    @error('birth_year')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>--}}
-
                             <div class="form-group row">
                                 <label for="user_type" class="col-md-4 col-form-label text-md-right">{{ __('Account Type') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="user_type" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
-
-                                    @error('user_type')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn active btn-outline-quest">
+                                            <input type="radio" name="user_type" id="user_type" value=0 autocomplete="off" checked> Private
+                                        </label>
+                                        <label class="btn btn-outline-quest">
+                                            <input type="radio" name="user_type" id="user_type" value=1 autocomplete="off"> Bussiness
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-success">
                                         {{ __('Register') }}
                                     </button>
                                 </div>
