@@ -49526,7 +49526,15 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app'
 });
-AOS.init(); //code for navbar scroll
+AOS.init();
+$(document).on('click', '#hideDays', function () {
+  document.getElementById('days').style.display = 'none';
+  document.getElementById('date').style.display = 'initial';
+});
+$(document).on('click', '#hideDate', function () {
+  document.getElementById('date').style.display = 'none';
+  document.getElementById('days').style.display = 'initial';
+}); //code for navbar scroll
 // grabbing the class names from the data attributes
 
 var navBar = $('.navbar');
@@ -49544,9 +49552,8 @@ function switchInto() {
   navBar.addClass(data.intocolor);
   navBar.addClass(data.intosize);
   console.log('into transition triggered!');
-}
+} // transition back into bigge nav
 
-; // transition back into bigge nav
 
 function switchStart() {
   // update `scrolledPast` bool

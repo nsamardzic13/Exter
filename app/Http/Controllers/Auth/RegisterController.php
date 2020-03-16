@@ -75,6 +75,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'user_type' => $data['user_type'],
         ]);
+
         $sport = new Sport();
         $hangout = new Hangout();
         $availability = new Availability();

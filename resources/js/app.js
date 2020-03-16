@@ -33,6 +33,17 @@ const app = new Vue({
 
 AOS.init();
 
+$(document).on('click', '#hideDays', function () {
+    document.getElementById('days').style.display = 'none';
+    document.getElementById('date').style.display = 'initial';
+});
+
+$(document).on('click', '#hideDate', function () {
+    document.getElementById('date').style.display = 'none';
+    document.getElementById('days').style.display = 'initial';
+});
+
+
 //code for navbar scroll
 // grabbing the class names from the data attributes
 const navBar = $('.navbar');
@@ -52,7 +63,7 @@ function switchInto() {
     navBar.addClass(data.intocolor);
     navBar.addClass(data.intosize);
     console.log('into transition triggered!')
-};
+}
 
 // transition back into bigge nav
 function switchStart() {
@@ -91,14 +102,6 @@ setInterval(() => {
 }, 100);
 
 
-function hideDays(){
-    document.getElementById('days').style.display = 'none';
-    document.getElementById('date').style.display = 'initial';
-}
 
-function hideDate(){
-    document.getElementById('date').style.display = 'none';
-    document.getElementById('days').style.display = 'initial';
-}
 
 

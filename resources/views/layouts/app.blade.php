@@ -29,7 +29,7 @@
     <div id="app">
         @include('nav')
         <div class="container-fluid space-for-nav"></div>
-        
+
         <main>
 
         <main>

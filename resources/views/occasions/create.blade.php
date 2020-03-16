@@ -53,11 +53,11 @@ $user = Auth::user();
                                     <p>When?</p>
                                     <div class="btn-group-toggle mb-2 px-5 row" data-toggle="buttons">
                                     <label class="btn btn-outline-quest col">
-                                        <input type="radio"  name="when" value="0"  onclick="hideDays()" />
+                                        <input type="radio"  id="hideDays" name="when" value="0"  onclick="hideDays()" />
                                         Just one time on certain date
                                     </label>
                                     <label class="btn btn-outline-quest col">
-                                        <input type="radio"  name="when" value="1"  onclick="hideDate()"/>
+                                        <input type="radio"  id="hideDate" name="when" value="1"  onclick="hideDate()"/>
                                         Repeat on specified days
                                     </label>
 
