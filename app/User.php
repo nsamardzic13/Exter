@@ -52,4 +52,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function occasions(){
         return $this->hasMany(Occasion::class);
     }
+
+    public function groups(){
+        return $this->belongsToMany(Group::class)->withTimestamps();
+    }
 }

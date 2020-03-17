@@ -49589,7 +49589,34 @@ setInterval(function () {
     }
   } // take a breath.. hold event listener from firing for 100ms
 
-}, 100);
+}, 100); //AUTOCOMPLETE for adding users in groups
+
+$(document).ready(function () {
+  $('#user_name').keyup(function () {
+    var query = $(this).val();
+
+    if (query != '') {
+      var _token = $('input[name="_token"]').val();
+
+      $.ajax({
+        url: '/autocomplete',
+        method: "POST",
+        data: {
+          query: query,
+          _token: _token
+        },
+        success: function success(data) {
+          $('#userList').fadeIn();
+          $('#userList').html(data); //console.log('aaa');
+        }
+      });
+    }
+  });
+  $(document).on('click', 'a', function () {
+    $('#user_name').val($(this).text());
+    $('#userList').fadeOut();
+  });
+});
 
 /***/ }),
 

@@ -27,8 +27,13 @@ Route::post('/questionary/hangouts', 'HangoutsController@store');
 Route::get('/questionary/availability', 'AvailabilitiesController@index');
 Route::post('/questionary/availability', 'AvailabilitiesController@store');
 
-
 Route::get('/events', 'OccasionsController@index');
 Route::get('/events/create', 'OccasionsController@create');
 Route::post('/events', 'OccasionsController@store');
 Route::get('/events/{occasion}', 'OccasionsController@show');
+
+Route::get('/groups', 'GroupsController@index');
+Route::post('/groups', 'GroupsController@store');
+Route::get('groups/{group}', 'GroupsController@show');
+Route::patch('groups/{group}', 'GroupsController@update');
+Route::post('/autocomplete', 'AutocompleteController@fetch_names');
