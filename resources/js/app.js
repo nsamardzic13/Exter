@@ -44,6 +44,48 @@ $(document).on('click', '#hideDate', function () {
 });
 
 
+function setAtt(n){
+    $input = $("#time" + String(n) + " > p.title");
+    $input.html("Event time - " + String(n));
+
+    $input = $("#time" + String(n) + " > div.form-group > label:first");
+    $input.attr("for", "time-start[" + String(n)+"]");
+    $input = $("#time" + String(n)+" > div.form-group > input:first");
+    $input.attr("name", "time-start[" + String(n)+"]");
+
+    $input = $("#time" + String(n)+" > div.form-group > input:first");
+    $input.attr("for", "time-end[" + String(n)+"]");
+    $input = $("#time" + String(n)+" > div.form-group > input:last");
+    $input.attr("name", "time-end[" + String(n)+"]");
+
+    $input = $("#time" + String(n)+" > div.btn-group-toggle  label.btn input:checkbox");
+    $input.attr("name", "day" + String(n)+"[]");
+};
+var n = 0;
+$(document).on('click', '#addtime', function () {
+    n++;
+    if (n == 1) {
+        // $("#time[" + String(n)+"]").attr("id", "time[" + String(n)+"]");
+        setAtt(n);
+        n++;
+    }
+    if (n < 10) {
+        $clone = $("#time1").clone()
+
+        $("#time").append($clone);
+        $clone.attr("id", "time" + String(n));
+        setAtt(n);
+    }
+});
+$(document).on('click', '#removetime', function () {
+    $id = "#time"+n;
+    $($id).remove();
+    n--;
+});
+
+
+
+
 //code for navbar scroll
 // grabbing the class names from the data attributes
 const navBar = $('.navbar');
