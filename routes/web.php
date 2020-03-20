@@ -36,3 +36,7 @@ Route::post('/groups', 'GroupsController@store');
 Route::get('groups/{group}', 'GroupsController@show');
 Route::patch('groups/{group}', 'GroupsController@update');
 Route::post('/autocomplete', 'AutocompleteController@fetch_names');
+
+Route::get('/user/{user}', 'UsersController@index');
+Route::get('/user/{user}/edit', 'UsersController@edit');
+Route::post('/user/{user}', 'UsersController@update');
