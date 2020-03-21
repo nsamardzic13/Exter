@@ -29,8 +29,7 @@ class GroupsController extends Controller{
         $group->save();
         //add user group in pivot table too
         $user->groups()->syncWithoutDetaching([$group->id]);
-
-        return redirect('groups');
+        return redirect('user/'.$user->id)->with('message', 'Group has been added');
     }
 
     public function show(Group $group){

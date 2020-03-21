@@ -8,6 +8,10 @@ use Intervention\Image\Facades\Image;
 
 class UsersController extends Controller
 {
+    public function index(User $user){
+        return view('user.index', compact('user'));
+    }
+
 
     public function edit(User $user) {
         //get current user

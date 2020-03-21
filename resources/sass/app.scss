@@ -13,6 +13,14 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+//css for profile questionary card
+.quest-profile{
+    border-style: solid;
+    border-width: 0.7px;
+    border-color: #E32743;
+    //box-shadow: #E32743;
+}
+
 //Questionary buttons design
 .btn-outline-quest{
     color: #FF8663;
@@ -21,17 +29,37 @@
     font-weight: bold;
     letter-spacing: 0.05em;
 }
-.btn-outline-quest:hover,
-.btn-outline-quest:active,
-.btn-outline-quest:focus,
 
-.btn-outline-quest.active{
-    background: #FF8663;
+.btn-outline-quest2{
+    color: #E32743;
+    background-color: #ffffff;
+    border-color: #E32743;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+.btn-outline-quest2:hover,
+.btn-outline-quest2:active,
+.btn-outline-quest2:focus,
+.btn-outline-quest2.hover{
+    background-color: #E32743;
     color: #ffffff;
-    border-color: #FF8663;
+    border-color: #E32743;
     box-shadow: none !important;
     outline: none !important;
 }
+
+.btn-outline-quest:hover,
+.btn-outline-quest:active,
+.btn-outline-quest:focus,
+.btn-outline-quest.active{
+     background: #FF8663;
+     color: #ffffff;
+     border-color: #FF8663;
+     box-shadow: none !important;
+     outline: none !important;
+ }
+
 //Css for cards in questionary
 .zoom:hover,
 .zoom.hover{
@@ -141,5 +169,11 @@ hr.light-100{
     //padding-bottom: 5px;
     margin-bottom: 0px;
     //margin: auto;
+}
+
+.group-card:hover,
+.group-card.hover{
+    filter: brightness(95%);
+    cursor: pointer;
 }
 
