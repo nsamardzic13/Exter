@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('description')->nullable();
             $table->boolean('user_type');
             $table->string('profile_pic')->nullable();
+            $table->longText('user_gallary')->nullable();
             /*$table->string('file_path');*/
             $table->rememberToken();
             $table->timestamps();

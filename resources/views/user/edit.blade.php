@@ -119,6 +119,15 @@
                                 </div>
                             </div>
 
+                            @if ($user->user_type == True)
+                            <div class="form-group row">
+                                <label for="multiple_images" class="col-md-4 col-form-label text-md-right">{{ __('Multiple Images') }}</label>
+                                <div class="col-md-6">
+                                    <input id="multiple_images" type="file" class="form-control" name="multiple_images[]" autocomplete="multiple_images" multiple>
+                                </div>
+                            </div>
+                            @endif
+
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
@@ -127,6 +136,11 @@
                                     </button>
                                 </div>
                             </div>
+{{--                            PRINT MULTIPLE IMAGES--}}
+{{--                            @foreach(json_decode($user->user_gallary) as $pic)--}}
+{{--                                <p>{{ asset('storage/' . $pic) }}</p>--}}
+{{--                                <img src="{{ asset('storage/' . $pic) }}">--}}
+{{--                            @endforeach--}}
                         </form>
                     </div>
                 </div>
