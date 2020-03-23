@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Occasion extends Model
 {
-   
+
     protected $guarded = [];
 
     public function getEndedAttribute($attribute){
@@ -16,7 +16,7 @@ class Occasion extends Model
 		][$attribute];
 	}
 
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function users(){
+        return $this->belongsToMany(User::class)->withTimestamps();;
     }
 }

@@ -50,7 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function occasions(){
-        return $this->hasMany(Occasion::class);
+        return $this->belongsToMany(Occasion::class)->withTimestamps();
     }
 
     public function groups(){

@@ -28,6 +28,7 @@
                                             <h5 class="card-title">{{ $event->name }}</h5>
                                             <h6 class="card-subtitle mb-2 text-muted">{{ date('d.m.Y h:i', strtotime($event->start))}}</h6>
                                             <h6 class="card-subtitle mb-2 text-muted">{{ $event->category }}</h6>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{ $event->user_name }}</h6>
                                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                             <button type="button" class="btn btn-outline-success btn-lg my-2 ml-4 center-block" data-toggle="modal" data-target="#myModal{{$event->id}}">Open</button>
 

@@ -25,6 +25,7 @@
                                         <div class="border card zoom p-2">
                                             <p> {{ $t->start}}</p>
                                             <p> {{ $t->end}}</p>
+                                            <a href="/events/{{$t->id}}/wall">JOIN</a>
                                         </div>
                                     @endforeach
                                 </div>

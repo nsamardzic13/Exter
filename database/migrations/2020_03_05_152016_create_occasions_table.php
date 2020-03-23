@@ -21,8 +21,7 @@ class CreateOccasionsTable extends Migration
             $table->string('zipcode');
             $table->dateTime('start');
             $table->dateTime('end');
-            $table->unsignedBigInteger('user_id')->index(); //user_id
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('user_name'); //user_id
             $table->string('category');
             $table->integer('max_people')->default(0);
             $table->boolean('ended')->default(0);

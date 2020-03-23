@@ -19,9 +19,10 @@ class OccasionsController extends Controller
 
         $occasions1 = DB::table('occasions')->paginate(12);
 
-        $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, city, min(start) as start, category'))
-            ->groupBy('name', 'user_id', 'street', 'city', 'category')
+        $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, city, min(start) as start, user_name, category'))
+            ->groupBy('name', 'user_name', 'street', 'city', 'category')
             ->paginate(12);
+
         return view('occasions.index', compact('user', 'occasions'));
     }
 
@@ -61,6 +62,8 @@ class OccasionsController extends Controller
         ]);
         unset($data['when']);
 
+        $user = auth()->user();
+
         //multiple days and times
         if (request('when') == '1'){
             //dd());
@@ -88,7 +91,7 @@ class OccasionsController extends Controller
                 // dd("oke");
             }
             //$when = request()->validate($validation);
-            $user_id = Auth::user()->id;
+            $user_name = Auth::user()->name;
 
             $timezone = date_default_timezone_get();
             date_default_timezone_set($timezone);
@@ -113,8 +116,8 @@ class OccasionsController extends Controller
                             $edate = date('Y-m-d', $d) . ' ' . $etime;
 
                             //dd($sdate);
-                            $occasion = Occasion::create(array_merge($data, ['start' => $sdate], ['end' => $edate], ['user_id' => $user_id]));
-
+                            $occasion = Occasion::create(array_merge($data, ['start' => $sdate], ['end' => $edate], ['user_name' => $user->name]));
+                            $occasion->users()->syncWithoutDetaching($user->id);
                         }
 
                     }
@@ -124,14 +127,23 @@ class OccasionsController extends Controller
 
 
         } else {
+
             $when = request()->validate([
-                'start'=> 'required|date|after:today',
-                'end'=> 'required|date|after:start',
+                'start-one'=> 'required|date|after:today',
+                'end-one'=> 'required|date|',
+                'time-start-one'=> 'required',
+                'time-end-one'=> 'required',
             ]);
 
-            $user_id = Auth::user()->id;
 
-            $occasion = Occasion::create(array_merge($data, $when, ['user_id'  =>  $user_id]));
+            $startdate = request('start-one') .' ' . request('time-start-one');
+            //dd($startdate);
+
+            $enddate = request('end-one') .' '. request('time-end-one');;
+            //dd($when);
+            $occasion = Occasion::create(array_merge($data, ['start'  =>  $startdate], ['end'  =>  $enddate], ['user_name'  =>  $user->name]));
+
+            $occasion->users()->syncWithoutDetaching($user->id);
         }
 
 
@@ -142,7 +154,21 @@ class OccasionsController extends Controller
 
     public static function showDataForModal($occasion){
         $time =  DB::table('occasions')->where('name', $occasion->name)->get();
-
+        //dd($time);
         return $time;
+    }
+
+    public static function wall(Occasion $occasion){
+
+        $user = auth()->user();
+        $occasion->users()->syncWithoutDetaching($user->id);
+        $joined = DB::table('users')
+            ->join('occasion_user', 'users.id', '=', 'occasion_user.user_id')
+            ->where('occasion_user.occasion_id', $occasion->id)
+            ->select('users.name')
+            ->get();
+
+        //dd($joined);
+        return view('occasions.wall', compact('joined', 'occasion'));
     }
 }
