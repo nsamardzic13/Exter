@@ -2,6 +2,7 @@
 <?php
 use Illuminate\Support\Facades\Auth;
 $user = Auth::user();
+$name = ["time-start[1]"];
 ?>
 @section('content')
 
@@ -66,18 +67,32 @@ $user = Auth::user();
                                             <div>{{ $errors->first('when') }}</div>
                                             <div id="date"  style="display:none;">
                                                 <div class="form-group">
-                                                    <label for='start'>Start:</label>
-                                                    <input type="datetime-local" name="start"  value="{{ old('start')}}" class="form-control">
+                                                    <label for='start-one'>Start date:</label>
+                                                    <input type="date" name="start-one"  value="{{ old('start-one')}}" class="form-control">
                                                 </div>
-                                                <div>{{ $errors->first('start') }}</div>
+                                                <div>{{ $errors->first('start-one') }}</div>
 
 
                                                 <div class="form-group">
-                                                    <label for='end'>End:</label>
-                                                    <input type="datetime-local" name="end"  value="{{ old('end')}}" class="form-control">
-
+                                                    <label for='end-one'>End date:</label>
+                                                    <input type="date" name="end-one"  value="{{ old('end-one')}}" class="form-control">
                                                 </div>
-                                                <div>{{ $errors->first('end') }}</div>
+                                                <div>{{ $errors->first('end-one') }}</div>
+                                                <div class="container border p-2">
+                                                    <div id= class="pb-5">
+                                                        <p class="title">Event time:</p>
+                                                        <div class="form-group">
+                                                            <label for='time-start-one'>Start time:</label>
+                                                            <input type="time" name="time-start-one" value="{{ old('time-start-one')}}" value="08:00:AM" class="form-control">
+                                                        </div>
+                                                        <div>{{ $errors->first('time-start-one') }}</div>
+                                                        <div class="form-group">
+                                                            <label for='time-end'>End time:</label>
+                                                            <input type="time" name="time-end-one"  value="{{ old('time-end-one')}}" value="09:00:AM" class="form-control">
+                                                        </div>
+                                                        <div>{{ $errors->first('time-end-one') }}</div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div id="days" style="display:none">
                                                 <div class="form-group">

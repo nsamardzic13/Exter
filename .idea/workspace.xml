@@ -3,15 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="6bdc332a-f2ed-498d-b504-30138fbc1915" name="Default Changelist" comment="izvuko nav iz app.blade try 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GroupsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GroupsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_16_105742_create_groups_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_16_105742_create_groups_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OccasionsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OccasionsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Occasion.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Occasion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_05_152016_create_occasions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_05_152016_create_occasions_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/nav.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/occasions/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/occasions/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/occasions/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/occasions/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/occasions/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/occasions/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -300,10 +303,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="297" y="151" key="run.anything.popup/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1584915965103" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1584916058605">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="364" y="1" width="807" height="822" key="search.everywhere.popup" timestamp="1584983013966">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1584916058605" />
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1583849423349" />
+    <state x="364" y="1" width="807" height="822" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1584983013966" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/occasions/create.blade.php</url>
+          <line>67</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

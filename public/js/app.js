@@ -49528,6 +49528,7 @@ var app = new Vue({
 });
 AOS.init();
 $(document).on('click', '#hideDays', function () {
+  //$($days).remove();
   document.getElementById('days').style.display = 'none';
   document.getElementById('date').style.display = 'initial';
 });
@@ -49557,7 +49558,6 @@ $(document).on('click', '#addtime', function () {
   n++;
 
   if (n == 1) {
-    // $("#time[" + String(n)+"]").attr("id", "time[" + String(n)+"]");
     setAtt(n);
     n++;
   }
@@ -49567,12 +49567,15 @@ $(document).on('click', '#addtime', function () {
     $("#time").append($clone);
     $clone.attr("id", "time" + String(n));
     setAtt(n);
+    console.log($clone.html(), n);
   }
 });
 $(document).on('click', '#removetime', function () {
-  $id = "#time" + n;
-  $($id).remove();
-  n--;
+  if (n > 1) {
+    $id = "#time" + n;
+    $($id).remove();
+    n--;
+  }
 }); //code for navbar scroll
 // grabbing the class names from the data attributes
 
