@@ -44,3 +44,5 @@ Route::delete('/user/{group}', 'GroupsController@destroy');
 
 Route::get('/user/{user}/edit', 'UsersController@edit');
 Route::post('/user/{user}/edit', 'UsersController@update');
+
+Route::get('wall', 'MessagesController@index');

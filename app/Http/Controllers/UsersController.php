@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Console\Input\InputArgument;
@@ -13,7 +14,6 @@ class UsersController extends Controller
 {
     public function index(User $user){
         //factory(User::class, 5)->create();
-
         return view('user.index', compact('user'));
     }
 
@@ -32,7 +32,7 @@ class UsersController extends Controller
             'address' => 'nullable',
             'city' => 'nullable',
             'zip_code' => 'nullable|integer',
-            'phone_number' => 'nullable',
+            'phone_number' => ['nullable' , 'regex:/(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,4})/'],
             'about_me' => 'nullable',
             'profile_pic' => 'sometimes|file|image|max:4000',
             'multiple_images.*' => 'sometimes|file|image|max:8000',
@@ -54,7 +54,7 @@ class UsersController extends Controller
             ]);
 
             //resize photo
-            $image = Image::make(public_path('storage/' . $user->profile_pic))->fit(200,200);
+            $image = Image::make(public_path('storage/' . $user->profile_pic))->fit(128,128);
             $image->save();
         }
 

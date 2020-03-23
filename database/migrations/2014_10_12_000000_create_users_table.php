@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('phone_number')->nullable();
             $table->string('description')->nullable();
             $table->boolean('user_type');
-            $table->string('profile_pic')->nullable();
+            $table->string('profile_pic')->default('uploads\/user_default_pic.png');
             $table->longText('user_gallary')->nullable();
             /*$table->string('file_path');*/
             $table->rememberToken();
