@@ -33,17 +33,6 @@ const app = new Vue({
 
 AOS.init();
 
-$(document).on('click', '#hideDays', function () {
-    //$($days).remove();
-    document.getElementById('days').style.display = 'none';
-    document.getElementById('date').style.display = 'initial';
-});
-
-$(document).on('click', '#hideDate', function () {
-    document.getElementById('date').style.display = 'none';
-    document.getElementById('days').style.display = 'initial';
-});
-
 
 function setAtt(n){
     $input = $("#time" + String(n) + " > p.title");
@@ -83,6 +72,19 @@ $(document).on('click', '#removetime', function () {
         $($id).remove();
         n--;
     }
+});
+
+$(document).on('click', '#hideDays', function () {
+    document.getElementById('days').style.display = 'none';
+    document.getElementById('date').style.display = 'initial';
+});
+
+$(document).on('click', '#hideDate', function () {
+    document.getElementById('date').style.display = 'none';
+    document.getElementById('days').style.display = 'initial';
+    setAtt(1);
+    $input = $("#time" + String(n) + " > div.form-group > label:first");
+    console.log($input.attr('name'));
 });
 
 

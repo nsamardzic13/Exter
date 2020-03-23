@@ -66,7 +66,6 @@ class OccasionsController extends Controller
 
         //multiple days and times
         if (request('when') == '1'){
-            //dd());
             $ntime = 1;
             //if we have multiple times
             if(is_array(request('time-start'))){
@@ -87,11 +86,11 @@ class OccasionsController extends Controller
                     'start' => 'required|date|after:today',
                     'time-start' => 'required',
                     'time-end' => 'required|after:time-start',
+                    'day' => 'required',
                 ];
                 // dd("oke");
             }
             //$when = request()->validate($validation);
-            $user_name = Auth::user()->name;
 
             $timezone = date_default_timezone_get();
             date_default_timezone_set($timezone);
@@ -102,6 +101,7 @@ class OccasionsController extends Controller
             for ($i = 1; $i <= $ntime; $i = $i + 1){
 
                 $checkedDays = request('day'.$i);
+                //dd($checkedDays);
 
                 $stime = request('time-start')[$i];
                 $etime = request('time-end')[$i];
