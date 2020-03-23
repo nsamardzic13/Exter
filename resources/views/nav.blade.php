@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-md navbar--color--ghost py-3 rounded" data-startColor="navbar--color--ghost" data-startSize="py-3" data-intoColor="navbar--color--white" data-intoSize="py-0">
+<nav class="navbar fixed-top navbar-expand-md navbar--color--ghost py-1 rounded" data-startColor="navbar--color--ghost" data-startSize="py-1" data-intoColor="navbar--color--white" data-intoSize="py-0">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img class="img-fluid" src="{{ asset('/images/logo/logo-transp-sm.png') }}" style="width: 60%; height: auto; overflow: hidden">
@@ -38,6 +38,14 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a href="/user/{{ Auth::id() }}" class="dropdown-item">
+                                Profile
+                            </a>
+                            <hr class="my-0">
+                            <a href="/user/{{ Auth::id() }}/edit" class="dropdown-item">
+                                Settings
+                            </a>
+                            <hr class="my-0">
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

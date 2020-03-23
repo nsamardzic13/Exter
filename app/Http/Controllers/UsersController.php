@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Symfony\Component\Console\Input\Input;
+use Symfony\Component\Console\Input\InputArgument;
+
 
 class UsersController extends Controller
 {
     public function index(User $user){
+        //factory(User::class, 5)->create();
+
         return view('user.index', compact('user'));
     }
 

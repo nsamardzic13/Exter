@@ -34,10 +34,13 @@ Route::post('/events', 'OccasionsController@store');
 Route::get('/groups', 'GroupsController@index');
 Route::post('/groups', 'GroupsController@store');
 Route::get('groups/{group}', 'GroupsController@show');
-Route::patch('groups/{group}', 'GroupsController@update');
+//Route::patch('groups/{group}', 'GroupsController@update');
 Route::post('/autocomplete', 'AutocompleteController@fetch_names');
 
 Route::get('/user/{user}', 'UsersController@index');
 Route::post('/user/{user}', 'GroupsController@store');
+Route::post('/users/addPersonToGroup', 'GroupsController@update');
+Route::delete('/user/{group}', 'GroupsController@destroy');
+
 Route::get('/user/{user}/edit', 'UsersController@edit');
 Route::post('/user/{user}/edit', 'UsersController@update');

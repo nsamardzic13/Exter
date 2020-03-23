@@ -22671,6 +22671,11 @@ a.text-dark:focus {
   }
 }
 
+.admin-column:hover,
+.admin-column.hover {
+  background-color: #fff3f0;
+}
+
 .quest-profile {
   border-style: solid;
   border-width: 0.7px;
@@ -22819,7 +22824,7 @@ hr.light-100 {
 .space-for-nav {
   background-color: #f53b57;
   background-image: linear-gradient(135deg, #e32743 0%, rgba(255, 121, 63, 0.8) 100%);
-  min-height: 100px;
+  min-height: 80px;
   margin-bottom: 0px;
 }
 

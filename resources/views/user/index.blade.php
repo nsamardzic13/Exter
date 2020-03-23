@@ -7,6 +7,12 @@
         </div>
     @enderror
 
+    @error('description')
+    <div class="alert alert-danger" role="alert" style="border-width: 1px; border-color: #E32743">
+        <strong>Failed adding group</strong> {{  $errors->first('description') }}
+    </div>
+    @enderror
+
     @if(session()->has('message'))
         <div class="alert alert-success" role="alert" style="border-width: 1px; border-color: #27864f">
             <strong>Success</strong> {{ session()->get('message') }}
@@ -99,15 +105,15 @@
 
             <!-- Right side of profile -->
             <div class="col-lg-8 order-lg-2">
-                <ul class="nav nav-pills">
+                <ul class="nav nav-pills" id="tabMenu">
                     <li class="nav-item">
-                        <a href="" data-target="#profile" data-toggle="tab" class="nav-link active"><b>Profile</b></a>
+                        <a  data-toggle="tab" href="#profile" class="nav-link active"><b>Profile</b></a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#events" data-toggle="tab" class="nav-link"><b>Events</b></a>
+                        <a  data-toggle="tab" href="#events" class="nav-link"><b>Events</b></a>
                     </li>
                     <li class="nav-item">
-                        <a href="" data-target="#groups" data-toggle="tab" class="nav-link"><b>Groups</b></a>
+                        <a  data-toggle="tab" href="#groups" class="nav-link"><b>Groups</b></a>
                     </li>
                 </ul>
                 <hr class="my-1">
@@ -203,7 +209,53 @@
                             </div>
                         </div>
 
-                        <!-- Modal for groups-->
+                        @if(count($user->groups))
+                        <div class="mt-4">
+                            <h3>List of all your groups</h3>
+                        </div>
+                        @endif
+                        <table class="table table-hover">
+                            <tbody>
+                            @if(!(count($user->groups)))
+                                <div class="text-center">
+                                    You dont have any groups...
+                                    <p><b>make one and start going on events</b></p>
+                                </div>
+                            @endif
+                            @foreach($user->groups as $group)
+                                @if($group->admin_id == $user->id)
+                                    <tr>
+                                        <td class="align-middle admin-column">
+                                            <span class="float-right font-weight-bold">
+                                                <form action="/user/{{ $group->id }}" method="POST" style="padding: 0px !important;">
+                                                    @method('DELETE')
+                                                    @csrf
+
+                                                 <button type="button" id="{{ $group->id }}" name="btnZaModal" class="btn btn-outline-primary btn-sm"
+                                                         data-toggle="modal" data-target="#addUserToGroup"><i class="fas fa-plus-circle"></i></button>
+                                                <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                                 {{ $group->created_at->format('M Y') }}
+                                                </form>
+
+                                            </span><i class="fas fa-crown"></i> {{ $group->name }}
+                                        </td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td class="align-middle">
+                                            <span class="float-right font-weight-bold">
+                                                 {{ $group->created_at->format('M Y') }}
+                                            </span>{{ $group->name }}
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                            </tbody>
+                        </table>
+
+
+
+                        <!-- Modal for ADD groups-->
                         <div class="modal fade" id="addGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -217,10 +269,15 @@
                                         <form method="POST" action="/user/{{ $user->id }}">
                                             <div class="form-group">
                                                 <label for="name" class="col-form-label">Group name:</label>
-                                                <input type="text" class="form-control" name="name">
+                                                <input type="text" class="form-control" name="name" placeholder="Enter group name:">
                                                 <div>{{ $errors->first('name') }}</div>
                                             </div>
-                                            <div class="modal-footer">
+                                            <div class="form-group">
+                                                <label for="description-text" class="col-form-label">Group description:</label>
+                                                <textarea class="form-control" name="description" placeholder="Write something that makes your group unique:"></textarea>
+                                                <div>{{ $errors->first('description') }}</div>
+                                            </div>
+                                            <div class="modal-footer" style="padding: 1px">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 <button type="submit" class="btn btn-primary">Add Group</button>
                                             </div>
@@ -231,6 +288,34 @@
                             </div>
                         </div>
                         <!-- Here ends modal for adding group -->
+
+                        <!-- Modal for adding user to group -->
+                        <div class="modal fade" id="addUserToGroup" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Add friend to group:</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" id="user_name" name="userName" placeholder="Enter name of a person you want to add to this group" autocomplete="off">
+                                            <div id="errorForAddingUser">{{ $errors->first('userName') }}</div>
+                                            <div id="userList"></div>
+                                        </div>
+                                        <input type="hidden" id="userId" name="{{ $user->id }}" >
+                                        <input type="hidden" value="{{csrf_token()}}" name="_token">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" id="addFriend" class="btn btn-primary">Add friend</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Here ends modal for adding User to group -->
 
                     </div>
 

@@ -104,7 +104,7 @@ function switchInto() {
     navBar.removeClass(data.startsize);
     navBar.addClass(data.intocolor);
     navBar.addClass(data.intosize);
-    console.log('into transition triggered!')
+    //console.log('into transition triggered!')
 }
 
 // transition back into bigge nav
@@ -116,7 +116,7 @@ function switchStart() {
     navBar.addClass(data.startsize);
     navBar.removeClass(data.intocolor);
     navBar.removeClass(data.intosize);
-    console.log('start transition triggered!')
+    //console.log('start transition triggered!')
 }
 
 // set `scrolling` to true when user scrolls
@@ -165,6 +165,74 @@ $(document).ready(function(){
     $(document).on('click', 'a', function () {
         $('#user_name').val($(this).text());
         $('#userList').fadeOut();
+    });
+    $('#user_name').focusout(function (){
+        $('#userList').fadeOut();
+    });
+});
+
+//redirect to specific tab and change url dependent on tab click
+$(document).ready(() => {
+    let url = location.href.replace(/\/$/, "");
+    //console.log(location.href);
+    if (location.hash) {
+        const hash = url.split("#");
+        $('#tabMenu a[href="#'+hash[1]+'"]').tab("show");
+        url = location.href.replace(/\/#/, "#");
+        history.replaceState(null, null, url);
+        setTimeout(() => {
+            $(window).scrollTop(0);
+        }, 150);
+    }
+
+    $('a[data-toggle="tab"]').on("click", function() {
+        let newUrl;
+        const hash = $(this).attr("href");
+        if(hash == "#profile") {
+            newUrl = url.split("#")[0];
+        } else {
+            newUrl = url.split("#")[0] + hash;
+        }
+        newUrl += "/";
+        history.replaceState(null, null, newUrl);
+    });
+});
+
+//scrip for addin' user to group
+var groupId;
+var regUser;
+$(document).ready(function(){
+    $('button[name="btnZaModal"]').click(function(){
+        groupId = $(this).attr('id');
+        regUser = $('#userId').attr('name');
+    });
+
+    $('#addFriend').click(function(){
+        var userName = $('#user_name').val();
+        var _token = $('input[name="_token"]').val();
+
+        console.log(userName);
+
+        $.ajax({
+            type: 'POST',
+            url: '/users/addPersonToGroup',
+            data: {
+                    _token : _token,
+                    groupId : groupId,
+                    userName : userName
+            },
+            success:function (data) {
+                $('#addUserToGroup').modal('toggle');
+                location.reload();
+                //window.location.href = '/user/'+regUser+'#groups';
+            },
+
+            error: function(data){
+                var error = data.responseJSON.errors.userName[0];
+                $('#errorForAddingUser').text(error)
+            }
+
+        });
     });
 });
 
