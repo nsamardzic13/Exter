@@ -29,9 +29,9 @@
                         <h5 class="card-title mb-0">Profile Details</h5>
                     </div> -->
                     <div class="card-body text-center">
-                        <img src="{{ asset('storage/' . $user->profile_pic) }}" alt="Marie Salter" class="img-fluid rounded-circle mb-2" width="128" height="128">
+                        <img src="{{ asset('storage/' .$user->profile_pic) }}" class="img-fluid rounded-circle mb-2" width="128" height="128">
                         <h4 class="card-title mb-0">{{ $user->name }}</h4>
-                        <div class="text-muted mb-2">{{ !$user->type ? 'Private user' : 'Company' }}</div>
+                        <div class="text-muted mb-2">{{ !$user->user_type ? 'Private user' : 'Company' }}</div>
 
                         <div>
                             <!-- MAYBE BUTTONS UNDER IMAGE -->
@@ -117,6 +117,7 @@
                     </li>
                 </ul>
                 <hr class="my-1">
+
                 <div class="tab-content py-4">
                     <div class="tab-pane active" id="profile">
                         <h5 class="mb-3">Other user info... <i class="fas fa-pen"></i></h5>
@@ -131,6 +132,13 @@
                                 </p>
                                 <h6><b>Joined</b></h6>
                                    Part of Exter family since {{ $user-> created_at }}
+
+                                @if($user->user_type)
+                                    <a class="btn btn-outline-quest mt-3 mb-2" data-toggle="collapse" href="#collapseGallery" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        Check out if this user has a gallery <i class="fas fa-images"></i>
+                                    </a>
+                                @endif
+
                             </div>
                             <div class="col-md-6">
                                 <h6>Recent badges</h6>
@@ -142,6 +150,26 @@
                                 <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
                                 <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
                             </div>
+
+                            @if($user->user_type && $user->user_gallary)
+                                <div class="collapse ml-3" id="collapseGallery">
+                                    <h2 class="font-weight-light text-center text-lg-left mt-4 mb-2">Gallery</h2>
+                                    <div class="row text-center text-lg-left">
+                                        @foreach(json_decode($user->user_gallary) as $pic)
+                                            <div class="col-lg-3 col-md-4 col-6">
+                                                <a data-fancybox="gallery" href="{{ asset('storage/'.$pic) }}" class="d-block mb-4 h-100">
+                                                    <img class="img-thumbnail zoom" src="{{ asset('storage/'.$pic) }}" style="width: 170px; height: 120px">
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @else
+                                <div class="collapse ml-3" id="collapseGallery">
+                                    <b>This user has no gallery to show :(</b>
+                                </div>
+                            @endif
+
 
                             <div class="col-md-12 my-5">
                                 <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Events</h5>
