@@ -63,7 +63,6 @@ $(document).on('click', '#addtime', function () {
         $("#time").append($clone);
         $clone.attr("id", "time" + String(n));
         setAtt(n);
-        console.log($clone.html(), n);
     }
 });
 $(document).on('click', '#removetime', function () {
@@ -83,8 +82,6 @@ $(document).on('click', '#hideDate', function () {
     document.getElementById('date').style.display = 'none';
     document.getElementById('days').style.display = 'initial';
     setAtt(1);
-    $input = $("#time" + String(n) + " > div.form-group > label:first");
-    console.log($input.attr('name'));
 });
 
 

@@ -24,6 +24,7 @@ class CreateOccasionsTable extends Migration
             $table->string('user_name'); //user_id
             $table->string('category');
             $table->integer('max_people')->default(0);
+            $table->string('description');
             $table->boolean('ended')->default(0);
             $table->timestamps();
         });

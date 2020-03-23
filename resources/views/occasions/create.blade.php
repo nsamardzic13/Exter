@@ -55,17 +55,17 @@ $name = ["time-start[1]"];
                                             <p>When?</p>
                                             <div class="btn-group-toggle mb-2 px-5 row" data-toggle="buttons">
                                                 <label class="btn btn-outline-quest col">
-                                                    <input type="radio"  id="hideDays" name="when" value="0"  />
+                                                    <input type="radio"  id="hideDays" name="when" value="0"  @if(!old('when')) checked @endif />
                                                     Just one time on certain date
                                                 </label>
                                                 <label class="btn btn-outline-quest col">
-                                                    <input type="radio"  id="hideDate" name="when" value="1" />
+                                                    <input type="radio"  id="hideDate" name="when" value="1" @if(old('when')) checked @endif/>
                                                     Repeat on specified days
                                                 </label>
 
                                             </div>
                                             <div>{{ $errors->first('when') }}</div>
-                                            <div id="date"  style="display:none;">
+                                            <div id="date"  @if(!old('when')) style="display:initial" @else style="display:none" @endif>
                                                 <div class="form-group">
                                                     <label for='start-one'>Start date:</label>
                                                     <input type="date" name="start-one"  value="{{ old('start-one')}}" class="form-control">
@@ -83,18 +83,18 @@ $name = ["time-start[1]"];
                                                         <p class="title">Event time:</p>
                                                         <div class="form-group">
                                                             <label for='time-start-one'>Start time:</label>
-                                                            <input type="time" name="time-start-one" value="{{ old('time-start-one')}}" value="08:00:AM" class="form-control">
+                                                            <input type="time" name="time-start-one" value="{{ old('time-start-one')}}" class="form-control">
                                                         </div>
                                                         <div>{{ $errors->first('time-start-one') }}</div>
                                                         <div class="form-group">
                                                             <label for='time-end'>End time:</label>
-                                                            <input type="time" name="time-end-one"  value="{{ old('time-end-one')}}" value="09:00:AM" class="form-control">
+                                                            <input type="time" name="time-end-one"  value="{{ old('time-end-one')}}" class="form-control">
                                                         </div>
                                                         <div>{{ $errors->first('time-end-one') }}</div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div id="days" style="display:none">
+                                            <div id="days" @if(old('when')) style="display:initial" @else style="display:none" @endif>
                                                 <div class="form-group">
                                                     <label for='start'>Start from:</label>
                                                     <input type="date" name="start"  value="{{ old('start')}}" class="form-control">
@@ -130,6 +130,12 @@ $name = ["time-start[1]"];
                                                 <input type="number" name="max_people"  value="{{ old('max_people')}}" class="form-control">
                                             </div>
                                             <div>{{ $errors->first('max_people') }}</div>
+                                            <div class="form-group">
+                                                <label for='description'>Description:</label>
+                                                <textarea class="form-control" name="description" value="{{ old('description')}}" rows="3"></textarea>
+                                            </div>
+                                            <div>{{ $errors->first('max_people') }}</div>
+
 
                                             <div class="form-group">
                                                 <label for="category"></label>

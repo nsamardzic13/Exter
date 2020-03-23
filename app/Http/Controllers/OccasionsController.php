@@ -19,8 +19,8 @@ class OccasionsController extends Controller
 
         $occasions1 = DB::table('occasions')->paginate(12);
 
-        $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, city, min(start) as start, user_name, category'))
-            ->groupBy('name', 'user_name', 'street', 'city', 'category')
+        $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, city, min(start) as start, user_name, description, category'))
+            ->groupBy('name', 'user_name', 'street', 'city', 'category', 'description')
             ->paginate(12);
 
         return view('occasions.index', compact('user', 'occasions'));
@@ -59,6 +59,7 @@ class OccasionsController extends Controller
             'when'=> 'required',
             'category'=> 'required|min:3',
             'max_people'=> 'required|numeric|min:2',
+            'description'=> 'required|min:10|max:255',
         ]);
         unset($data['when']);
 
@@ -86,9 +87,7 @@ class OccasionsController extends Controller
                     'start' => 'required|date|after:today',
                     'time-start' => 'required',
                     'time-end' => 'required|after:time-start',
-                    'day' => 'required',
                 ];
-                // dd("oke");
             }
             //$when = request()->validate($validation);
 
@@ -101,7 +100,6 @@ class OccasionsController extends Controller
             for ($i = 1; $i <= $ntime; $i = $i + 1){
 
                 $checkedDays = request('day'.$i);
-                //dd($checkedDays);
 
                 $stime = request('time-start')[$i];
                 $etime = request('time-end')[$i];
@@ -110,6 +108,7 @@ class OccasionsController extends Controller
 
                 for ($d = $startdate; $d <= $enddate; $d = $d + 86400) {
                     $today = date("N", $d);
+                    //dd($checkedDays);
                     foreach ($checkedDays as $day => $value) {
                         if ($today == $value + 1) {
                             $sdate = date('Y-m-d', $d) . ' ' . $stime;

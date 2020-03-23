@@ -1,11 +1,11 @@
 <div class="form-group">
     <label for='time-start'>Start time:</label>
-    <input type="time" name="time-start"  id="start-time" value="{{ old('time-start')}}" value="08:00:AM" class="form-control">
+    <input type="time" name="time-start"  id="start-time" value="{{ old('time-start')}}" class="form-control">
 </div>
 <div>{{ $errors->first('time-start') }}</div>
 <div class="form-group">
     <label for='time-end'>End time:</label>
-    <input type="time" name="time-end"  value="{{ old('time-end')}}" value="09:00:AM" class="form-control">
+    <input type="time" name="time-end"  value="{{ old('time-end')}}"  class="form-control">
 </div>
 <div>{{ $errors->first('time-end') }}</div>
 <p>Repeat on these days</p>
