@@ -49527,15 +49527,6 @@ var app = new Vue({
   el: '#app'
 });
 AOS.init();
-$(document).on('click', '#hideDays', function () {
-  //$($days).remove();
-  document.getElementById('days').style.display = 'none';
-  document.getElementById('date').style.display = 'initial';
-});
-$(document).on('click', '#hideDate', function () {
-  document.getElementById('date').style.display = 'none';
-  document.getElementById('days').style.display = 'initial';
-});
 
 function setAtt(n) {
   $input = $("#time" + String(n) + " > p.title");
@@ -49567,7 +49558,6 @@ $(document).on('click', '#addtime', function () {
     $("#time").append($clone);
     $clone.attr("id", "time" + String(n));
     setAtt(n);
-    console.log($clone.html(), n);
   }
 });
 $(document).on('click', '#removetime', function () {
@@ -49576,6 +49566,15 @@ $(document).on('click', '#removetime', function () {
     $($id).remove();
     n--;
   }
+});
+$(document).on('click', '#hideDays', function () {
+  document.getElementById('days').style.display = 'none';
+  document.getElementById('date').style.display = 'initial';
+});
+$(document).on('click', '#hideDate', function () {
+  document.getElementById('date').style.display = 'none';
+  document.getElementById('days').style.display = 'initial';
+  setAtt(1);
 }); //code for navbar scroll
 // grabbing the class names from the data attributes
 
@@ -49687,7 +49686,7 @@ $(document).ready(function () {
     newUrl += "/";
     history.replaceState(null, null, newUrl);
   });
-}); //scrip for addin' user to group
+}); //scrip for adding user to group
 
 var groupId;
 var regUser;
@@ -49719,6 +49718,12 @@ $(document).ready(function () {
         $('#errorForAddingUser').text(error);
       }
     });
+  });
+}); //alert fade up after being shown
+
+$(document).ready(function () {
+  $('.alert').fadeTo(2000, 500).slideUp(500, function () {
+    $('.alert').slideUp(600);
   });
 });
 

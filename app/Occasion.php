@@ -8,6 +8,7 @@ class Occasion extends Model
 {
 
     protected $guarded = [];
+    protected $dates = ['start', 'end'];
 
     public function getEndedAttribute($attribute){
 		return [
@@ -17,6 +18,6 @@ class Occasion extends Model
 	}
 
     public function users(){
-        return $this->belongsToMany(User::class)->withTimestamps();;
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 }

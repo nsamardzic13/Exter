@@ -134,7 +134,7 @@ $name = ["time-start[1]"];
                                                 <label for='description'>Description:</label>
                                                 <textarea class="form-control" name="description" value="{{ old('description')}}" rows="3"></textarea>
                                             </div>
-                                            <div>{{ $errors->first('max_people') }}</div>
+                                            <div>{{ $errors->first('description') }}</div>
 
 
                                             <div class="form-group">

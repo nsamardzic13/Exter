@@ -105,7 +105,7 @@
 
             <!-- Right side of profile -->
             <div class="col-lg-8 order-lg-2">
-                <ul class="nav nav-pills" id="tabMenu">
+                <ul class="nav nav-pills nav-fill" id="tabMenu">
                     <li class="nav-item">
                         <a  data-toggle="tab" href="#profile" class="nav-link active"><b>Profile</b></a>
                     </li>
@@ -118,7 +118,7 @@
                 </ul>
                 <hr class="my-1">
 
-                <div class="tab-content py-4">
+                <div class="tab-content py-2">
                     <div class="tab-pane active" id="profile">
                         <h5 class="mb-3">Other user info... <i class="fas fa-pen"></i></h5>
                         <div class="row">
@@ -172,19 +172,31 @@
 
 
                             <div class="col-md-12 my-5">
-                                <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Events</h5>
-                                <table class="table table-sm table-hover table-striped">
+                                <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span><i class="fas fa-calendar-alt"></i> Recent Events {{$user->name}} went</h5>
+                                <table class="table table-hover table-striped">
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
+                                        @php
+                                          $flag = 0;
+                                            $occasions = $user->occasions->sortByDesc('end');
+                                        @endphp
+                                        @foreach($occasions as $event)
+                                            @if($loop->iteration > 4)
+                                                @break
+                                            @endif
+                                            @if($event->ended == 'Ended')
+                                                @php $flag = 1 @endphp
+                                                <tr>
+                                                    <td>{{ $event->name }}</td>
+                                                    <td>{{ $event->description }}</td>
+                                                    <td><b>Event ended:</b> {{ $event->end }}</td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                        @if(!$flag)
+                                            <tr class="text-center">
+                                                <td>User hasn't been on any events yet :(</td>
+                                            </tr>
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -193,38 +205,63 @@
 
                     <!-- Here is Events tab -->
                     <div class="tab-pane" id="events">
-                        <div class="alert alert-info alert-dismissable">
-                            <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                        <div class="card text-white bg mb-3 group-card" style="max-width: 50rem; background-color: #d93850">
+                            <a href="/events/create" style="color: white">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Make a new event</h5>
+                                    <p class="card-text"><i class="fas fa-calendar-day fa-3x"></i></p>
+                                </div>
+                            </a>
                         </div>
-                        <table class="table table-hover table-striped">
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="float-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros.
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="row">
+                            <div class="col-md-12 pb-3">
+                                <div class="card-header border">
+                                    <b><i class="fas fa-crown"></i> My Events</b>
+                                </div>
+                                <ul class="list-group list-group">
+                                    @php
+                                    $lastName = '';
+                                    @endphp
+                                    @foreach($user->occasions as $event)
+                                        @if($user->name == $event->user_name && $event->name != $lastName)
+                                            <li class="list-group-item event-column">{{ $event->name}}
+                                                <span class="float-right font-weight-bold">
+                                                    <button type="button" class="btn btn-outline-quest2 btn-sm" data-toggle="modal" data-target="#myModal{{$event->id}}">
+                                                        <i class="fas fa-info-circle"></i>
+                                                    </button>
+                                                </span>
+                                            </li>
+                                                @include('occasions.show',  ['occasion' => $event])
+                                        @endif
+                                        @php
+                                        $lastName = $event->name;
+                                        @endphp
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="col-md-12 pb-3">
+                                <div class="card-header border">
+                                    <b><i class="fas fa-calendar-times"></i> Upcoming events you have joined</b>
+                                </div>
+                                <ul class="list-group list-group">
+                                @foreach($user->occasions as $event)
+                                    @if($event->ended = 'Upcoming')
+                                        <li class="list-group-item list-inline align-items-center event-column">{{ $event->name}}
+                                            <span class="float-right font-weight-bold">
+                                                <p>starts: {{ $event->start->format('M Y') }}
+                                                    <i class="fas fa-clock"></i> {{ $event->start->format(' H:i') }}</p>
+                                                <p>ends: {{ $event->end->format('M Y') }}
+                                                    <i class="fas fa-clock"></i> {{ $event->end->format(' H:i') }}</p>
+                                            </span>
+                                        </li>
+                                    @endif
+                                @endforeach
+                                </ul>
+                            </div>
+                            <a class="btn btn-outline-quest2 mt-2 mb-1 ml-3" href="/user/{{$user->id}}/occasion-history" role="button">
+                                Check your whole event history <i class="fas fa-align-justify"></i>
+                            </a>
+                        </div>
                     </div>
 
                     <!-- Here is Groups tab -->
@@ -239,7 +276,7 @@
 
                         @if(count($user->groups))
                         <div class="mt-4">
-                            <h3>List of all your groups</h3>
+                            <h4>List of all your groups</h4>
                         </div>
                         @endif
                         <table class="table table-hover">
@@ -247,20 +284,20 @@
                             @if(!(count($user->groups)))
                                 <div class="text-center">
                                     You dont have any groups...
-                                    <p><b>make one and start going on events</b></p>
+                                    <p><b>make one and start going on events with your friends</b></p>
                                 </div>
                             @endif
                             @foreach($user->groups as $group)
                                 @if($group->admin_id == $user->id)
-                                    <tr>
-                                        <td class="align-middle admin-column">
+                                    <tr class="admin-row">
+                                        <td class="align-middle">
                                             <span class="float-right font-weight-bold">
                                                 <form action="/user/{{ $group->id }}" method="POST" style="padding: 0px !important;">
                                                     @method('DELETE')
                                                     @csrf
 
                                                  <button type="button" id="{{ $group->id }}" name="btnZaModal" class="btn btn-outline-primary btn-sm"
-                                                         data-toggle="modal" data-target="#addUserToGroup"><i class="fas fa-plus-circle"></i></button>
+                                                         data-toggle="modal" title="Add a friend to this group" data-target="#addUserToGroup"><i class="fas fa-plus-circle"></i></button>
                                                 <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>
                                                  {{ $group->created_at->format('M Y') }}
                                                 </form>

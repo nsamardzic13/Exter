@@ -13,10 +13,22 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+//css for event table
+.event-column:hover,
+.event-column.hover{
+    border-width: 2px;
+    border-left-color: #E32743;
+}
+
 //css for group table
-.admin-column:hover,
-.admin-column.hover{
-    background-color: #fff3f0;
+.admin-row{
+    border: 2px solid transparent;
+}
+
+.admin-row:hover,
+.admin-row.hover{
+    //background-color: #fff3f0;
+    border-left: 2px solid #0275d8;
 }
 
 //css for profile questionary card
