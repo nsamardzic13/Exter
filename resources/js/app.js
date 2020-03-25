@@ -200,7 +200,7 @@ $(document).ready(() => {
     });
 });
 
-//scrip for addin' user to group
+//scrip for adding user to group
 var groupId;
 var regUser;
 $(document).ready(function(){
@@ -235,6 +235,13 @@ $(document).ready(function(){
             }
 
         });
+    });
+});
+
+//alert fade up after being shown
+$(document).ready(function() {
+    $('.alert').fadeTo(2000, 500).slideUp(500, function() {
+        $('.alert').slideUp(600);
     });
 });
 

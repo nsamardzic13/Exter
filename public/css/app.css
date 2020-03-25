@@ -22671,9 +22671,19 @@ a.text-dark:focus {
   }
 }
 
-.admin-column:hover,
-.admin-column.hover {
-  background-color: #fff3f0;
+.event-column:hover,
+.event-column.hover {
+  border-width: 2px;
+  border-left-color: #E32743;
+}
+
+.admin-row {
+  border: 2px solid transparent;
+}
+
+.admin-row:hover,
+.admin-row.hover {
+  border-left: 2px solid #0275d8;
 }
 
 .quest-profile {

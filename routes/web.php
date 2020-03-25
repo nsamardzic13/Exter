@@ -43,6 +43,7 @@ Route::get('/user/{user}', 'UsersController@index');
 Route::post('/user/{user}', 'GroupsController@store');
 Route::post('/users/addPersonToGroup', 'GroupsController@update');
 Route::delete('/user/{group}', 'GroupsController@destroy');
+Route::get('user/{user}/occasion-history', 'UsersController@history');
 
 Route::get('/user/{user}/edit', 'UsersController@edit');
 Route::post('/user/{user}/edit', 'UsersController@update');

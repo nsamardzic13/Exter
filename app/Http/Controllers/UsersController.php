@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Symfony\Component\Console\Input\Input;
@@ -14,6 +18,7 @@ class UsersController extends Controller
 {
     public function index(User $user){
         //factory(User::class, 5)->create();
+
         return view('user.index', compact('user'));
     }
 
@@ -74,8 +79,28 @@ class UsersController extends Controller
                 'user_gallary' => json_encode($img_data),
             ]);
         }
-
-//        dd($user);
         return redirect('user/' . $user->id);
+    }
+
+    public function history(){
+
+        $user = auth()->user();
+        //$user_events = $user->occasions;
+        /*$joined = DB::table('users')
+            ->join('occasion_user', 'users.id', '=', 'occasion_user.user_id')
+            ->where('occasion_user.occasion_id', $occasion->id)
+            ->select('users.name')
+            ->get();*/
+        //dd($user_events->sortByDesc('end'));
+
+        $user_events = DB::table('users')->join('occasion_user', 'users.id', '=', 'occasion_user.user_id')
+            ->join('occasions', 'occasion_user.occasion_id', '=', 'occasions.id')
+            ->where('occasions.ended', 'true')
+            ->where('occasion_user.user_id', $user->id)
+            ->orderByDesc('end')
+            ->paginate(5);
+
+        return view('user.occasionHistory', compact('user_events', 'user'));
+
     }
 }
