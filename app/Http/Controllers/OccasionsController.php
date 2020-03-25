@@ -19,8 +19,8 @@ class OccasionsController extends Controller
 
         $occasions1 = DB::table('occasions')->paginate(12);
 
-        $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, city, min(start) as start, user_name, description, category'))
-            ->groupBy('name', 'user_name', 'street', 'city', 'category', 'description')
+        $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, city, min(start) as start, user_name, max_people, description, category'))
+            ->groupBy('name', 'user_name', 'street', 'city', 'category', 'description', 'max_people')
             ->paginate(12);
 
         return view('occasions.index', compact('user', 'occasions'));
@@ -151,23 +151,24 @@ class OccasionsController extends Controller
         return redirect('events');
     }
 
-    public static function showDataForModal($occasion){
-        $time =  DB::table('occasions')->where('name', $occasion->name)->get();
+    public static function showTimesForModal($occasion){
+        $time =  DB::table('occasions')->where('name', $occasion->name)->orderBy('start')->get();
         //dd($time);
         return $time;
+    }
+    public static function showPeopleForModal($occasion){
+        $people =  DB::table('occasion_user')->where('occasion_id', $occasion->id)->get();
+
+        return $people->count();
     }
 
     public static function wall(Occasion $occasion){
 
         $user = auth()->user();
         $occasion->users()->syncWithoutDetaching($user->id);
-        $joined = DB::table('users')
-            ->join('occasion_user', 'users.id', '=', 'occasion_user.user_id')
-            ->where('occasion_user.occasion_id', $occasion->id)
-            ->select('users.name')
-            ->get();
 
-        //dd($joined);
+        $joined = $occasion->users;
+
         return view('occasions.wall', compact('joined', 'occasion'));
     }
 }

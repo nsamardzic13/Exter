@@ -134,7 +134,7 @@ $name = ["time-start[1]"];
                                                 <label for='description'>Description:</label>
                                                 <textarea class="form-control" name="description" value="{{ old('description')}}" rows="3"></textarea>
                                             </div>
-                                            <div>{{ $errors->first('max_people') }}</div>
+                                            <div>{{ $errors->first('description') }}</div>
 
 
                                             <div class="form-group">
@@ -155,9 +155,12 @@ $name = ["time-start[1]"];
                                         @endif
 
                                     </form>
+                                    <div>
+                                        <p class="float-right"><a href="/events"><button type="button" class="btn btn-secondary btn-lg my-2 ml-4">Back</button></a></p>
+                                    </div>
                             </div>
                         </div>
-                        <p><a href="/events">Back</a></p>
+
 
                     </div>
                 </div>
