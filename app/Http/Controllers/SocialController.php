@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Availability;
+use App\Hangout;
+use App\Sport;
 use App\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Carbon\Carbon;
@@ -58,6 +61,13 @@ class SocialController extends Controller
                 'provider' => $provider,
                 'provider_id' => $getInfo->id
             ]);
+
+            $sport = new Sport();
+            $hangout = new Hangout();
+            $availability = new Availability();
+            $user->sport()->save($sport);
+            $user->hangout()->save($hangout);
+            $user->availability()->save($availability);
         }
         return $user;
     }
