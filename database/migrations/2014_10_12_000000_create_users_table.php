@@ -15,19 +15,21 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->unique();
-            /*$table->string('first_name');
-            $table->string('last_name');*/
+            $table->string('name')->nullable()->unique();
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
             $table->year('birth_year')->nullable();
             $table->string('email')->unique();
+            $table->string('provider')->nullable();
+            $table->string('provider_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('street_name')->nullable();
             $table->string('city_name')->nullable();
             $table->integer('zip_code')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('description')->nullable();
-            $table->boolean('user_type');
+            $table->boolean('user_type')->nullable();
             $table->string('profile_pic')->default('uploads\/user_default_pic.png');
             $table->longText('user_gallary')->nullable();
             /*$table->string('file_path');*/

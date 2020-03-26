@@ -33,12 +33,14 @@
                                             </div>
                                     </div>
                                     @endforeach
+                                    @csrf
                                 </div>
                         </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-outline-success btn-lg my-2 ml-4"><b>Submit</b></button>
-                        </div>
-            @csrf
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-outline-success btn-lg my-2 ml-4"><b>Submit</b></button>
+                            </div>
+                </div>
+            </div>
         </form>
     </div>
 @endsection

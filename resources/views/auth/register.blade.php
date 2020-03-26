@@ -26,6 +26,34 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="firstname" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ old('firstname') }}" required autocomplete="firstname" autofocus>
+
+                                    @error('firstname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Last name') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" required autocomplete="lastname" autofocus>
+
+                                    @error('lastname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                                 <div class="col-md-6">
@@ -70,7 +98,7 @@
                                             <input type="radio" name="user_type" id="user_type" value=0 autocomplete="off" checked> Private
                                         </label>
                                         <label class="btn btn-outline-quest">
-                                            <input type="radio" name="user_type" id="user_type" value=1 autocomplete="off"> Bussiness
+                                            <input type="radio" name="user_type" id="user_type" value=1 autocomplete="off"> Business
                                         </label>
                                     </div>
                                 </div>
@@ -79,7 +107,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-success">
-                                        {{ __('Register') }}
+                                        <b>{{ __('Register') }}</b>
                                     </button>
                                 </div>
                             </div>

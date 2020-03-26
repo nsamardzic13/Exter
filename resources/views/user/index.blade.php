@@ -158,7 +158,8 @@
                                         @foreach(json_decode($user->user_gallary) as $pic)
                                             <div class="col-lg-3 col-md-4 col-6">
                                                 <a data-fancybox="gallery" href="{{ asset('storage/'.$pic) }}" class="d-block mb-4 h-100">
-                                                    <img class="img-thumbnail zoom" src="{{ asset('storage/'.$pic) }}" style="width: 170px; height: 120px">
+                                                    <!-- 170 * 120 -->
+                                                    <img class="img-thumbnail zoom" src="{{ asset('storage/'.$pic) }}" style="max-width: 100%; min-height: 120px">
                                                 </a>
                                             </div>
                                         @endforeach
@@ -366,7 +367,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group">
-                                            <input class="form-control" type="text" id="user_name" name="userName" placeholder="Enter name of a person you want to add to this group" autocomplete="off">
+                                            <input class="form-control" type="text" id="user_name" name="userName" placeholder="Enter username of a person you want to add to this group" autocomplete="off">
                                             <div id="errorForAddingUser">{{ $errors->first('userName') }}</div>
                                             <div id="userList"></div>
                                         </div>
@@ -381,10 +382,10 @@
                             </div>
                         </div>
                         <!-- Here ends modal for adding User to group -->
-
                     </div>
 
                 </div>
             </div>
+        </div>
     </div>
 @endsection

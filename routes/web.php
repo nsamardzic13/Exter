@@ -49,3 +49,7 @@ Route::get('/user/{user}/edit', 'UsersController@edit');
 Route::post('/user/{user}/edit', 'UsersController@update');
 
 Route::get('wall', 'MessagesController@index');
+
+//routes for google registration
+Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+Route::get('/callback/{provider}', 'SocialController@callback');

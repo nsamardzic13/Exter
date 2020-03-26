@@ -35,21 +35,25 @@ class UsersController extends Controller
         $data = request()->validate([
             'birth_year' => 'nullable|integer',
             'address' => 'nullable',
+            'name' => 'nullable|unique:App\User,name,'.$user->id,
             'city' => 'nullable',
             'zip_code' => 'nullable|integer',
             'phone_number' => ['nullable' , 'regex:/(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,4})/'],
             'about_me' => 'nullable',
             'profile_pic' => 'sometimes|file|image|max:4000',
             'multiple_images.*' => 'sometimes|file|image|max:8000',
+            'user_type' => 'required',
         ]);
 //        dd((int)$data['birth_year']);
         $user->update([
+            'name' => $data['name'],
             'birth_year' => $data['birth_year'],
             'street_name' => $data['address'],
             'city_name' => $data['city'],
             'zip_code' => $data['zip_code'],
             'phone_number' => $data['phone_number'],
             'description' => $data['about_me'],
+            'user_type' => $data['user_type'],
         ]);
 
         //check if image is submited
@@ -63,21 +67,23 @@ class UsersController extends Controller
             $image->save();
         }
 
-        if(request()->has('multiple_images')) {
-            foreach($data['multiple_images'] as $img) {
-                $img_name = $img->store('uploads', 'public');
-                $img_data[] = $img_name;
-            }
-
-            if($user->user_gallary) {
-                foreach(json_decode($user->user_gallary) as $img) {
-                    $img_data[] = $img;
+        if($user->user_type == True){
+            if(request()->has('multiple_images')) {
+                foreach($data['multiple_images'] as $img) {
+                    $img_name = $img->store('uploads', 'public');
+                    $img_data[] = $img_name;
                 }
-            }
 
-            $user->update([
-                'user_gallary' => json_encode($img_data),
-            ]);
+                if($user->user_gallary) {
+                    foreach(json_decode($user->user_gallary) as $img) {
+                        $img_data[] = $img;
+                    }
+                }
+
+                $user->update([
+                    'user_gallary' => json_encode($img_data),
+                ]);
+            }
         }
         return redirect('user/' . $user->id);
     }
@@ -85,13 +91,6 @@ class UsersController extends Controller
     public function history(){
 
         $user = auth()->user();
-        //$user_events = $user->occasions;
-        /*$joined = DB::table('users')
-            ->join('occasion_user', 'users.id', '=', 'occasion_user.user_id')
-            ->where('occasion_user.occasion_id', $occasion->id)
-            ->select('users.name')
-            ->get();*/
-        //dd($user_events->sortByDesc('end'));
 
         $user_events = DB::table('users')->join('occasion_user', 'users.id', '=', 'occasion_user.user_id')
             ->join('occasions', 'occasion_user.occasion_id', '=', 'occasions.id')

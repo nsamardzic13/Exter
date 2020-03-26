@@ -39,8 +39,6 @@
         <div class="container-fluid space-for-nav"></div>
 
         <main>
-
-        <main>
             @yield('content')
         </main>
     </div>
