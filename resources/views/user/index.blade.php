@@ -154,7 +154,7 @@
                             @if($user->user_type && $user->user_gallary)
                                 <div class="collapse ml-3" id="collapseGallery">
                                     <h2 class="font-weight-light text-center text-lg-left mt-4 mb-2">Gallery</h2>
-                                    <div class="row text-center text-lg-left">
+                                    <div class="row">
                                         @foreach(json_decode($user->user_gallary) as $pic)
                                             <div class="col-lg-3 col-md-4 col-6">
                                                 <a data-fancybox="gallery" href="{{ asset('storage/'.$pic) }}" class="d-block mb-4 h-100">

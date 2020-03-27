@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -42,10 +43,9 @@ class SocialController extends Controller
         ]);
 
         if($validator->fails()){
-            //return redirect()->route('register');
-            //return redirect()->route('login');
-            echo 'That email address is already registered. You sure you don\'t have an account?';
-            //return redirect()->back()->with('error', 'Credentials not matched !');
+
+            $error = $validator->errors()->first();
+            Redirect::route('login')->send()->with('login-error', $error);
         }
 
         $user = User::where('provider_id', $getInfo->id)->first();

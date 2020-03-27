@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(session()->has('login-error'))
+        <div class="alert login-alert alert-danger" role="alert" style="border-width: 1px; border-color: #E32743">
+            <strong>Failed login </strong> {{  session()->get('login-error') }}
+        </div>
+    @endif
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
