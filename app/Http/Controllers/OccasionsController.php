@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use \App\Occasion;
@@ -16,8 +17,6 @@ class OccasionsController extends Controller
     public function index(){
 
         $user = auth()->user();
-
-        $occasions1 = DB::table('occasions')->paginate(12);
 
         $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, city, min(start) as start, user_name, max_people, description, category'))
             ->groupBy('name', 'user_name', 'street', 'city', 'category', 'description', 'max_people')
@@ -114,6 +113,10 @@ class OccasionsController extends Controller
                             $sdate = date('Y-m-d', $d) . ' ' . $stime;
                             $edate = date('Y-m-d', $d) . ' ' . $etime;
 
+                            $sdate = Carbon::createFromFormat('Y-m-d H:i:s', $sdate);
+                            $edate = Carbon::createFromFormat('Y-m-d H:i:s', $edate);
+
+
                             //dd($sdate);
                             $occasion = Occasion::create(array_merge($data, ['start' => $sdate], ['end' => $edate], ['user_name' => $user->name]));
                             $occasion->users()->syncWithoutDetaching($user->id);
@@ -136,10 +139,11 @@ class OccasionsController extends Controller
 
 
             $startdate = request('start-one') .' ' . request('time-start-one');
-            //dd($startdate);
+            $startdate = Carbon::createFromFormat('Y-m-d H:i:s', $startdate);
 
             $enddate = request('end-one') .' '. request('time-end-one');;
-            //dd($when);
+            $enddate = Carbon::createFromFormat('Y-m-d H:i:s', $enddate);
+
             $occasion = Occasion::create(array_merge($data, ['start'  =>  $startdate], ['end'  =>  $enddate], ['user_name'  =>  $user->name]));
 
             $occasion->users()->syncWithoutDetaching($user->id);
