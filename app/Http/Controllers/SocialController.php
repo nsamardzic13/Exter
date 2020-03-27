@@ -34,23 +34,22 @@ class SocialController extends Controller
     }
     function createUser($getInfo,$provider){
 
-        //we take name first name + first 4 digits from google id and make username
-        $username = $getInfo->user['given_name'];
-        $id = substr($getInfo->id, 0, 4);
-        $username .= '#'.$id;
-        $validator = Validator::make($getInfo->user, [
-            'email' => 'required|unique:App\User,email',
-        ]);
-
-        if($validator->fails()){
-
-            $error = $validator->errors()->first();
-            Redirect::route('login')->send()->with('login-error', $error);
-        }
-
         $user = User::where('provider_id', $getInfo->id)->first();
 
         if (!$user) {
+            //we take name first name + first 4 digits from google id and make username
+            $username = $getInfo->user['given_name'];
+            $id = substr($getInfo->id, 0, 4);
+            $username .= '#'.$id;
+            $validator = Validator::make($getInfo->user, [
+                'email' => 'required|unique:App\User,email',
+            ]);
+
+            if($validator->fails()){
+
+                $error = $validator->errors()->first();
+                Redirect::route('login')->send()->with('login-error', $error);
+            }
 
             $user = User::create([
                 'name' => $username,

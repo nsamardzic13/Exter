@@ -22671,6 +22671,18 @@ a.text-dark:focus {
   }
 }
 
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #F56942;
+}
+
 .event-column:hover,
 .event-column.hover {
   border-width: 2px;

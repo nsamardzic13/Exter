@@ -4,10 +4,8 @@
     <list default="true" id="688e5f26-aa99-400a-8e44-982ac4183f81" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SocialController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SocialController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,7 +256,8 @@
       <workItem from="1585237851022" duration="311000" />
       <workItem from="1585238722691" duration="960000" />
       <workItem from="1585242369104" duration="202000" />
-      <workItem from="1585309872336" duration="2254000" />
+      <workItem from="1585309872336" duration="2438000" />
+      <workItem from="1585321430369" duration="1218000" />
     </task>
     <servers />
   </component>
@@ -314,11 +313,11 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1584918421268" />
-    <state x="313" y="184" key="com.intellij.ide.util.TipDialog" timestamp="1585309872330">
+    <state x="313" y="184" key="com.intellij.ide.util.TipDialog" timestamp="1585321437612">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1585242369479" />
-    <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1585309872330" />
+    <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1585321437612" />
     <state x="449" y="252" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585076799179">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -328,10 +327,11 @@
     </state>
     <state x="507" y="207" width="250" height="278" key="jetbrains.javascript.buildTools.run-task-popup/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1585166943387" />
     <state x="507" y="207" width="250" height="278" key="jetbrains.javascript.buildTools.run-task-popup/0.0.1280.680@0.0.1280.680" timestamp="1583849828487" />
-    <state x="297" y="151" key="run.anything.popup" timestamp="1584915965103">
+    <state x="297" y="151" key="run.anything.popup" timestamp="1585321541246">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="297" y="151" key="run.anything.popup/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1584915965103" />
+    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1585321541246" />
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1585143764404">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
