@@ -3,7 +3,7 @@
 @section('content')
     <br>
     <div class="container">
-        <h2 class="text-center">Bootstrap 4 User Rating Form / Comment Form</h2>
+        <h2 class="text-center">Bootstrap 4</h2>
         @foreach($messages as $message)
             <div class="card">
                 <div class="card-body">
@@ -32,5 +32,18 @@
                 </div>
             </div>
         @endforeach
+        <br>
+        <form action="/wall" method="POST">
+            @csrf
+            <input type="hidden" name="user_id" value="{{ $user->id }}">
+            <input type="hidden" name="group_id" value="{{ $group->id }}">
+            <div class="form-group">
+                <label for="comment">{{ __('Add Your Comment:') }}</label>
+                <textarea class="form-control" rows="5" name="comment" id="comment"></textarea>
+                <button type="submit" class="btn btn-success float-right">
+                    {{ __('Submit Comment') }}
+                </button>
+            </div>
+        </form>
     </div>
 @endsection

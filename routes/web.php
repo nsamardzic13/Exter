@@ -48,7 +48,8 @@ Route::get('user/{user}/occasion-history', 'UsersController@history');
 Route::get('/user/{user}/edit', 'UsersController@edit');
 Route::post('/user/{user}/edit', 'UsersController@update');
 
-Route::get('wall', 'MessagesController@index');
+Route::get('/wall', 'MessagesController@index');
+Route::post('/wall', 'MessagesController@store');
 
 //routes for google registration
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');

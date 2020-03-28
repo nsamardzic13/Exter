@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Messages;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Http\Request;
@@ -39,7 +40,9 @@ class GroupsController extends Controller{
         //$user = auth()->user();
         //dd($group->users());
         //dd($user->groups->name);
-        return view('groups.show', compact('group'));
+        $user = auth()->user();
+        $messages = Messages::all();
+        return view('groups.show', compact(['group', 'user', 'messages']));
     }
 
 

@@ -22,7 +22,7 @@
                 </div>
             </div>
         @endforeach
-
     </div>
-
+    @include('messages.index')
 @endsection
+

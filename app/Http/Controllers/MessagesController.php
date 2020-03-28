@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Messages;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
 class MessagesController extends Controller
 {
@@ -38,7 +39,24 @@ class MessagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd(request()->all());
+        $messages = new Messages();
+        $data = request()->validate([
+            'comment' => 'required',
+            'user_id' => 'required',
+            'group_id' => 'required',
+        ]);
+//        dd($data);
+
+        $messages->user_id = $data['user_id'];
+        $messages->group_id = $data['group_id'];
+        $messages->message_flag = false;
+        $messages->message_text = $data['comment'];
+//        dd($messages);
+
+        $messages->save();
+
+        return redirect('/groups/' . $data['group_id']);
     }
 
     /**

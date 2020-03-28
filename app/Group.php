@@ -11,4 +11,8 @@ class Group extends Model{
     public function users(){
         return $this->belongsToMany(User::class)->withTimestamps();
     }
+
+    public function messages() {
+        return $this->hasMany(Messages::class);
+    }
 }
