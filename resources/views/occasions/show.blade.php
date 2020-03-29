@@ -20,6 +20,7 @@
                     <div class="container-fluid">
                         <div class="p-3 border-bottom text-center text-muted">
                             <h6> <i>{{ $occasion->description }}</i></h6>
+                            <p>Host: {{ $occasion->user_name }}</p>
                         </div>
                         <div class="row p-2 pt-3">
                             <div class="col-6   text-center border-right text-secondary">

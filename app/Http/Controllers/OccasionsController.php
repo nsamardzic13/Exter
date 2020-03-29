@@ -20,6 +20,7 @@ class OccasionsController extends Controller
 
         $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, city, min(start) as start, user_name, max_people, description, category'))
             ->groupBy('name', 'user_name', 'street', 'city', 'category', 'description', 'max_people')
+            ->orderBy('start')
             ->paginate(12);
 
         return view('occasions.index', compact('user', 'occasions'));
@@ -113,13 +114,13 @@ class OccasionsController extends Controller
                             $sdate = date('Y-m-d', $d) . ' ' . $stime;
                             $edate = date('Y-m-d', $d) . ' ' . $etime;
 
-                            $sdate = Carbon::createFromFormat('Y-m-d H:i:s', $sdate);
-                            $edate = Carbon::createFromFormat('Y-m-d H:i:s', $edate);
+                            $sdate = Carbon::createFromFormat('Y-m-d H:i', $sdate);
+                            $edate = Carbon::createFromFormat('Y-m-d H:i', $edate);
 
 
                             //dd($sdate);
                             $occasion = Occasion::create(array_merge($data, ['start' => $sdate], ['end' => $edate], ['user_name' => $user->name]));
-                            $occasion->users()->syncWithoutDetaching($user->id);
+
                         }
 
                     }
@@ -139,14 +140,13 @@ class OccasionsController extends Controller
 
 
             $startdate = request('start-one') .' ' . request('time-start-one');
-            $startdate = Carbon::createFromFormat('Y-m-d H:i:s', $startdate);
+            $startdate = Carbon::createFromFormat('Y-m-d H:i', $startdate);
 
             $enddate = request('end-one') .' '. request('time-end-one');;
-            $enddate = Carbon::createFromFormat('Y-m-d H:i:s', $enddate);
+            $enddate = Carbon::createFromFormat('Y-m-d H:i', $enddate);
 
             $occasion = Occasion::create(array_merge($data, ['start'  =>  $startdate], ['end'  =>  $enddate], ['user_name'  =>  $user->name]));
 
-            $occasion->users()->syncWithoutDetaching($user->id);
         }
 
 
