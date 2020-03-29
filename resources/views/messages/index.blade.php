@@ -3,7 +3,7 @@
 @section('content')
     <br>
     <div class="container">
-        <h2 class="text-center">Bootstrap 4</h2>
+        <h2 class="text-center">WALL OF "{{ Str::upper($group->name) }}"</h2>
         @foreach($messages as $message)
             <div class="card">
                 <div class="card-body">
@@ -24,8 +24,53 @@
                             <div class="clearfix"></div>
                             <p>{{ $message->message_text }}</p>
                             <p>
-                                <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
-                                <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                                @if(\Illuminate\Support\Facades\DB::table('likes')
+                                                                    ->where('user_id', '=', $user->id)
+                                                                    ->where('message_id', '=', $message->id)
+                                                                    ->where('type', '=', false)
+                                                                    ->doesntExist())
+                                    <form id='like{{ $message->id }}' action="/groups/{{ $group->id }}" method="post">
+                                        @method('PATCH')
+                                        @csrf
+                                        @isset($event)
+                                            <input type="hidden" name="group_id" value="{{ $event->id }}">
+                                            <input type="hidden" name="type" value="event">
+                                        @endisset
+                                        @isset($group)
+                                            <input type="hidden" name="group_id" value="{{ $group->id }}">
+                                            <input type="hidden" name="type" value="group">
+                                        @endisset
+                                        <input type="hidden" name="message_id" value="{{ $message->id }}">
+                                        <input type="hidden" name="like_dislike" value="dislike">
+                                        <a onclick="document.getElementById('like{{ $message->id }}').submit()" class="float-right btn btn-outline-primary ml-2"> <i class="fas fa-thumbs-down"></i> Dislike</a>
+                                    </form>
+                                @endif
+                                @if(\Illuminate\Support\Facades\DB::table('likes')
+                                                                ->where('user_id', '=', $user->id)
+                                                                ->where('message_id', '=', $message->id)
+                                                                ->where('type', '=', true)
+                                                                ->doesntExist())
+                                    <form id='dislike{{$message->id}}' action="/groups/{{ $group->id }}" method="post">
+                                        @method('PATCH')
+                                        @csrf
+                                        @isset($event)
+                                            <input type="hidden" name="group_id" value="{{ $event->id }}">
+                                            <input type="hidden" name="type" value="event">
+                                        @endisset
+                                        @isset($group)
+                                            <input type="hidden" name="group_id" value="{{ $group->id }}">
+                                            <input type="hidden" name="type" value="group">
+                                        @endisset
+                                        <input type="hidden" name="message_id" value="{{ $message->id }}">
+                                        <input type="hidden" name="like_dislike" value="like">
+                                        <a onclick="document.getElementById('dislike{{ $message->id }}').submit()" class="float-right btn text-white btn-success"> <i class="fas fa-thumbs-up"></i> Like</a>
+                                    </form>
+                                @endif
+                            </p>
+                            <br><br>
+                            <p>
+                                <a class="float-right">DISLIKES {{ $message->dislikes }}</a>
+                                <a class="float-right" style="margin-right: 10px">LIKES {{ $message->likes }}</a>
                             </p>
                         </div>
                     </div>
@@ -36,7 +81,14 @@
         <form action="/wall" method="POST">
             @csrf
             <input type="hidden" name="user_id" value="{{ $user->id }}">
-            <input type="hidden" name="group_id" value="{{ $group->id }}">
+            @isset($event)
+                <input type="hidden" name="group_id" value="{{ $event->id }}">
+                <input type="hidden" name="type" value="event">
+            @endisset
+            @isset($group)
+                <input type="hidden" name="group_id" value="{{ $group->id }}">
+                <input type="hidden" name="type" value="group">
+            @endisset
             <div class="form-group">
                 <label for="comment">{{ __('Add Your Comment:') }}</label>
                 <textarea class="form-control" rows="5" name="comment" id="comment"></textarea>

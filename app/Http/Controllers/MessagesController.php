@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Like;
 use App\Messages;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MessagesController extends Controller
 {
@@ -45,11 +48,17 @@ class MessagesController extends Controller
             'comment' => 'required',
             'user_id' => 'required',
             'group_id' => 'required',
+            'type' => 'required',
         ]);
 //        dd($data);
 
         $messages->user_id = $data['user_id'];
-        $messages->group_id = $data['group_id'];
+        if ($data['type'] == 'group') {
+            $messages->group_id = $data['group_id'];
+        }
+        else {
+            $messages->event_id = $data['group_id'];
+        }
         $messages->message_flag = false;
         $messages->message_text = $data['comment'];
 //        dd($messages);
@@ -90,7 +99,41 @@ class MessagesController extends Controller
      */
     public function update(Request $request, Messages $messages)
     {
-        //
+        $data = request()->validate([
+            'message_id' => 'required',
+            'like_dislike' => 'required',
+            'group_id' => 'required',
+            'type' => 'required',
+        ]);
+        $user = Auth::user();
+        switch ($data['like_dislike']) {
+            case 'like':
+
+                if ($this->checkIfExists($user->id, $data['message_id'])) {
+                    Messages::where('id', $data['message_id'])->decrement('dislikes', 1);
+                    $this->removeFromLikes($user->id, $data['message_id']);
+                }
+                Messages::where('id', $data['message_id'])->increment('likes', 1);
+                DB::table('likes')->insert([
+                   'user_id' => $user->id,
+                   'message_id' => $data['message_id'],
+                   'type' => true,
+                ]);
+                break;
+            case 'dislike':
+                if ($this->checkIfExists($user->id, $data['message_id'])) {
+                    Messages::where('id', $data['message_id'])->decrement('likes', 1);
+                    $this->removeFromLikes($user->id, $data['message_id']);
+                }
+                Messages::where('id', $data['message_id'])->increment('dislikes', 1);
+                DB::table('likes')->insert([
+                    'user_id' => $user->id,
+                    'message_id' => $data['message_id'],
+                    'type' => false,
+                ]);
+                break;
+        }
+        return redirect('/groups/' . $data['group_id']);
     }
 
     /**
@@ -103,4 +146,17 @@ class MessagesController extends Controller
     {
         //
     }
+
+    public static function checkIfExists($user, $msg) {
+        return Like::where('user_id', '=', $user)
+            ->where('message_id', '=', $msg)
+            ->first();
+    }
+
+    public static function removeFromLikes($user, $msg) {
+        return Like::where('user_id', '=', $user)
+            ->where('message_id', '=', $msg)
+            ->delete();
+    }
+
 }

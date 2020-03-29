@@ -41,7 +41,9 @@ class GroupsController extends Controller{
         //dd($group->users());
         //dd($user->groups->name);
         $user = auth()->user();
-        $messages = Messages::all();
+        $messages = Messages::whereNotNull('group_id')
+                            ->orderByDesc('created_at')
+                            ->get();
         return view('groups.show', compact(['group', 'user', 'messages']));
     }
 

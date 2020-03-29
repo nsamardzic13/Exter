@@ -19,4 +19,8 @@ class Messages extends Model
     public function group() {
         return $this->belongsTo(Group::class);
     }
+
+    public function like() {
+        return $this->belongsToMany(User::class, 'likes');
+    }
 }

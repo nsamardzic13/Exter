@@ -37,6 +37,7 @@ Route::get('/groups', 'GroupsController@index');
 Route::post('/groups', 'GroupsController@store');
 Route::get('groups/{group}', 'GroupsController@show');
 //Route::patch('groups/{group}', 'GroupsController@update');
+Route::patch('groups/{group}', 'MessagesController@update');
 Route::post('/autocomplete', 'AutocompleteController@fetch_names');
 
 Route::get('/user/{user}', 'UsersController@index');
@@ -50,6 +51,7 @@ Route::post('/user/{user}/edit', 'UsersController@update');
 
 Route::get('/wall', 'MessagesController@index');
 Route::post('/wall', 'MessagesController@store');
+//Route::post('/like', 'MessagesController@like');
 
 //routes for google registration
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');

@@ -230,7 +230,6 @@ return [
 
         //other aliases
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-
     ],
 
 ];
