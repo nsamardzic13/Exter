@@ -37,7 +37,7 @@ Route::get('/groups', 'GroupsController@index');
 Route::post('/groups', 'GroupsController@store');
 Route::get('groups/{group}', 'GroupsController@show');
 //Route::patch('groups/{group}', 'GroupsController@update');
-Route::patch('groups/{group}', 'MessagesController@update');
+Route::post('groups/{group}', 'MessagesController@update');
 Route::post('/autocomplete', 'AutocompleteController@fetch_names');
 
 Route::get('/user/{user}', 'UsersController@index');

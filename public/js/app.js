@@ -49527,45 +49527,30 @@ var app = new Vue({
   el: '#app'
 });
 AOS.init();
+$(document).ready(function () {
+  var n = document.getElementById('number-times').value;
+  console.log(n); //otvori n timova pri loadanju
 
-function setAtt(n) {
-  $input = $("#time" + String(n) + " > p.title");
-  $input.html("Event time - " + String(n));
-  $input = $("#time" + String(n) + " > div.form-group > label:first");
-  $input.attr("for", "time-start[" + String(n) + "]");
-  $input = $("#time" + String(n) + " > div.form-group > input:first");
-  $input.attr("name", "time-start[" + String(n) + "]");
-  $input = $("#time" + String(n) + " > div.form-group > input:first");
-  $input.attr("for", "time-end[" + String(n) + "]");
-  $input = $("#time" + String(n) + " > div.form-group > input:last");
-  $input.attr("name", "time-end[" + String(n) + "]");
-  $input = $("#time" + String(n) + " > div.btn-group-toggle  label.btn input:checkbox");
-  $input.attr("name", "day" + String(n) + "[]");
-}
-
-;
-var n = 0;
-$(document).on('click', '#addtime', function () {
-  n++;
-
-  if (n == 1) {
-    setAtt(n);
-    n++;
-  }
-
-  if (n < 10) {
-    $clone = $("#time1").clone();
-    $("#time").append($clone);
-    $clone.attr("id", "time" + String(n));
-    setAtt(n);
-  }
-});
-$(document).on('click', '#removetime', function () {
   if (n > 1) {
-    $id = "#time" + n;
-    $($id).remove();
-    n--;
+    for (var i = 1; i <= n; i++) {
+      document.getElementById('time' + String(i)).style.display = 'initial';
+    }
   }
+
+  $(document).on('click', '#addtime', function () {
+    if (n < 10) {
+      n++;
+      document.getElementById('time' + String(n)).style.display = 'initial';
+      document.getElementById('number-times').value = n;
+    }
+  });
+  $(document).on('click', '#removetime', function () {
+    if (n > 1) {
+      document.getElementById('time' + String(n)).style.display = 'none';
+      n--;
+      document.getElementById('number-times').value = n;
+    }
+  });
 });
 $(document).on('click', '#hideDays', function () {
   document.getElementById('days').style.display = 'none';
@@ -49574,7 +49559,6 @@ $(document).on('click', '#hideDays', function () {
 $(document).on('click', '#hideDate', function () {
   document.getElementById('date').style.display = 'none';
   document.getElementById('days').style.display = 'initial';
-  setAtt(1);
 }); //code for navbar scroll
 // grabbing the class names from the data attributes
 
@@ -49726,6 +49710,61 @@ $(document).ready(function () {
     $('.alert').slideUp(600);
   });
 });
+var message_id;
+var like_dislike;
+var group_id;
+var type;
+var no;
+$(document).ready(function (e) {
+  $('.a_dislike').click(function () {
+    no = $(this).attr("id");
+    group_id = $('#group_id' + no).val();
+    message_id = $('#message_id' + no).val();
+    like_dislike = 'dislike';
+    type = $('#type' + no).val();
+
+    var _token = $('input[name="_token"]').val();
+
+    $.ajax({
+      type: 'POST',
+      url: '/groups/' + group_id,
+      data: {
+        _token: _token,
+        message_id: message_id,
+        like_dislike: like_dislike,
+        group_id: group_id,
+        type: type
+      },
+      success: function success(data) {
+        location.reload();
+      }
+    });
+  });
+  $('.a_like').click(function () {
+    no = $(this).attr("id");
+    group_id = $('#group_id' + no).val();
+    message_id = $('#message_id' + no).val();
+    like_dislike = 'like';
+    type = $('#type' + no).val();
+
+    var _token = $('input[name="_token"]').val();
+
+    $.ajax({
+      type: 'POST',
+      url: '/groups/' + group_id,
+      data: {
+        _token: _token,
+        message_id: message_id,
+        like_dislike: like_dislike,
+        group_id: group_id,
+        type: type
+      },
+      success: function success(data) {
+        location.reload();
+      }
+    });
+  });
+});
 
 /***/ }),
 
@@ -49861,8 +49900,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Exter\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Exter\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/Exter/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Exter/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

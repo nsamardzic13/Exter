@@ -232,6 +232,59 @@ $(document).ready(function() {
     });
 });
 
+var message_id;
+var like_dislike;
+var group_id;
+var type;
+var no;
+$(document).ready(function(e){
+    $('.a_dislike').click(function(){
+        no = $(this).attr("id");
+        group_id = $('#group_id'+no).val();
+        message_id = $('#message_id'+no).val();
+        like_dislike = 'dislike';
+        type = $('#type'+no).val();
 
+        var _token = $('input[name="_token"]').val();
 
+        $.ajax({
+            type: 'POST',
+            url: '/groups/' + group_id,
+            data: {
+                _token: _token,
+                message_id: message_id,
+                like_dislike: like_dislike,
+                group_id: group_id,
+                type: type
+            },
+            success: function (data) {
+                location.reload();
+            }
+        });
+    });
 
+    $('.a_like').click(function(){
+        no = $(this).attr("id");
+        group_id = $('#group_id'+no).val();
+        message_id = $('#message_id'+no).val();
+        like_dislike = 'like';
+        type = $('#type'+no).val();
+
+        var _token = $('input[name="_token"]').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/groups/' + group_id,
+            data: {
+                _token: _token,
+                message_id: message_id,
+                like_dislike: like_dislike,
+                group_id: group_id,
+                type: type
+            },
+            success: function (data) {
+                location.reload();
+            }
+        });
+    });
+});
