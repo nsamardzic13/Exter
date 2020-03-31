@@ -36,7 +36,6 @@ Route::get('/events/{occasion}/wall', 'OccasionsController@wall');
 Route::get('/groups', 'GroupsController@index');
 Route::post('/groups', 'GroupsController@store');
 Route::get('groups/{group}', 'GroupsController@show');
-//Route::patch('groups/{group}', 'GroupsController@update');
 Route::post('groups/{group}', 'MessagesController@update');
 Route::post('/autocomplete', 'AutocompleteController@fetch_names');
 

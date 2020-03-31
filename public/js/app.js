@@ -49765,6 +49765,31 @@ $(document).ready(function (e) {
     });
   });
 });
+$(document).ready(function () {
+  $(window).scroll(fetchPosts);
+
+  function fetchPosts() {
+    var page = $('.endless-pagination').data('next-page');
+    console.log(page);
+
+    if (page !== null) {
+      clearTimeout($.data(this, "scrollCheck"));
+      $.data(this, "scrollCheck", setTimeout(function () {
+        var scroll_position_for_posts_load = $(window).height() + $(window).scrollTop() + 3000;
+
+        if (scroll_position_for_posts_load >= $(document).height()) {
+          $.get(page, function (data) {
+            console.log('mrs2'); // $('.posts').html(data.messages);
+
+            console.log(data.messages);
+            $('.posts').append(data.messages);
+            $('.endless-pagination').data('next-page', data.next_page);
+          });
+        }
+      }, 350));
+    }
+  }
+});
 
 /***/ }),
 

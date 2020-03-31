@@ -4,6 +4,7 @@
     <br>
     <div class="container">
         <h2 class="text-center">WALL OF "{{ Str::upper($group->name) }}"</h2>
+        <section class="posts endless-pagination" data-next-page="{{ $messages->nextPageUrl() }}">
         @foreach($messages as $message)
             <div class="card">
                 <div class="card-body">
@@ -113,6 +114,7 @@
                 </div>
             </div>
         @endforeach
+        </section>
         <br>
         <form action="/wall" method="POST">
             @csrf
