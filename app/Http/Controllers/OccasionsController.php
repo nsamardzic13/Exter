@@ -18,7 +18,17 @@ class OccasionsController extends Controller
 
         $user = auth()->user();
 
-        $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, city, min(start) as start, user_name, max_people, description, category'))
+        $events = DB::table('occasions')->get();
+
+
+        foreach($events as $occasion){
+            if (strtotime($occasion->start) < time() && !$occasion->ended){
+                DB::table('occasions')->where('id', $occasion->id)->update([ 'ended' => true ]);
+
+            }
+        }
+    $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, city, min(start) as start, user_name, max_people, description, category'))
+            ->where('ended', 'false')
             ->groupBy('name', 'user_name', 'street', 'city', 'category', 'description', 'max_people')
             ->orderBy('start')
             ->paginate(12);
@@ -51,49 +61,36 @@ class OccasionsController extends Controller
 
     public function store(){
 
-        $data = request()->validate([
-            'name'=> 'required|min:3',
-            'street'=> 'required|min:3',
-            'city'=> 'required|min:3',
-            'zipcode'=> 'required|min:3',
-            'when'=> 'required',
-            'category'=> 'required|min:3',
-            'max_people'=> 'required|numeric|min:2',
-            'description'=> 'required|min:10|max:255',
-        ]);
-        unset($data['when']);
-
         $user = auth()->user();
 
         //multiple days and times
+        //1 for repetitive events
         if (request('when') == '1'){
-            $ntime = 1;
-            //if we have multiple times
-            if(is_array(request('time-start'))){
-                $ntime = sizeof(request('time-start'));
-                $validation = [
-                    'day' => 'required',
-                    'start'=> 'required|date|after:today',
-                ];
-                for ($i = 1; $i <= $ntime; $i++){
-                    $validation = array_merge($validation,['time-start['.$i.']' => 'required'], [
-                        'time-end['.$i.']' => 'required|after:time-start'.$i], ['day'.$i => 'required']);
-                }
-                //dd($validation);
+            $data = request()->validate([
+                'name'=> 'required|min:3',
+                'street'=> 'required|min:3',
+                'city'=> 'required|min:3',
+                'zipcode'=> 'required|min:3',
+                'when'=> 'required',
+                'max_people'=> 'required|numeric|min:2',
+                'description'=> 'required|min:10|max:255',
+                'category'=> 'required|min:3',
 
-            } else { //for one time
-                $validation = [
-                    'day' => 'required',
+            ]);
+            unset($data['when']);
+            $ntime = request('number-times');
+            //dd(request()->all());
+            for ($i = 1; $i <= $ntime; $i = $i + 1) {
+                $when = request()->validate([
+                    'repeat' => 'required',
                     'start' => 'required|date|after:today',
-                    'time-start' => 'required',
-                    'time-end' => 'required|after:time-start',
-                ];
+                    'time-start'.$i=> 'required|date_format:H:i',
+                    'time-end'.$i=> 'required|date_format:H:i|after:time-start1',
+                    'day'.$i => 'required|array|between:1,7',
+                ]);
             }
-            //$when = request()->validate($validation);
-
-            $timezone = date_default_timezone_get();
-            date_default_timezone_set($timezone);
-
+            //dd($data);
+            //dd($when);
             $startdate = strtotime(request('start'));
             $enddate = $startdate + (request('repeat') * 86400);
 
@@ -101,14 +98,13 @@ class OccasionsController extends Controller
 
                 $checkedDays = request('day'.$i);
 
-                $stime = request('time-start')[$i];
-                $etime = request('time-end')[$i];
+                $stime = request('time-start'.$i);
+                $etime = request('time-end'.$i);
 
-                //dd(request('start'));
 
                 for ($d = $startdate; $d <= $enddate; $d = $d + 86400) {
                     $today = date("N", $d);
-                    //dd($checkedDays);
+
                     foreach ($checkedDays as $day => $value) {
                         if ($today == $value + 1) {
                             $sdate = date('Y-m-d', $d) . ' ' . $stime;
@@ -117,8 +113,6 @@ class OccasionsController extends Controller
                             $sdate = Carbon::createFromFormat('Y-m-d H:i', $sdate);
                             $edate = Carbon::createFromFormat('Y-m-d H:i', $edate);
 
-
-                            //dd($sdate);
                             $occasion = Occasion::create(array_merge($data, ['start' => $sdate], ['end' => $edate], ['user_name' => $user->name]));
 
                         }
@@ -128,16 +122,25 @@ class OccasionsController extends Controller
 
             }
 
-
+    ///za jedan dogadaj
         } else {
-
-            $when = request()->validate([
+            $data = request()->validate([
+                'name'=> 'required|min:3',
+                'street'=> 'required|min:3',
+                'city'=> 'required|min:3',
+                'zipcode'=> 'required|min:3',
+                'when'=> 'required',
+                'max_people'=> 'required|numeric|min:2',
+                'description'=> 'required|min:10|max:255',
+                'category'=> 'required|min:3',
                 'start-one'=> 'required|date|after:today',
-                'end-one'=> 'required|date|',
-                'time-start-one'=> 'required',
-                'time-end-one'=> 'required',
+                'end-one'=> 'required|date|after_or_equal:start-one',
+                'time-start-one'=> 'required|date_format:H:i',
+                'time-end-one'=> 'required|date_format:H:i|after:time-start-one',
             ]);
+            unset($data['when'], $data['start-one'], $data['end-one'], $data['time-start-one'], $data['time-end-one']);
 
+            //dd($data);
 
             $startdate = request('start-one') .' ' . request('time-start-one');
             $startdate = Carbon::createFromFormat('Y-m-d H:i', $startdate);
@@ -156,7 +159,7 @@ class OccasionsController extends Controller
     }
 
     public static function showTimesForModal($occasion){
-        $time =  DB::table('occasions')->where('name', $occasion->name)->orderBy('start')->get();
+        $time =  DB::table('occasions')->where('name', $occasion->name)->where('ended', false)->orderBy('start')->get();
         //dd($time);
         return $time;
     }

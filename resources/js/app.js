@@ -34,43 +34,31 @@ const app = new Vue({
 AOS.init();
 
 
-function setAtt(n){
-    $input = $("#time" + String(n) + " > p.title");
-    $input.html("Event time - " + String(n));
-
-    $input = $("#time" + String(n) + " > div.form-group > label:first");
-    $input.attr("for", "time-start[" + String(n)+"]");
-    $input = $("#time" + String(n)+" > div.form-group > input:first");
-    $input.attr("name", "time-start[" + String(n)+"]");
-
-    $input = $("#time" + String(n)+" > div.form-group > input:first");
-    $input.attr("for", "time-end[" + String(n)+"]");
-    $input = $("#time" + String(n)+" > div.form-group > input:last");
-    $input.attr("name", "time-end[" + String(n)+"]");
-
-    $input = $("#time" + String(n)+" > div.btn-group-toggle  label.btn input:checkbox");
-    $input.attr("name", "day" + String(n)+"[]");
-};
-var n = 0;
-$(document).on('click', '#addtime', function () {
-    n++;
-    if (n == 1) {
-        setAtt(n);
-        n++;
-    }
-    if (n < 10) {
-        $clone = $("#time1").clone()
-        $("#time").append($clone);
-        $clone.attr("id", "time" + String(n));
-        setAtt(n);
-    }
-});
-$(document).on('click', '#removetime', function () {
+$(document).ready(function (){
+    var n =  document.getElementById('number-times').value;
+    console.log(n);
+    //otvori n timova pri loadanju
     if(n > 1){
-        $id = "#time"+n;
-        $($id).remove();
-        n--;
+        for (var i = 1; i <= n; i++){
+            document.getElementById('time'+String(i)).style.display = 'initial';
+        }
     }
+    $(document).on('click', '#addtime', function () {
+        if (n < 10) {
+            n++;
+            document.getElementById('time'+String(n)).style.display = 'initial';
+            document.getElementById('number-times').value = n;
+
+        }
+    });
+    $(document).on('click', '#removetime', function () {
+        if (n > 1) {
+            document.getElementById('time' + String(n)).style.display = 'none';
+            n--;
+            document.getElementById('number-times').value = n;
+
+        }
+    });
 });
 
 $(document).on('click', '#hideDays', function () {
@@ -81,7 +69,6 @@ $(document).on('click', '#hideDays', function () {
 $(document).on('click', '#hideDate', function () {
     document.getElementById('date').style.display = 'none';
     document.getElementById('days').style.display = 'initial';
-    setAtt(1);
 });
 
 
