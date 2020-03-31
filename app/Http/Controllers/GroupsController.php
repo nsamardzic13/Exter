@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Like;
 use App\Messages;
 use Illuminate\Support\Facades\DB;
 use App\User;
@@ -41,10 +42,16 @@ class GroupsController extends Controller{
         //dd($group->users());
         //dd($user->groups->name);
         $user = auth()->user();
-        $messages = Messages::whereNotNull('group_id')
+        $messages = Messages::where('group_id', '=', $group->id)
                             ->orderByDesc('created_at')
                             ->get();
-        return view('groups.show', compact(['group', 'user', 'messages']));
+        $likes = DB::table('likes')
+                    ->select('users.name')
+                    ->join('messages', 'likes.message_id', '=', 'messages.id')
+                    ->join('users', 'likes.user_id','=', 'users.id')
+                    ->where('messages.group_id', '=', $group->id)->get();
+//        dd($likes);
+        return view('groups.show', compact(['group', 'user', 'messages', 'likes']));
     }
 
 
@@ -75,5 +82,4 @@ class GroupsController extends Controller{
         $group->delete();
         return redirect('user/'. $ruser->id.'#groups')->with('message', 'You have deleted group');
     }
-
 }
