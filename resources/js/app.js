@@ -237,55 +237,75 @@ var like_dislike;
 var group_id;
 var type;
 var no;
-$(document).ready(function(e){
-    $('.a_dislike').click(function(){
-        no = $(this).attr("id");
-        group_id = $('#group_id'+no).val();
-        message_id = $('#message_id'+no).val();
-        like_dislike = 'dislike';
-        type = $('#type'+no).val();
+$(document).on("click", ".a_dislike", function(e){
+    var posts = $('.endless-pagination').html();
+    no = $(this).attr("id");
+    var group_id = $('#group_id'+no).val();
+    message_id = $('#message_id'+no).val();
+    like_dislike = 'dislike';
+    type = $('#type'+no).val();
+    e.preventDefault();
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+        type: 'POST',
+        url: '/groups/' + group_id,
+        data: {
+            _token: _token,
+            message_id: message_id,
+            like_dislike: like_dislike,
+            group_id: group_id,
+            type: type
+        },
+        success: function (data) {
+            //$("#likes_messages"+no).load("/groups/" +group_id + " #likes_messages"+no);
+            // $('#likes_messages'+no).fadeOut(800, function () {
+            //     $('#likes_messages'+no).fadeIn().delay(2000);
+            // })
+            $("#likes_messages" + no + " .a_dislike").addClass("likescroll")
+            $("#likes_messages" + no + " .likescroll-dislikes").html(parseInt($("#likes_messages" + no + " .likescroll-dislikes").html())+1)
 
-        var _token = $('input[name="_token"]').val();
+            if ($("#likes_messages" + no + " .a_like").hasClass("likescroll")) {
+                let newhtml = parseInt($("#likes_messages" + no + " .likescroll-likes").html())-1
 
-        $.ajax({
-            type: 'POST',
-            url: '/groups/' + group_id,
-            data: {
-                _token: _token,
-                message_id: message_id,
-                like_dislike: like_dislike,
-                group_id: group_id,
-                type: type
-            },
-            success: function (data) {
-                location.reload();
+                $("#likes_messages" + no + " .likescroll-likes").html(newhtml)
+                $("#likes_messages" + no + " .a_like").removeClass("likescroll")
             }
-        });
+        }
     });
+});
 
-    $('.a_like').click(function(){
-        no = $(this).attr("id");
-        group_id = $('#group_id'+no).val();
-        message_id = $('#message_id'+no).val();
-        like_dislike = 'like';
-        type = $('#type'+no).val();
+$(document).on("click", ".a_like", function(e){
+    var no = $(this).attr("id");
+    group_id = $('#group_id'+no).val();
+    message_id = $('#message_id'+no).val();
+    like_dislike = 'like';
+    type = $('#type'+no).val();
+    e.preventDefault();
+    var _token = $('input[name="_token"]').val();
 
-        var _token = $('input[name="_token"]').val();
+    $.ajax({
+        type: 'POST',
+        url: '/groups/' + group_id,
+        data: {
+            _token: _token,
+            message_id: message_id,
+            like_dislike: like_dislike,
+            group_id: group_id,
+            type: type
+        },
+        success: function (data) {
+            //location.reload(null, false);
+            //<div id="likes_messages{{ $message->id }}
+            $("#likes_messages" + no + " .a_like").addClass("likescroll")
+            $("#likes_messages" + no + " .likescroll-likes").html(parseInt($("#likes_messages" + no + " .likescroll-likes").html())+1)
 
-        $.ajax({
-            type: 'POST',
-            url: '/groups/' + group_id,
-            data: {
-                _token: _token,
-                message_id: message_id,
-                like_dislike: like_dislike,
-                group_id: group_id,
-                type: type
-            },
-            success: function (data) {
-                location.reload();
+            if ($("#likes_messages" + no + " .a_dislike").hasClass("likescroll")) {
+                let newhtml = parseInt($("#likes_messages" + no + " .likescroll-dislikes").html())-1
+
+                $("#likes_messages" + no + " .likescroll-dislikes").html(newhtml)
+                $("#likes_messages" + no + " .a_dislike").removeClass("likescroll")
             }
-        });
+        }
     });
 });
 
@@ -295,7 +315,6 @@ $(document).ready(function() {
     function fetchPosts() {
 
         var page = $('.endless-pagination').data('next-page');
-        console.log(page);
         if(page !== null) {
 
             clearTimeout( $.data( this, "scrollCheck" ) );
@@ -305,9 +324,7 @@ $(document).ready(function() {
 
                 if(scroll_position_for_posts_load >= $(document).height()) {
                     $.get(page, function(data){
-                        console.log('mrs2');
                         // $('.posts').html(data.messages);
-                        console.log(data.messages);
                         $('.posts').append(data.messages);
                         $('.endless-pagination').data('next-page', data.next_page);
                     });

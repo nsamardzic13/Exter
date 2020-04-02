@@ -24,6 +24,25 @@ body::-webkit-scrollbar-thumb{
     background: #F56942;
 }
 
+
+/**********************by IVANA*****************************/
+.likescroll {
+    color:green !important;
+    pointer-events: none;
+}
+
+p.likescroll-p {
+    text-align: right;
+}
+
+.likescroll-btn {
+    cursor:pointer;
+}
+/***************************************************/
+
+
+
+
 //css for event table
 .event-column:hover,
 .event-column.hover{

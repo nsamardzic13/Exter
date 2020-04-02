@@ -52,10 +52,9 @@ class GroupsController extends Controller{
                     ->where('messages.group_id', '=', $group->id)->get();
 //        dd($likes);
         if($request->ajax()) {
-
             return [
                 'messages' => view('messages.index_scroll', compact(['group', 'user', 'messages', 'likes']))->render(),
-                'next_page' => $messages->nextPageUrl()
+                'next_page' => $messages->nextPageUrl(),
             ];
         }
 

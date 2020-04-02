@@ -99,6 +99,7 @@ class MessagesController extends Controller
      */
     public function update(Request $request, Messages $messages)
     {
+
         $data = request()->validate([
             'message_id' => 'required',
             'like_dislike' => 'required',
