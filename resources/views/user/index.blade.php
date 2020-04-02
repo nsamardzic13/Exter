@@ -230,6 +230,7 @@
                                                     <button type="button" class="btn btn-outline-quest2 btn-sm" data-toggle="modal" data-target="#myModal{{$event->id}}">
                                                         <i class="fas fa-info-circle"></i>
                                                     </button>
+                                                    <a href="/events/recreate/{{$event->id}}" class="btn btn-outline-quest2 btn-sm" title="Repeat this event"><i class="fas fa-redo-alt"></i></a>
                                                 </span>
                                             </li>
                                                 @include('occasions.show',  ['occasion' => $event])

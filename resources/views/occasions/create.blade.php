@@ -4,166 +4,204 @@ use Illuminate\Support\Facades\Auth;
 $user = Auth::user();
 
 date_default_timezone_set('Europe/Zagreb');
+
 ?>
 @section('content')
 
 
-    <div class="container-fluid p-5 jumbotron jumbotron-fluid bg-gradient-primary-to-secondary">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        <h1>Create event</h1>
-                    </div>
-                    <div class="card-body">
+<div class="container-fluid p-5 jumbotron jumbotron-fluid bg-gradient-primary-to-secondary">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="container justify-content-center pb-2 pr-5">
+                <h1 class="text-white font-weight-bolder">Create event</h1></br>
+            </div>
+        <div class="card" >
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        @auth
+                            <form action="/events" method="POST" class="pb-2">
 
-                        <div class="row">
-                            <div class="col-12">
-
-                                @if($user)
-                                    <form action="/events" method="POST" class="pb-2">
-                                        <div class="form-group ">
-                                            <label for='name'>Name:</label>
-                                            <input type="text" name="name" value="{{ old('name')}}" class="form-control">
-                                        </div>
-                                        <div class="text-danger pb-3">{{ $errors->first('name') }}</div>
-
-                                        <div class="form-group">
-                                            <label for='street'>Street:</label>
-                                            <input type="text" name="street"  value="{{ old('street')}}" class="form-control" placeholder="{{$user->street_name}}">
-                                        </div>
-
-                                        <div class="text-danger pb-3">{{ $errors->first('street') }}</div>
-
-                                        <div class="form-group">
-                                            <label for='city'>City:</label>
-                                            <input type="text" name="city"  value="{{ old('city')}}" class="form-control">
-                                        </div>
-                                        <div class="text-danger pb-3">{{ $errors->first('city') }}</div>
-
-                                        <div class="form-group">
-                                            <label for='zipcode'>Zipcode:</label>
-                                            <input type="text" name="zipcode"  value="{{ old('zipcode')}}" class="form-control">
-                                        </div>
-                                        <div class="text-danger pb-3">{{ $errors->first('zipcode') }}</div>
-
-                                        <div class="form-group">
-                                            <p>When?</p>
-                                            <div class="btn-group-toggle mb-2 px-5 row" data-toggle="buttons">
-                                                <label class="btn btn-outline-quest col">
-                                                    <input type="radio"  id="hideDays" name="when" value="0"  @if(!old('when')) checked @endif />
-                                                    Just one time on certain date
-                                                </label>
-                                                <label class="btn btn-outline-quest col">
-                                                    <input type="radio"  id="hideDate" name="when" value="1" @if(old('when')) checked @endif/>
-                                                    Repeat on specified days
-                                                </label>
-
-                                            </div>
-                                            <div>{{ $errors->first('when') }}</div>
-                                            <div id="date"  @if(!old('when')) style="display:initial" @else style="display:none" @endif>
-                                                <div class="form-group">
-                                                    <label for='start-one'>Start date:</label>
-                                                    <input type="date" name="start-one"  @if(!old('start-one')) value="{{date("Y-m-d", strtotime('tomorrow'))}}"  @else value ="{{old('start-one')}}" @endif  class="form-control">
-                                                </div>
-                                                <div class="text-danger pb-3">{{ $errors->first('start-one') }}</div>
-
-
-                                                <div class="form-group">
-                                                    <label for='end-one'>End date:</label>
-                                                    <input type="date" name="end-one"  @if(!old('end-one')) value="{{date("Y-m-d", strtotime('tomorrow'))}}"  @else value ="{{old('end-one')}}" @endif class="form-control">
-                                                </div>
-                                                <div class="text-danger pb-3">{{ $errors->first('end-one') }}</div>
-                                                <div class="container border p-2">
-                                                    <div id= class="pb-5">
-                                                        <p class="title">Event time:</p>
-                                                        <div class="form-group">
-                                                            <label for='time-start-one'>Start time:</label>
-                                                            <input type="time" name="time-start-one" @if(!old('time-start-one')) value="{{date('H:i')}}"  @else value ="{{old('time-start-one')}}" @endif class="form-control">
-                                                        </div>
-                                                        <div class="text-danger pb-3">{{ $errors->first('time-start-one') }}</div>
-                                                        <div class="form-group">
-                                                            <label for='time-end'>End time:</label>
-                                                            <input type="time" name="time-end-one"  @if(!old('time-end-one')) value="{{date('H:i', strtotime("+1 hours"))}}"  @else value ="{{old('time-end-one')}}" @endif class="form-control">
-                                                        </div>
-                                                        <div class="text-danger pb-3">{{ $errors->first('time-end-one') }}</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="days" @if(old('when')) style="display:initial" @else style="display:none" @endif>
-                                                <div class="form-group">
-                                                    <label for='start'>Start from:</label>
-                                                    <input type="date" name="start"  @if(!old('start')) value="{{date("Y-m-d", strtotime('tomorrow'))}}"  @else value ="{{old('start')}}" @endif class="form-control">
-                                                </div>
-
-                                                <div class="text-danger pb-3">{{ $errors->first('start') }}</div>
-
-
-                                                <div class="form-group">
-                                                    <label for='repeat'>Repeat:</label>
-                                                    <select name ="repeat" class="form-control">
-                                                        <option value="7" selected>For a week</option>
-                                                        <option value="14" >For 2 weeks</option>
-                                                        <option value="21" >For 3 weeks</option>
-                                                        <option value="28" >For 4 weeks</option></select>
-                                                </div>
-                                                <div class="text-danger pb-3">{{ $errors->first('repeat') }}</div>
-
-                                                <h4>Time:</h4>
-                                                <div id="time" class="container border p-2">
-
-                                                        @include('occasions.time', $days)
-
-
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="btn btn-secondary btn-lg" id="addtime">Add new time</div>
-                                                    <div class="btn btn-secondary btn-lg" id="removetime">Remove time</div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for='max_people'>Maximum number of people:</label>
-                                                <input type="number" name="max_people"  value="{{ old('max_people')}}" class="form-control">
-                                            </div>
-                                            <div class="text-danger pb-3">{{ $errors->first('max_people') }}</div>
-                                            <div class="form-group">
-                                                <label for='description'>Description:</label>
-                                                <textarea type="text" class="form-control" name="description" rows="3">{{ old('description')}} </textarea>
-                                            </div>
-                                            <div class="text-danger pb-3">{{ $errors->first('description') }}</div>
-
-
-                                            <div class="form-group">
-                                                <label for="category"></label>
-                                                <select name ="category" class="form-control">
-                                                    <option value="" disabled="" selected>Select category</option>
-                                                    @foreach ($category as $c)
-                                                        <option value="{{ $c }}" {{ old('category') == $c ? 'selected' : '' }}>{{ $c }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="text-danger pb-3">{{ $errors->first('category') }}</div>
-
-                                            <button type="submit" class="btn btn-outline-success btn-lg my-2 ml-4">Add event</button>
-                                            @csrf
-
-
-                                            @else
-                                                <p>You need to login</p>
-                                        @endif
-
-                                    </form>
-                                    <div>
-                                        <p class="float-right"><a href="/events"><button type="button" class="btn btn-secondary btn-lg my-2 ml-4">Back</button></a></p>
+                                <label class="text-secondary" for='name'>Name:</label>
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text text-muted bg-light"><i class="fas fa-signature"></i></span>
                                     </div>
-                            </div>
+                                    <input type="text" name="name" value="{{ old('name', $event->name ?? '')}}" class="form-control" >
+                                </div>
+                                <div class="text-danger pb-3">{{ $errors->first('name') }}</div>
+
+                                 <label class="text-secondary" for='street'>Street:</label>
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text text-muted bg-light" ><i class="fas fa-map-marker-alt"></i></span>
+                                    </div>
+                                    <input type="text" name="street"  value="{{ old('street', $event->street ?? '')}}" class="form-control" placeholder="{{$user->street_name}}">
+                                </div>
+                                <div class="text-danger pb-3">{{ $errors->first('street') }}</div>
+
+                                  <label class="text-secondary"class="text-secondary" for='city'>City:</label>
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text text-muted bg-light" ><i class="fas fa-city"></i></span>
+                                    </div>
+                                    <input type="text" name="city"  value="{{ old('city', $event->city ?? '')}}" class="form-control">
+                                </div>
+                                <div class="text-danger pb-3">{{ $errors->first('city') }}</div>
+
+                                 <label class="text-secondary"for='zipcode'>Zipcode:</label>
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text text-muted bg-light" ><i class="fas fa-mail-bulk"></i></span>
+                                    </div>
+                                    <input type="text" name="zipcode"  value="{{ old('zipcode', $event->zipcode ?? '')}}" class="form-control">
+                                </div>
+                                <div class="text-danger pb-3">{{ $errors->first('zipcode') }}</div>
+
+                                <div class="form-group">
+                                    <p>When?</p>
+                                    <div class="btn-group-toggle mb-2 px-5 row" data-toggle="buttons">
+                                     <label class="btn btn-outline-quest col">
+                                        <input type="radio"  id="hideDays" name="when" value="0"  @if(!old('when')) checked @endif />
+                                        Just one time on certain date
+                                    </label>
+                                    <label class="btn btn-outline-quest col">
+                                        <input type="radio"  id="hideDate" name="when" value="1" @if(old('when')) checked @endif/>
+                                    Repeat on specified days
+                                    </label>
+                                </div>
+                                <div>{{ $errors->first('when') }}</div>
+
+                                <div id="date"  @if(!old('when')) style="display:initial" @else style="display:none" @endif>
+                                     <label class="text-secondary"for='start-one'>Start date:</label>
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text text-muted bg-light" ><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input type="date" name="start-one"  @if(!old('start-one', date('Y-m-d', strtotime($event->start ?? '')))) value="{{date("Y-m-d", strtotime('tomorrow'))}}"
+                                                                            @else value ="{{old('start-one', date('Y-m-d', strtotime($event->start ?? '')))}}" @endif  class="form-control">
+                                    </div>
+                                    <div class="text-danger pb-3">{{ $errors->first('start-one') }}</div>
+
+
+                                     <label class="text-secondary"for='end-one'>End date:</label>
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text text-muted bg-light" ><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                    <input type="date" name="end-one"  @if(!old('end-one', date('Y-m-d', strtotime($event->end ?? '')))) value="{{date("Y-m-d", strtotime('tomorrow'))}}"  @else value ="{{old('end-one', date('Y-m-d', strtotime($event->end ?? ''))) }}" @endif class="form-control">
+                                    </div>
+                                    <div class="text-danger pb-3">{{ $errors->first('end-one') }}</div>
+                                    <div class="container border p-2">
+                                        <div class="pb-3">
+                                            <p class="title">Event time:</p>
+                                             <label class="text-secondary"for='time-start-one'>Start time:</label>
+                                            <div class="form-group input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text text-muted bg-light" ><i class="fas fa-clock"></i></span>
+                                                </div>
+                                                <input type="time" name="time-start-one" @if(!old('time-start-one', date('H:i', strtotime($event->start ?? '')) )) value="{{date('H:i')}}"  @else value ="{{old('time-start-one', date('H:i', strtotime($event->start ?? '')) )}}" @endif class="form-control">
+                                            </div>
+                                            <div class="text-danger pb-3">{{ $errors->first('time-start-one') }}</div>
+                                             <label class="text-secondary"for='time-end'>End time:</label>
+                                            <div class="form-group input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text text-muted bg-light" ><i class="fas fa-clock"></i></span>
+                                                </div>
+                                                <input type="time" name="time-end-one"  @if(!old('time-end-one', date('H:i', strtotime($event->end ?? '')))) value="{{date('H:i', strtotime("+1 hours"))}}"  @else value ="{{old('time-end-one', date('H:i', strtotime($event->end ?? '')))}}" @endif class="form-control">
+                                            </div>
+                                            <div class="text-danger pb-3">{{ $errors->first('time-end-one') }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div id="days" @if(old('when')) style="display:initial" @else style="display:none" @endif>
+                                     <label class="text-secondary"for='start'>Start from:</label>
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text text-muted bg-light" ><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input type="date" name="start"  @if(!old('start', date('Y-m-d', strtotime($event->start ?? '')))) value="{{date("Y-m-d", strtotime('tomorrow'))}}"  @else value ="{{old('start', date('Y-m-d', strtotime($event->start ?? '')))}}" @endif class="form-control">
+                                    </div>
+
+                                    <div class="text-danger pb-3">{{ $errors->first('start') }}</div>
+
+
+                                     <label class="text-secondary"for='repeat'>Repeat:</label>
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                            <span class="input-group-text text-muted bg-light" ><i class="fas fa-redo-alt"></i></span>
+                                            </div>
+                                            <select name ="repeat" class="form-control">
+                                            <option value="7" selected>For a week</option>
+                                            <option value="14" >For 2 weeks</option>
+                                            <option value="21" >For 3 weeks</option>
+                                            <option value="28" >For 4 weeks</option></select>
+                                        </div>
+                                    <div class="text-danger pb-3">{{ $errors->first('repeat') }}</div>
+
+                                    <h4>Time:</h4>
+                                    <div id="time" class="container border p-2">
+
+                                    @include('occasions.time', [$days, 'event' => $event ?? new \App\Occasion()])
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="btn btn-secondary btn-lg" id="addtime">Add new time</div>
+                                        <div class="btn btn-secondary btn-lg" id="removetime">Remove time</div>
+                                    </div>
+                                </div>
+                                <br><br>
+                                 <label class="text-secondary"for='max_people'>Maximum number of people:</label>
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text text-muted bg-light" ><i class="fas fa-user-friends"></i></span>
+                                        </div>
+                                        <input type="number" name="max_people"  value="{{ old('max_people', $event->max_people ?? '')}}" class="form-control">
+                                    </div>
+                                <div class="text-danger pb-3">{{ $errors->first('max_people') }}</div>
+
+                                 <label class="text-secondary"for='description'>Description:</label>
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text text-muted bg-light" ><i class="fas fa-align-center"></i></span>
+                                        </div>
+                                        <textarea type="text" class="form-control" name="description" rows="3">{{ old('description', $event->description ?? '')}} </textarea>
+                                    </div>
+                                <div class="text-danger pb-3">{{ $errors->first('description') }}</div>
+
+
+                                 <label class="text-secondary"for="category"></label>
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text text-muted bg-light" ><i class="fas fa-th-list"></i></span>
+                                    </div>
+                                    <select name ="category" class="form-control">
+                                        <option value="" disabled="" selected>Select category</option>
+                                        @foreach ($category as $c)
+                                            <option value="{{ $c }}" {{ old('category', $event->category ?? '') == $c ? 'selected' : '' }}>{{ $c }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="text-danger pb-3">{{ $errors->first('category') }}</div>
+
+                                <button type="submit" class="btn btn-outline-success btn-lg my-2 ml-4 px-5">Add event</button>
+                                @csrf
+
+                            </form>
+                        @endauth
+                        @guest
+                            <p>You need to login</p>
+                        @endguest
+                        <div>
+                            <p class="float-right "><a href="/events"><button type="button" class="btn btn-secondary btn-lg my-2 ml-4 px-4">Back</button></a></p>
                         </div>
-
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
