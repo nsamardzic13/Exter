@@ -14,20 +14,21 @@ use Illuminate\Support\Facades\DB;
 
 class OccasionsController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
         $user = auth()->user();
 
         $events = DB::table('occasions')->get();
 
 
-        foreach($events as $occasion){
-            if (strtotime($occasion->start) < time() && !$occasion->ended){
-                DB::table('occasions')->where('id', $occasion->id)->update([ 'ended' => true ]);
+        foreach ($events as $occasion) {
+            if (strtotime($occasion->start) < time() && !$occasion->ended) {
+                DB::table('occasions')->where('id', $occasion->id)->update(['ended' => true]);
 
             }
         }
-    $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, city, min(start) as start, user_name, max_people, description, category'))
+        $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, city, min(start) as start, user_name, max_people, description, category'))
             ->where('ended', 'false')
             ->groupBy('name', 'user_name', 'street', 'city', 'category', 'description', 'max_people')
             ->orderBy('start')
@@ -36,10 +37,11 @@ class OccasionsController extends Controller
         return view('occasions.index', compact('user', 'occasions'));
     }
 
-    public function create(){
+    public function create()
+    {
 
         $user = auth()->user();
-        if($user){
+        if ($user) {
             $hangouts = $user->hangout->getTableColumns();
             $sports = $user->sport->getTableColumns();
             $categories = array_merge($hangouts, $sports);
@@ -59,22 +61,23 @@ class OccasionsController extends Controller
     }
 
 
-    public function store(){
+    public function store()
+    {
 
         $user = auth()->user();
 
         //multiple days and times
         //1 for repetitive events
-        if (request('when') == '1'){
+        if (request('when') == '1') {
             $data = request()->validate([
-                'name'=> 'required|min:3',
-                'street'=> 'required|min:3',
-                'city'=> 'required|min:3',
-                'zipcode'=> 'required|min:3',
-                'when'=> 'required',
-                'max_people'=> 'required|numeric|min:2',
-                'description'=> 'required|min:10|max:255',
-                'category'=> 'required|min:3',
+                'name' => 'required|min:3',
+                'street' => 'required|min:3',
+                'city' => 'required|min:3',
+                'zipcode' => 'required|min:3',
+                'when' => 'required',
+                'max_people' => 'required|numeric|min:2',
+                'description' => 'required|min:10|max:255',
+                'category' => 'required|min:3',
 
             ]);
             unset($data['when']);
@@ -84,9 +87,9 @@ class OccasionsController extends Controller
                 $when = request()->validate([
                     'repeat' => 'required',
                     'start' => 'required|date|after:today',
-                    'time-start'.$i=> 'required|date_format:H:i',
-                    'time-end'.$i=> 'required|date_format:H:i|after:time-start1',
-                    'day'.$i => 'required|array|between:1,7',
+                    'time-start' . $i => 'required|date_format:H:i',
+                    'time-end' . $i => 'required|date_format:H:i|after:time-start1',
+                    'day' . $i => 'required|array|between:1,7',
                 ]);
             }
             //dd($data);
@@ -94,12 +97,12 @@ class OccasionsController extends Controller
             $startdate = strtotime(request('start'));
             $enddate = $startdate + (request('repeat') * 86400);
 
-            for ($i = 1; $i <= $ntime; $i = $i + 1){
+            for ($i = 1; $i <= $ntime; $i = $i + 1) {
 
-                $checkedDays = request('day'.$i);
+                $checkedDays = request('day' . $i);
 
-                $stime = request('time-start'.$i);
-                $etime = request('time-end'.$i);
+                $stime = request('time-start' . $i);
+                $etime = request('time-end' . $i);
 
 
                 for ($d = $startdate; $d <= $enddate; $d = $d + 86400) {
@@ -122,54 +125,56 @@ class OccasionsController extends Controller
 
             }
 
-    ///za jedan dogadaj
+            ///za jedan dogadaj
         } else {
             $data = request()->validate([
-                'name'=> 'required|min:3',
-                'street'=> 'required|min:3',
-                'city'=> 'required|min:3',
-                'zipcode'=> 'required|min:3',
-                'when'=> 'required',
-                'max_people'=> 'required|numeric|min:2',
-                'description'=> 'required|min:10|max:255',
-                'category'=> 'required|min:3',
-                'start-one'=> 'required|date|after:today',
-                'end-one'=> 'required|date|after_or_equal:start-one',
-                'time-start-one'=> 'required|date_format:H:i',
-                'time-end-one'=> 'required|date_format:H:i|after:time-start-one',
+                'name' => 'required|min:3',
+                'street' => 'required|min:3',
+                'city' => 'required|min:3',
+                'zipcode' => 'required|min:3',
+                'when' => 'required',
+                'max_people' => 'required|numeric|min:2',
+                'description' => 'required|min:10|max:255',
+                'category' => 'required|min:3',
+                'start-one' => 'required|date|after:today',
+                'end-one' => 'required|date|after_or_equal:start-one',
+                'time-start-one' => 'required|date_format:H:i',
+                'time-end-one' => 'required|date_format:H:i|after:time-start-one',
             ]);
             unset($data['when'], $data['start-one'], $data['end-one'], $data['time-start-one'], $data['time-end-one']);
 
             //dd($data);
 
-            $startdate = request('start-one') .' ' . request('time-start-one');
+            $startdate = request('start-one') . ' ' . request('time-start-one');
             $startdate = Carbon::createFromFormat('Y-m-d H:i', $startdate);
 
-            $enddate = request('end-one') .' '. request('time-end-one');;
+            $enddate = request('end-one') . ' ' . request('time-end-one');;
             $enddate = Carbon::createFromFormat('Y-m-d H:i', $enddate);
 
-            $occasion = Occasion::create(array_merge($data, ['start'  =>  $startdate], ['end'  =>  $enddate], ['user_name'  =>  $user->name]));
+            $occasion = Occasion::create(array_merge($data, ['start' => $startdate], ['end' => $enddate], ['user_name' => $user->name]));
 
         }
-
-
 
 
         return redirect('events');
     }
 
-    public static function showTimesForModal($occasion){
-        $time =  DB::table('occasions')->where('name', $occasion->name)->where('ended', false)->orderBy('start')->get();
+    public static function showTimesForModal($occasion)
+    {
+        $time = DB::table('occasions')->where('name', $occasion->name)->where('ended', false)->orderBy('start')->get();
         //dd($time);
         return $time;
     }
-    public static function showPeopleForModal($occasion){
-        $people =  DB::table('occasion_user')->where('occasion_id', $occasion->id)->get();
+
+    public static function showPeopleForModal($occasion)
+    {
+        $people = DB::table('occasion_user')->where('occasion_id', $occasion->id)->get();
 
         return $people->count();
     }
 
-    public static function wall(Occasion $occasion){
+    public static function wall(Occasion $occasion)
+    {
 
         $user = auth()->user();
         $occasion->users()->syncWithoutDetaching($user->id);
@@ -177,5 +182,28 @@ class OccasionsController extends Controller
         $joined = $occasion->users;
 
         return view('occasions.wall', compact('joined', 'occasion'));
+    }
+
+    public function recreate(Occasion $occasion)
+    {
+
+        $user = auth()->user();
+        if ($user) {
+            $hangouts = $user->hangout->getTableColumns();
+            $sports = $user->sport->getTableColumns();
+            $categories = array_merge($hangouts, $sports);
+
+            $exclude = array("user_id", "id", "updated_at", "created_at");
+
+            $category = array_diff($categories, $exclude);
+
+            $days = ['Monday', 'Tuesday', 'Wendsday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+            $event = DB::table('occasions')->where('id', $occasion->id)->first();
+
+            return view('occasions.create', compact('category', 'days', 'event'));
+        }
+        return view('occasions.create');
+
     }
 }
