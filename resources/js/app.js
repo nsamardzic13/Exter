@@ -232,6 +232,8 @@ $(document).ready(function() {
     });
 });
 
+
+
 var message_id;
 var like_dislike;
 var group_id;
@@ -261,14 +263,14 @@ $(document).on("click", ".a_dislike", function(e){
             // $('#likes_messages'+no).fadeOut(800, function () {
             //     $('#likes_messages'+no).fadeIn().delay(2000);
             // })
-            $("#likes_messages" + no + " .a_dislike").addClass("likescroll")
+            $("#likes_messages" + no + " .a_dislike").addClass("likescroll");
             $("#likes_messages" + no + " .likescroll-dislikes").html(parseInt($("#likes_messages" + no + " .likescroll-dislikes").html())+1)
 
             if ($("#likes_messages" + no + " .a_like").hasClass("likescroll")) {
-                let newhtml = parseInt($("#likes_messages" + no + " .likescroll-likes").html())-1
+                let newhtml = parseInt($("#likes_messages" + no + " .likescroll-likes").html())-1;
 
-                $("#likes_messages" + no + " .likescroll-likes").html(newhtml)
-                $("#likes_messages" + no + " .a_like").removeClass("likescroll")
+                $("#likes_messages" + no + " .likescroll-likes").html(newhtml);
+                $("#likes_messages" + no + " .a_like").removeClass("likescroll");
             }
         }
     });
@@ -281,6 +283,7 @@ $(document).on("click", ".a_like", function(e){
     like_dislike = 'like';
     type = $('#type'+no).val();
     e.preventDefault();
+
     var _token = $('input[name="_token"]').val();
 
     $.ajax({
@@ -296,14 +299,14 @@ $(document).on("click", ".a_like", function(e){
         success: function (data) {
             //location.reload(null, false);
             //<div id="likes_messages{{ $message->id }}
-            $("#likes_messages" + no + " .a_like").addClass("likescroll")
-            $("#likes_messages" + no + " .likescroll-likes").html(parseInt($("#likes_messages" + no + " .likescroll-likes").html())+1)
+            $("#likes_messages" + no + " .a_like").addClass("likescroll");
+            $("#likes_messages" + no + " .likescroll-likes").html(parseInt($("#likes_messages" + no + " .likescroll-likes").html())+1);
 
             if ($("#likes_messages" + no + " .a_dislike").hasClass("likescroll")) {
-                let newhtml = parseInt($("#likes_messages" + no + " .likescroll-dislikes").html())-1
+                let newhtml = parseInt($("#likes_messages" + no + " .likescroll-dislikes").html())-1;
 
-                $("#likes_messages" + no + " .likescroll-dislikes").html(newhtml)
-                $("#likes_messages" + no + " .a_dislike").removeClass("likescroll")
+                $("#likes_messages" + no + " .likescroll-dislikes").html(newhtml);
+                $("#likes_messages" + no + " .a_dislike").removeClass("likescroll");
             }
         }
     });
@@ -315,15 +318,15 @@ $(document).ready(function() {
     function fetchPosts() {
 
         var page = $('.endless-pagination').data('next-page');
-        if(page !== null) {
+        if (page !== null) {
 
-            clearTimeout( $.data( this, "scrollCheck" ) );
+            clearTimeout($.data(this, "scrollCheck"));
 
-            $.data( this, "scrollCheck", setTimeout(function() {
+            $.data(this, "scrollCheck", setTimeout(function () {
                 var scroll_position_for_posts_load = $(window).height() + $(window).scrollTop() + 3000;
 
-                if(scroll_position_for_posts_load >= $(document).height()) {
-                    $.get(page, function(data){
+                if (scroll_position_for_posts_load >= $(document).height()) {
+                    $.get(page, function (data) {
                         // $('.posts').html(data.messages);
                         $('.posts').append(data.messages);
                         $('.endless-pagination').data('next-page', data.next_page);
