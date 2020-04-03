@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 
 use \App\Occasion;
@@ -118,6 +119,8 @@ class OccasionsController extends Controller
 
                             $occasion = Occasion::create(array_merge($data, ['start' => $sdate], ['end' => $edate], ['user_name' => $user->name]));
 
+                            $occasion->users()->syncWithoutDetaching($user->id);
+
                         }
 
                     }
@@ -133,7 +136,7 @@ class OccasionsController extends Controller
                 'city' => 'required|min:3',
                 'zipcode' => 'required|min:3',
                 'when' => 'required',
-                'max_people' => 'required|numeric|min:2',
+                'max_people' => 'required|numeric',
                 'description' => 'required|min:10|max:255',
                 'category' => 'required|min:3',
                 'start-one' => 'required|date|after:today',
@@ -142,7 +145,7 @@ class OccasionsController extends Controller
                 'time-end-one' => 'required|date_format:H:i|after:time-start-one',
             ]);
             unset($data['when'], $data['start-one'], $data['end-one'], $data['time-start-one'], $data['time-end-one']);
-
+            //dd($data['max_people']);
             //dd($data);
 
             $startdate = request('start-one') . ' ' . request('time-start-one');
@@ -153,10 +156,12 @@ class OccasionsController extends Controller
 
             $occasion = Occasion::create(array_merge($data, ['start' => $startdate], ['end' => $enddate], ['user_name' => $user->name]));
 
+            $occasion->users()->syncWithoutDetaching($user->id);
+
         }
 
 
-        return redirect('events');
+        return redirect('events')->with('message', 'You have succesfuly created event');;
     }
 
     public static function showTimesForModal($occasion)
@@ -170,7 +175,7 @@ class OccasionsController extends Controller
     {
         $people = DB::table('occasion_user')->where('occasion_id', $occasion->id)->get();
 
-        return $people->count();
+        return $people->count()-1;
     }
 
     public static function wall(Occasion $occasion)

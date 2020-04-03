@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 <?php
 use Illuminate\Support\Facades\Auth;
 $user = Auth::user();
@@ -36,7 +37,7 @@ date_default_timezone_set('Europe/Zagreb');
                                     <div class="input-group-prepend">
                                         <span class="input-group-text text-muted bg-light" ><i class="fas fa-map-marker-alt"></i></span>
                                     </div>
-                                    <input type="text" name="street"  value="{{ old('street', $event->street ?? '')}}" class="form-control" placeholder="{{$user->street_name}}">
+                                    <input type="text" name="street"  value="{{ old('street', $event->street ?? '')}}" class="form-control" >
                                 </div>
                                 <div class="text-danger pb-3">{{ $errors->first('street') }}</div>
 
@@ -78,7 +79,7 @@ date_default_timezone_set('Europe/Zagreb');
                                         <div class="input-group-prepend">
                                             <span class="input-group-text text-muted bg-light" ><i class="fas fa-calendar"></i></span>
                                         </div>
-                                        <input type="date" name="start-one"  @if(!old('start-one', date('Y-m-d', strtotime($event->start ?? '')))) value="{{date("Y-m-d", strtotime('tomorrow'))}}"
+                                        <input type="date" name="start-one"  @if(!old('start-one', $event->start ?? '')))) value="{{date("Y-m-d", strtotime('tomorrow'))}}"
                                                                             @else value ="{{old('start-one', date('Y-m-d', strtotime($event->start ?? '')))}}" @endif  class="form-control">
                                     </div>
                                     <div class="text-danger pb-3">{{ $errors->first('start-one') }}</div>
@@ -89,7 +90,7 @@ date_default_timezone_set('Europe/Zagreb');
                                         <div class="input-group-prepend">
                                             <span class="input-group-text text-muted bg-light" ><i class="fas fa-calendar"></i></span>
                                         </div>
-                                    <input type="date" name="end-one"  @if(!old('end-one', date('Y-m-d', strtotime($event->end ?? '')))) value="{{date("Y-m-d", strtotime('tomorrow'))}}"  @else value ="{{old('end-one', date('Y-m-d', strtotime($event->end ?? ''))) }}" @endif class="form-control">
+                                    <input type="date" name="end-one"  @if(!old('end-one', $event->start ?? '')) value="{{date("Y-m-d", strtotime('tomorrow'))}}"  @else value ="{{old('end-one', date('Y-m-d', strtotime($event->end ?? ''))) }}" @endif class="form-control">
                                     </div>
                                     <div class="text-danger pb-3">{{ $errors->first('end-one') }}</div>
                                     <div class="container border p-2">
@@ -100,7 +101,7 @@ date_default_timezone_set('Europe/Zagreb');
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text text-muted bg-light" ><i class="fas fa-clock"></i></span>
                                                 </div>
-                                                <input type="time" name="time-start-one" @if(!old('time-start-one', date('H:i', strtotime($event->start ?? '')) )) value="{{date('H:i')}}"  @else value ="{{old('time-start-one', date('H:i', strtotime($event->start ?? '')) )}}" @endif class="form-control">
+                                                <input type="time" name="time-start-one" @if(!old('time-start-one', $event->start ?? '' )) value="{{date('H:i')}}"  @else value ="{{old('time-start-one', date('H:i', strtotime($event->start ?? '')) )}}" @endif class="form-control">
                                             </div>
                                             <div class="text-danger pb-3">{{ $errors->first('time-start-one') }}</div>
                                              <label class="text-secondary"for='time-end'>End time:</label>
@@ -108,7 +109,7 @@ date_default_timezone_set('Europe/Zagreb');
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text text-muted bg-light" ><i class="fas fa-clock"></i></span>
                                                 </div>
-                                                <input type="time" name="time-end-one"  @if(!old('time-end-one', date('H:i', strtotime($event->end ?? '')))) value="{{date('H:i', strtotime("+1 hours"))}}"  @else value ="{{old('time-end-one', date('H:i', strtotime($event->end ?? '')))}}" @endif class="form-control">
+                                                <input type="time" name="time-end-one"  @if(!old('time-end-one', $event->start ?? '')) value="{{date('H:i', strtotime("+1 hours"))}}"  @else value ="{{old('time-end-one', date('H:i', strtotime($event->end ?? '')))}}" @endif class="form-control">
                                             </div>
                                             <div class="text-danger pb-3">{{ $errors->first('time-end-one') }}</div>
                                         </div>
@@ -122,7 +123,7 @@ date_default_timezone_set('Europe/Zagreb');
                                         <div class="input-group-prepend">
                                             <span class="input-group-text text-muted bg-light" ><i class="fas fa-calendar"></i></span>
                                         </div>
-                                        <input type="date" name="start"  @if(!old('start', date('Y-m-d', strtotime($event->start ?? '')))) value="{{date("Y-m-d", strtotime('tomorrow'))}}"  @else value ="{{old('start', date('Y-m-d', strtotime($event->start ?? '')))}}" @endif class="form-control">
+                                        <input type="date" name="start"  @if(!old('start', $event->start ?? '')) value="{{date("Y-m-d", strtotime('tomorrow'))}}"  @else value ="{{old('start', date('Y-m-d', strtotime($event->start ?? '')))}}" @endif class="form-control">
                                     </div>
 
                                     <div class="text-danger pb-3">{{ $errors->first('start') }}</div>
@@ -193,7 +194,9 @@ date_default_timezone_set('Europe/Zagreb');
                             </form>
                         @endauth
                         @guest
-                            <p>You need to login</p>
+                                <div class="container-fluid card p-5 ">
+                                    <p class="mx-auto text-orange font-weight-bolder">You need to login to create an event</p>
+                                </div>
                         @endguest
                         <div>
                             <p class="float-right "><a href="/events"><button type="button" class="btn btn-secondary btn-lg my-2 ml-4 px-4">Back</button></a></p>
