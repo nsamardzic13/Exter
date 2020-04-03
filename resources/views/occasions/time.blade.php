@@ -9,7 +9,7 @@
               <div class="input-group-prepend">
                       <span class="input-group-text text-muted bg-light" ><i class="fas fa-clock"></i></span>
                </div>
-        <input type="time" name="time-start1"  @if(!old('time-start1', date('H:i', strtotime($event->start ?? '')))) value="{{date('H:i')}}" @else value ="{{old('time-start1', date('H:i', strtotime($event->start)))}}" @endif class="form-control">
+        <input type="time" name="time-start1"  @if(!old('time-start1', $event->start ?? '')) value="{{date('H:i')}}" @else value ="{{old('time-start1', date('H:i', strtotime($event->start)))}}" @endif class="form-control">
     </div>
     <div class="text-danger pb-3">{{ $errors->first('time-start1') }}</div>
 
@@ -18,7 +18,7 @@
         <div class="input-group-prepend">
             <span class="input-group-text text-muted bg-light" ><i class="fas fa-clock"></i></span>
         </div>
-        <input type="time" name="time-end1"  @if(!old('time-end1', date('H:i', strtotime($event->end ?? '')))) value="{{date('H:i', strtotime("+1 hours"))}}" @else value ="{{old('time-end1', date('H:i', strtotime($event->end)))}}" @endif  class="form-control">
+        <input type="time" name="time-end1"  @if(!old('time-end1', $event->end ?? '')) value="{{date('H:i', strtotime("+1 hours"))}}" @else value ="{{old('time-end1', date('H:i', strtotime($event->end)))}}" @endif  class="form-control">
     </div>
     <div class="text-danger pb-3">{{ $errors->first('time-end1') }}</div>
 

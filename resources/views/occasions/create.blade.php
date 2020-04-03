@@ -79,7 +79,7 @@ date_default_timezone_set('Europe/Zagreb');
                                         <div class="input-group-prepend">
                                             <span class="input-group-text text-muted bg-light" ><i class="fas fa-calendar"></i></span>
                                         </div>
-                                        <input type="date" name="start-one"  @if(!old('start-one', $event->start ?? '')))) value="{{date("Y-m-d", strtotime('tomorrow'))}}"
+                                        <input type="date" name="start-one"  @if(!old('start-one', $event->start ?? '')) value="{{date("Y-m-d", strtotime('tomorrow'))}}"
                                                                             @else value ="{{old('start-one', date('Y-m-d', strtotime($event->start ?? '')))}}" @endif  class="form-control">
                                     </div>
                                     <div class="text-danger pb-3">{{ $errors->first('start-one') }}</div>
