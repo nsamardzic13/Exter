@@ -49792,7 +49792,8 @@ $(document).ready(function () {
   function fetchPosts() {
     var page = $('.endless-pagination').data('next-page');
 
-    if (page !== null) {
+    if (page !== null && page != "") {
+      console.log(page);
       clearTimeout($.data(this, "scrollCheck"));
       $.data(this, "scrollCheck", setTimeout(function () {
         var scroll_position_for_posts_load = $(window).height() + $(window).scrollTop() + 3000;
