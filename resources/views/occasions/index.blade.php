@@ -19,7 +19,8 @@
                             @foreach($occasions as $eventNmb => $event)
                                 <div class="col-md-3 my-4" data-aos="fade-up">
                                     <div class="card zoom" style="border-color: #2d995b; border-width: 1.4px; color: #2d995b">
-                                        <img class="card-img-top img-fluid" style="height: 225px; width: 100%; display: block;" src="{{ url('images/hangout-sports/'.$event->category.'.png') }}" alt="Card image cap">
+                                        <img class="card-img-top img-fluid" style="height: 225px; width: 100%; display: block;" @if($event->picture) src="{{ asset('storage/' .$event->picture) }}"
+                                             @else src="{{ url('images/hangout-sports/'.$event->category.'.png') }}"  @endif  alt="Card image cap">
                                         <div class="card-body">
                                             <h4 class="card-title p-2">{{ $event->name }}</h4>
                                             <h6 class="card-subtitle mb-2 text-muted row"><i class="fas fa-calendar-day col-sm-1"></i><p class="col-sm">{{ date('d.m.Y', strtotime($event->start))}}</p>

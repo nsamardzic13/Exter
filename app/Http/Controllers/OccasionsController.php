@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Symfony\Component\Console\Input\Input;
+use Symfony\Component\Console\Input\InputArgument;
+
+
 class OccasionsController extends Controller
 {
     public function index()
@@ -29,9 +35,9 @@ class OccasionsController extends Controller
 
             }
         }
-        $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, city, min(start) as start, user_name, max_people, description, category'))
+        $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, city, min(start) as start, user_name, max_people, description, category, picture'))
             ->where('ended', 'false')
-            ->groupBy('name', 'user_name', 'street', 'city', 'category', 'description', 'max_people')
+            ->groupBy('name', 'user_name', 'street', 'city', 'category', 'description', 'max_people', 'picture')
             ->orderBy('start')
             ->paginate(12);
 
@@ -79,6 +85,7 @@ class OccasionsController extends Controller
                 'max_people' => 'required|numeric|min:2',
                 'description' => 'required|min:10|max:255',
                 'category' => 'required|min:3',
+                'picture' => 'sometimes|file|image|max:4000',
 
             ]);
             unset($data['when']);
@@ -89,37 +96,55 @@ class OccasionsController extends Controller
                     'repeat' => 'required',
                     'start' => 'required|date|after:today',
                     'time-start' . $i => 'required|date_format:H:i',
-                    'time-end' . $i => 'required|date_format:H:i|after:time-start1',
+                    'time-end' . $i => 'required|date_format:H:i',
                     'day' . $i => 'required|array|between:1,7',
                 ]);
+
             }
+
             //dd($data);
             //dd($when);
             $startdate = strtotime(request('start'));
             $enddate = $startdate + (request('repeat') * 86400);
 
             for ($i = 1; $i <= $ntime; $i = $i + 1) {
-
+                $flag = 0;
                 $checkedDays = request('day' . $i);
 
                 $stime = request('time-start' . $i);
                 $etime = request('time-end' . $i);
+                if ($stime > $etime){
+                    $flag = 1;
+                }
 
-
+               // dd($checkedDays);
                 for ($d = $startdate; $d <= $enddate; $d = $d + 86400) {
                     $today = date("N", $d);
 
                     foreach ($checkedDays as $day => $value) {
                         if ($today == $value + 1) {
                             $sdate = date('Y-m-d', $d) . ' ' . $stime;
-                            $edate = date('Y-m-d', $d) . ' ' . $etime;
+                            if ($flag) {
+                                $edate = date('Y-m-d', $d + 86400) . ' ' . $etime;
+                            } else {
+                                $edate = date('Y-m-d', $d) . ' ' . $etime;
+                            }
 
                             $sdate = Carbon::createFromFormat('Y-m-d H:i', $sdate);
                             $edate = Carbon::createFromFormat('Y-m-d H:i', $edate);
 
                             $occasion = Occasion::create(array_merge($data, ['start' => $sdate], ['end' => $edate], ['user_name' => $user->name]));
+                            if(request()->has('picture')) {
+                                $occasion->update([
+                                    'picture' => request()->picture->store('occassion_uploads', 'public'),
+                                ]);
 
-                            $occasion->users()->syncWithoutDetaching($user->id);
+                                //resize photo
+                                $image = Image::make(public_path('storage/' . $occasion->picture))->fit(286,180);
+                                $image->save();
+
+                            }
+
 
                         }
 
@@ -142,8 +167,14 @@ class OccasionsController extends Controller
                 'start-one' => 'required|date|after:today',
                 'end-one' => 'required|date|after_or_equal:start-one',
                 'time-start-one' => 'required|date_format:H:i',
-                'time-end-one' => 'required|date_format:H:i|after:time-start-one',
+                'time-end-one' => 'required|date_format:H:i',
+                'picture' => 'sometimes|file|image|max:4000',
             ]);
+            if (\request('start-one') == \request('end-one')){
+                $when = \request()->validate([
+                    'time-end-one' => 'after:time-start-one',
+                ]);
+            };
             unset($data['when'], $data['start-one'], $data['end-one'], $data['time-start-one'], $data['time-end-one']);
             //dd($data['max_people']);
             //dd($data);
@@ -156,7 +187,17 @@ class OccasionsController extends Controller
 
             $occasion = Occasion::create(array_merge($data, ['start' => $startdate], ['end' => $enddate], ['user_name' => $user->name]));
 
-            $occasion->users()->syncWithoutDetaching($user->id);
+            if(request()->has('picture')) {
+                $occasion->update([
+                    'picture' => request()->picture->store('occassion_uploads', 'public'),
+                ]);
+
+                //resize photo
+                $image = Image::make(public_path('storage/' . $occasion->picture))->fit(286,180);
+                $image->save();
+
+            }
+
 
         }
 
@@ -175,7 +216,7 @@ class OccasionsController extends Controller
     {
         $people = DB::table('occasion_user')->where('occasion_id', $occasion->id)->get();
 
-        return $people->count()-1;
+        return $people->count();
     }
 
     public static function wall(Occasion $occasion)
