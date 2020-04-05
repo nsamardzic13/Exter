@@ -89,4 +89,16 @@ class GroupsController extends Controller{
         $group->delete();
         return redirect('user/'. $ruser->id.'#groups')->with('message', 'You have deleted group');
     }
+
+    public function edit(Group $group) {
+        $data = request()->validate([
+            'description' => 'required|max:255'
+        ]);
+
+        $group->update([
+            'description' => $data['description'],
+        ]);
+
+        return redirect('groups/' . $group->id . '#settings');
+    }
 }

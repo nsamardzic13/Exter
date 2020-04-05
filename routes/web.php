@@ -32,13 +32,13 @@ Route::get('/events/create', 'OccasionsController@create');
 Route::post('/events', 'OccasionsController@store');
 
 Route::get('/events/{occasion}/wall', 'OccasionsController@wall');
-
 Route::get('/events/recreate/{occasion}', 'OccasionsController@recreate');
 
 Route::get('/groups', 'GroupsController@index');
 Route::post('/groups', 'GroupsController@store');
 Route::get('groups/{group}', 'GroupsController@show');
 Route::post('groups/{group}', 'MessagesController@update');
+Route::post('groups/{group}/edit', 'GroupsController@edit');
 
 Route::post('/autocomplete', 'AutocompleteController@fetch_names');
 

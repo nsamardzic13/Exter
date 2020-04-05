@@ -65,7 +65,7 @@ class MessagesController extends Controller
 
         $messages->save();
 
-        return redirect('/groups/' . $data['group_id']);
+        return redirect('/groups/' . $data['group_id'] . '#wall');
     }
 
     /**
@@ -134,7 +134,8 @@ class MessagesController extends Controller
                 ]);
                 break;
         }
-        return redirect('/groups/' . $data['group_id']);
+
+        return redirect('groups/' . $data['group_id']);
     }
 
     /**

@@ -166,7 +166,7 @@ $(document).ready(() => {
     //console.log(location.href);
     if (location.hash) {
         const hash = url.split("#");
-        $('#tabMenu a[href="#'+hash[1]+'"]').tab("show");
+        $('#tabMenu,#v-pills-tab a[href="#'+hash[1]+'"]').tab("show");
         url = location.href.replace(/\/#/, "#");
         history.replaceState(null, null, url);
         setTimeout(() => {
@@ -319,7 +319,6 @@ $(document).ready(function() {
 
         var page = $('.endless-pagination').data('next-page');
         if (page !== null && page != "") {
-            console.log(page);
             clearTimeout($.data(this, "scrollCheck"));
 
             $.data(this, "scrollCheck", setTimeout(function () {
