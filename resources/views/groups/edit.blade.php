@@ -16,7 +16,7 @@
     <div class="form-group row">
         <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }} </label>
         <div class="col-md-6">
-            <input id="description" type="text" class="form-control @error('name') is-invalid @enderror" name="description" value="{{ $group->description }}" autocomplete="description" autofocus>
+            <input id="description" type="text" class="form-control @error('name') is-invalid @enderror" name="description" value="{{ $group->description  }}" autocomplete="description" autofocus>
             @error('description')
             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -30,6 +30,13 @@
             <button type="submit" class="btn btn-success">
                 {{ __('Submit Changes') }}
             </button>
+            @if($group->admin_id == $user->id)
+                <form action="/user/{{ $group->id }}" method="POST" style="padding: 0px !important;">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Delete Group</button>
+                </form>
+            @endif
         </div>
     </div>
 </form>

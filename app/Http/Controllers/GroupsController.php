@@ -45,20 +45,18 @@ class GroupsController extends Controller{
         $messages = Messages::where('group_id', '=', $group->id)
                             ->orderByDesc('created_at')
                             ->paginate(4);
-        $likes = DB::table('likes')
-                    ->select('users.name')
-                    ->join('messages', 'likes.message_id', '=', 'messages.id')
-                    ->join('users', 'likes.user_id','=', 'users.id')
-                    ->where('messages.group_id', '=', $group->id)->get();
-//        dd($likes);
+        /*$likes = DB::table('likes')
+                    ->select('message_id', 'users.id as user_id', 'users.name', 'type')
+                    ->join('users', 'likes.user_id','=', 'users.id');*/
+
         if($request->ajax()) {
             return [
-                'messages' => view('messages.index_scroll', compact(['group', 'user', 'messages', 'likes']))->render(),
+                'messages' => view('messages.index_scroll', compact(['group', 'user', 'messages',]))->render(),
                 'next_page' => $messages->nextPageUrl(),
             ];
         }
 
-        return view('groups.show', compact(['group', 'user', 'messages', 'likes']));
+        return view('groups.show', compact(['group', 'user', 'messages',]));
     }
 
 

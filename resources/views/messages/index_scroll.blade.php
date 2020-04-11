@@ -32,28 +32,30 @@
 
                             <a style="padding:1vw" class="likescroll-btn a_like
                             @if(\Illuminate\Support\Facades\DB::table('likes')
-                                                            ->where('user_id', '=', $user->id)
-                                                            ->where('message_id', '=', $message->id)
-                                                            ->where('type', '=', true)
-                                                            ->exists())
+                                                                ->where('message_id', '=', $message->id)
+                                                                ->where('user_id', '=', $user->id)
+                                                                ->where('type', '=', true)
+                                                                ->exists())
                                 likescroll
                             @endif
                             " id="{{ $message->id }}"><i style="font-size: 30px" class="fas fa-thumbs-up"></i></a>
 
                             <a style="padding:1vw" class="likescroll-btn a_dislike
                             @if(\Illuminate\Support\Facades\DB::table('likes')
-                                                            ->where('user_id', '=', $user->id)
-                                                            ->where('message_id', '=', $message->id)
-                                                            ->where('type', '=', false)
-                                                            ->exists())
+                                                                ->where('message_id', '=', $message->id)
+                                                                ->where('user_id', '=', $user->id)
+                                                                ->where('type', '=', false)
+                                                                ->exists())
                                 likescroll
                             @endif
                             " id="{{ $message->id }}"><i style="font-size: 30px" class="fas fa-thumbs-down"></i></a>
                         </p>
                         <br><br>
                         <p>
-                            <span class="float-right">DISLIKES <a class="likescroll-dislikes">{{ $message->dislikes }}</a></span>
-                            <span class="float-right">LIKES <a class="likescroll-likes" style="margin-right: 10px">{{ $message->likes }}</a></span>
+                            {{--<span class="float-right">DISLIKES <a class="likescroll-dislikes">{{ $message->dislikes }}</a></span>
+                            <span class="float-right">LIKES <a class="likescroll-likes" style="margin-right: 10px">{{ $message->likes }}</a></span>--}}
+                            @include('messages.likes_modal', ['title' => 'dislike'])
+                            @include('messages.likes_modal', ['title' => 'like'])
                         </p>
                     </div>
                 </div>
