@@ -304,7 +304,8 @@
                                                  {{ $group->created_at->format('M Y') }}
                                                 </form>
 
-                                            </span><i class="fas fa-crown"></i> {{ $group->name }}
+                                            </span><i class="fas fa-crown"></i>
+                                            <a href="/groups/{{ $group->id }}">{{ $group->name }}</a>
                                         </td>
                                     </tr>
                                 @else
@@ -312,7 +313,8 @@
                                         <td class="align-middle">
                                             <span class="float-right font-weight-bold">
                                                  {{ $group->created_at->format('M Y') }}
-                                            </span>{{ $group->name }}
+                                            </span>
+                                            <a href="/groups/{{ $group->id }}">{{ $group->name }}</a>
                                         </td>
                                     </tr>
                                 @endif
