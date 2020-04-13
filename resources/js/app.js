@@ -263,7 +263,7 @@ $(document).on("click", ".a_dislike", function(e){
             // $('#likes_messages'+no).fadeOut(800, function () {
             //     $('#likes_messages'+no).fadeIn().delay(2000);
             // })
-            $("#likes_messages" + no + " .a_dislike").addClass("likescroll");
+            $("#likes_messages" + no + " .a_dislike").addClass("dislikescroll");
             $("#likes_messages" + no + " .likescroll-dislikes").html(parseInt($("#likes_messages" + no + " .likescroll-dislikes").html())+1)
 
             if ($("#likes_messages" + no + " .a_like").hasClass("likescroll")) {
@@ -302,11 +302,11 @@ $(document).on("click", ".a_like", function(e){
             $("#likes_messages" + no + " .a_like").addClass("likescroll");
             $("#likes_messages" + no + " .likescroll-likes").html(parseInt($("#likes_messages" + no + " .likescroll-likes").html())+1);
 
-            if ($("#likes_messages" + no + " .a_dislike").hasClass("likescroll")) {
+            if ($("#likes_messages" + no + " .a_dislike").hasClass("dislikescroll")) {
                 let newhtml = parseInt($("#likes_messages" + no + " .likescroll-dislikes").html())-1;
 
                 $("#likes_messages" + no + " .likescroll-dislikes").html(newhtml);
-                $("#likes_messages" + no + " .a_dislike").removeClass("likescroll");
+                $("#likes_messages" + no + " .a_dislike").removeClass("dislikescroll");
             }
         }
     });
@@ -334,4 +334,42 @@ $(document).ready(function() {
             }, 350))
         }
     }
+});
+
+$(document).ready(function() {
+    $(".modal-btn").on('click', function() {
+        var id = this.id;
+        var message_id = $(this).attr('click');
+        var _token = $('input[name="_token"]').val();
+        var value;
+        if ($(this).hasClass('likes')) {
+            value = true;
+            $("#myModal .modal-title").html('Message liked by:')
+        } else {
+            value = false;
+            $("#myModal .modal-title").html('Message disliked by:')
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/messages/showLikes/' + id,
+            data: {
+                value: value,
+                _token: _token,
+                id: message_id,
+            },
+            success: function (data) {
+                $("#myModal .modal-body").html('')
+                for(var i = 0; data.likes.data.length; i++) {
+                    $("#myModal .modal-body").append(
+                        `
+                        <p>
+                            <a href="/user/`+ data.likes.data[i].user_id +`"> `+ data.likes.data[i].name +` </a>
+                        </p>
+                        `
+                    );
+                }
+            }
+        });
+
+    })
 });

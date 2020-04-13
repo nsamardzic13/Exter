@@ -40,6 +40,9 @@ Route::get('groups/{group}', 'GroupsController@show');
 Route::post('groups/{group}', 'MessagesController@update');
 Route::post('groups/{group}/edit', 'GroupsController@edit');
 
+
+Route::post('messages/showLikes/{id}', 'MessagesController@showLikes');
+
 Route::post('/autocomplete', 'AutocompleteController@fetch_names');
 
 Route::get('/user/{user}', 'UsersController@index');

@@ -31,6 +31,11 @@ body::-webkit-scrollbar-thumb{
     pointer-events: none;
 }
 
+.dislikescroll {
+    color:red !important;
+    pointer-events: none;
+}
+
 p.likescroll-p {
     text-align: right;
 }

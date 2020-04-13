@@ -1,5 +1,5 @@
 <p>
-    <button type="button" class="btn  btn-info float-left" data-toggle="modal" data-target="#myModal_newmessage">
+    <button type="button" class="btn  btn-success float-left" data-toggle="modal" data-target="#myModal_newmessage">
         POST SOMETHING!
     </button>
 </p>

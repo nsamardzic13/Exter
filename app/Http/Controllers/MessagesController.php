@@ -161,4 +161,19 @@ class MessagesController extends Controller
             ->delete();
     }
 
+    public function showLikes(Request $request) {
+        if($request->ajax()) {
+
+            $likes = (\Illuminate\Support\Facades\DB::table('likes')
+                         ->select('message_id', 'users.id as user_id', 'users.name', 'type')
+                         ->join('users', 'likes.user_id','=', 'users.id')
+                         ->where('message_id', '=', $request->id)
+                         ->where('type', '=', $request->value)
+                         ->paginate(5));
+            return [
+                'likes' => $likes,
+            ];
+        }
+    }
+
 }

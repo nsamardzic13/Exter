@@ -46,7 +46,7 @@
                                                                 ->where('user_id', '=', $user->id)
                                                                 ->where('type', '=', false)
                                                                 ->exists())
-                                likescroll
+                                dislikescroll
                             @endif
                             " id="{{ $message->id }}"><i style="font-size: 30px" class="fas fa-thumbs-down"></i></a>
                         </p>
