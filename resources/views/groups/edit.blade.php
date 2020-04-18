@@ -36,12 +36,10 @@
 
 <div class="form-group row mb-0">
     <div class="col-md-6 offset-md-4">
-        @if($group->admin_id == $user->id)
-            <form action="/user/{{ $group->id }}" method="POST" style="padding-top: 5px">
-                @method('DELETE')
-                @csrf
-                <button type="submit" class="btn btn-danger">Delete Group</button>
-            </form>
-        @endif
+        <form action="/user/{{ $group->id }}" method="POST" style="padding-top: 5px">
+            @method('DELETE')
+            @csrf
+            <button type="submit" class="btn btn-danger">Delete Group</button>
+        </form>
     </div>
 </div>

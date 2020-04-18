@@ -1,22 +1,46 @@
-<div class="container">
-    <h1>Info about {{ $group->name }}</h1>
-    <form action="/groups/{{ $group->id }}" method="POST" enctype="multipart/form-data">
-        @method('PATCH')
-        <div class="form-group">
-            <label for="exampleInputEmail1">Dodaj osobu</label>
-            <input class="form-control" type="text" id="user_name" name="name" placeholder="Enter name of a person you want to add to this group" autocomplete="off">
-            <div id="userList"></div>
-            <div>{{ $errors->first('name') }}</div>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        @csrf
-    </form>
+<div class="row" style="margin-top: 15px; margin-bottom: 15px">
+        <p>
+            <button type="button" class="btn  btn-success float-left" data-toggle="modal" data-target="#myModal_newuser">
+                Add New User
+            </button>
+        </p>
+</div>
 
-    @foreach($group->users as $row)
-        <div class="row">
-            <div class="col-2">
-                <p> {{ $row->name }} </p>
+<!-- Modal LIKES -->
+<div id="myModal_newuser" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="/groups/{{ $group->id }}" method="POST" enctype="multipart/form-data">
+                    @method('PATCH')
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Dodaj osobu</label>
+                        <input class="form-control" type="text" id="user_name" name="name" placeholder="Enter name of a person you want to add to this group" autocomplete="off">
+                        <div id="userList"></div>
+                        <div>{{ $errors->first('name') }}</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    @csrf
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-    @endforeach
+    </div>
 </div>
+
+
+@foreach($group->users()->orderBy('name')->paginate(2) as $row)
+    <div class="row" style="margin-bottom: 5px">
+        <div class="col-lg-4">
+            <img src="{{ asset('storage/' .$user->profile_pic) }}" class="img-fluid rounded-circle mb-2" width="128" height="128">
+            <a style="margin-left: 10px" href="/user/{{ $row->id }}">{{ $row->name }}</a>
+        </div>
+    </div>
+@endforeach

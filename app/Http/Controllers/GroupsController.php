@@ -56,7 +56,7 @@ class GroupsController extends Controller{
             ];
         }
 
-        return view('groups.show', compact(['group', 'user', 'messages',]));
+        return view('groups.show', compact(['group', 'user', 'messages', ]));
     }
 
 
