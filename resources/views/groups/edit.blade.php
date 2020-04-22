@@ -1,5 +1,5 @@
 <br>
-<form action="/groups/{{ $group->id }}/edit" method="post">
+<form action="/groups/{{ $group->id }}/edit" method="post" enctype="multipart/form-data">
     @csrf
     <div class="form-group row">
         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Group Name') }} </label>
@@ -22,6 +22,14 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
             @enderror
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="profile_pic" class="col-md-4 col-form-label text-md-right">{{ __('Profile Image') }}</label>
+
+        <div class="col-md-6">
+            <input id="profile_pic" type="file" class="form-control" name="profile_pic" autocomplete="profile_pic">
         </div>
     </div>
 

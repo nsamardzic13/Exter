@@ -169,7 +169,7 @@ class MessagesController extends Controller
                          ->join('users', 'likes.user_id','=', 'users.id')
                          ->where('message_id', '=', $request->id)
                          ->where('type', '=', $request->value)
-                         ->paginate(5));
+                         ->paginate(10000));
             return [
                 'likes' => $likes,
             ];

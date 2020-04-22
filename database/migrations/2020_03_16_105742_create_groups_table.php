@@ -18,6 +18,7 @@ class CreateGroupsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->unsignedBigInteger('admin_id');
+            $table->string('profile_pic')->default('uploads\/user_default_pic.png');
             $table->timestamps();
         });
     }

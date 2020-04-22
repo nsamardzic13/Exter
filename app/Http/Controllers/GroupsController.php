@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Intervention\Image\Facades\Image;
 
 class GroupsController extends Controller{
 
@@ -42,21 +43,41 @@ class GroupsController extends Controller{
         //dd($group->users());
         //dd($user->groups->name);
         $user = auth()->user();
+        $admin = User::where('id', '=', $group->admin_id)->get();
         $messages = Messages::where('group_id', '=', $group->id)
                             ->orderByDesc('created_at')
                             ->paginate(4);
+        $top_users = DB::table('messages')
+            ->select('users.id as user_id', 'users.name', DB::raw('count(*) as count'))
+            ->join('users', 'messages.user_id','=', 'users.id')
+            ->where('messages.group_id', '=', $group->id)
+            ->groupBy('users.id');
+        $top_users = $top_users->orderBy('count')
+                                ->limit(5)
+                                ->get();
+
+        $user_events = DB::table('users')
+            ->select('users.id as user_id', 'users.name', DB::raw('count(*) as count'), 'group_user.group_id')
+            ->join('occasion_user', 'occasion_user.user_id','=', 'users.id')
+            ->join('group_user', 'users.id', '=', 'group_user.user_id')
+            ->where('group_user.group_id', '=', $group->id)
+            ->groupBy('users.id', 'group_user.group_id');
+        $user_events = $user_events->orderBy('count')
+            ->limit(5)
+            ->get();
+
         /*$likes = DB::table('likes')
                     ->select('message_id', 'users.id as user_id', 'users.name', 'type')
                     ->join('users', 'likes.user_id','=', 'users.id');*/
 
         if($request->ajax()) {
             return [
-                'messages' => view('messages.index_scroll', compact(['group', 'user', 'messages',]))->render(),
+                'messages' => view('messages.index_scroll', compact(['group', 'user', 'messages', 'top_users', 'user_events', 'admin', ]))->render(),
                 'next_page' => $messages->nextPageUrl(),
             ];
         }
 
-        return view('groups.show', compact(['group', 'user', 'messages', ]));
+        return view('groups.show', compact(['group', 'user', 'messages', 'top_users', 'user_events', 'admin', ]));
     }
 
 
@@ -89,14 +110,27 @@ class GroupsController extends Controller{
     }
 
     public function edit(Group $group) {
+
         $data = request()->validate([
-            'description' => 'required|max:255'
+            'description' => 'required|max:255',
+            'profile_pic' => 'sometimes|file|image|max:4000',
         ]);
 
         $group->update([
             'description' => $data['description'],
         ]);
 
-        return redirect('groups/' . $group->id . '#settings');
+        //check if image is submited
+        if(request()->has('profile_pic')) {
+            $group->update([
+                'profile_pic' => request()->profile_pic->store('uploads', 'public'),
+            ]);
+
+            //resize photo
+            $image = Image::make(public_path('storage/' . $group->profile_pic))->fit(128,128);
+            $image->save();
+        }
+
+        return redirect('groups/' . $group->id . '#home');
     }
 }

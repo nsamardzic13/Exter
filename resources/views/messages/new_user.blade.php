@@ -35,8 +35,7 @@
     </div>
 </div>
 
-
-@foreach($group->users()->orderBy('name')->paginate(2) as $row)
+@foreach($group->users()->orderBy('name')->paginate(1) as $row)
     <div class="row" style="margin-bottom: 5px">
         <div class="col-lg-4">
             <img src="{{ asset('storage/' .$user->profile_pic) }}" class="img-fluid rounded-circle mb-2" width="128" height="128">
@@ -44,3 +43,8 @@
         </div>
     </div>
 @endforeach
+<div class="row" style="margin-bottom: 5px">
+    <div class="col-lg-4">
+        {!! $group->users()->orderBy('name')->paginate(1)->links() !!}
+    </div>
+</div>

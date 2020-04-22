@@ -24,7 +24,7 @@
                 @endif
             </div>
         </div>
-        {{ $user_events->links() }}
+        {{ $user_events->appends(request()->query())->links() }}
         <p class="text-center">
             <a class="btn btn-outline-quest mt-2 mb-2" href="/user/{{$user->id}}" role="button">
             Back to Profile <i class="fas fa-chevron-circle-left"></i>

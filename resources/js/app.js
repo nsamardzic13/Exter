@@ -373,3 +373,9 @@ $(document).ready(function() {
 
     })
 });
+
+$(document).ready(function() {
+    $(".page-link").on('click', function() {
+        console.log('mrs')
+    });
+});
