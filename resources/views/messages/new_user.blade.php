@@ -16,8 +16,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <form action="/groups/{{ $group->id }}" method="POST" enctype="multipart/form-data">
-                    @method('PATCH')
+                <form action="/users/addPersonToGroup" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Dodaj osobu</label>
                         <input class="form-control" type="text" id="user_name" name="name" placeholder="Enter name of a person you want to add to this group" autocomplete="off">

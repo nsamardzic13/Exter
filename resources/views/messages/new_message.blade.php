@@ -19,8 +19,8 @@
                 <form action="/wall" method="POST">
                     @csrf
                     <input type="hidden" name="user_id" value="{{ $user->id }}">
-                    @isset($event)
-                        <input type="hidden" name="group_id" value="{{ $event->id }}">
+                    @isset($occasion)
+                        <input type="hidden" name="group_id" value="{{ $occasion->id }}">
                         <input type="hidden" name="type" value="event">
                     @endisset
                     @isset($group)

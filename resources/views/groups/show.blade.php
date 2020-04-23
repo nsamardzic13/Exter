@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-{{--    @dd(Request::fullUrl())--}}
 <div class="container">
     <div class="row my-3">
         <div class="col-md-4 col-xl-4">

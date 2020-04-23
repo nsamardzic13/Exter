@@ -39,9 +39,6 @@ class GroupsController extends Controller{
     }
 
     public function show(Group $group, Request $request){
-        //$user = auth()->user();
-        //dd($group->users());
-        //dd($user->groups->name);
         $user = auth()->user();
         $admin = User::where('id', '=', $group->admin_id)->get();
         $messages = Messages::where('group_id', '=', $group->id)

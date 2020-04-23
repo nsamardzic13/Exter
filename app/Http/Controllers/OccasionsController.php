@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Messages;
+use App\User;
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
@@ -219,15 +221,44 @@ class OccasionsController extends Controller
         return $people->count();
     }
 
-    public static function wall(Occasion $occasion)
+    public function show(Occasion $occasion, Request $request)
     {
 
         $user = auth()->user();
-        $occasion->users()->syncWithoutDetaching($user->id);
+        $admin = User::where('name', '=', $occasion->user_name)->get();
+        $messages = Messages::where('event_id', '=', $occasion->id)
+            ->orderByDesc('created_at')
+            ->paginate(4);
+        $top_users = DB::table('messages')
+            ->select('users.id as user_id', 'users.name', DB::raw('count(*) as count'))
+            ->join('users', 'messages.user_id','=', 'users.id')
+            ->where('messages.event_id', '=', $occasion->id)
+            ->groupBy('users.id');
+        $top_users = $top_users->orderBy('count')
+            ->limit(5)
+            ->get();
 
-        $joined = $occasion->users;
+        $user_events = DB::table('occasion_user')
+            ->select('users.id as user_id', 'users.name', DB::raw('count(*) as count'))
+            ->where('occasion_user.occasion_id', '=', $occasion->id)
+            ->join('users', 'occasion_user.user_id','=', 'users.id')
+            ->groupBy('users.id');
+        $user_events = $user_events->orderBy('count')
+            ->limit(5)
+            ->get();
 
-        return view('occasions.wall', compact('joined', 'occasion'));
+        /*$likes = DB::table('likes')
+                    ->select('message_id', 'users.id as user_id', 'users.name', 'type')
+                    ->join('users', 'likes.user_id','=', 'users.id');*/
+
+        if($request->ajax()) {
+            return [
+                'messages' => view('messages.index_scroll', compact(['occasion', 'user', 'messages', 'top_users', 'user_events', 'admin', ]))->render(),
+                'next_page' => $messages->nextPageUrl(),
+            ];
+        }
+
+        return view('occasions.wall', compact(['occasion', 'user', 'messages', 'top_users', 'user_events', 'admin', ]));
     }
 
     public function recreate(Occasion $occasion)

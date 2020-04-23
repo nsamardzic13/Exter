@@ -23,8 +23,8 @@
                                 <input type="hidden" name="group_id" id="group_id{{ $message->id }}" value="{{ $event->id }}">
                                 <input type="hidden" name="type" id="type{{ $message->id }}" value="event">
                             @endisset
-                            @isset($group)
-                                <input type="hidden" name="group_id" id="group_id{{ $message->id }}" value="{{ $group->id }}">
+                            @isset($occasion)
+                                <input type="hidden" name="group_id" id="group_id{{ $message->id }}" value="{{ $occasion->id }}">
                                 <input type="hidden" name="type" id="type{{ $message->id }}" value="group">
                             @endisset
                             <input type="hidden" name="message_id" id="message_id{{ $message->id }}" value="{{ $message->id }}">

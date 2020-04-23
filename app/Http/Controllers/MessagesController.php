@@ -65,7 +65,10 @@ class MessagesController extends Controller
 
         $messages->save();
 
-        return redirect('/groups/' . $data['group_id'] . '#wall');
+        if ($data['type'] == 'group') {
+            return redirect('/groups/' . $data['group_id'] . '#wall');
+        }
+        return redirect('/events/' . $data['group_id'] . '#wall');
     }
 
     /**
