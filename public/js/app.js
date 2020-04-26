@@ -49682,9 +49682,9 @@ $(document).ready(function () {
   $('#addFriend').click(function () {
     var userName = $('#user_name').val();
 
-    var _token = $('input[name="_token"]').val();
+    var _token = $('input[name="_token"]').val(); //console.log(userName);
 
-    console.log(userName);
+
     $.ajax({
       type: 'POST',
       url: '/users/addPersonToGroup',
@@ -49708,6 +49708,42 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('.alert:not(.login-alert)').fadeTo(2000, 500).slideUp(500, function () {
     $('.alert').slideUp(600);
+  });
+}); //function for checking notifications
+
+$(document).ready(function () {
+  $(document).on('click', "button#checkButton", function () {
+    var notifyId = $(this).attr('value');
+
+    var _token = $('input[name="_tokenCheck"]').val();
+
+    $.ajax({
+      type: 'POST',
+      url: '/notifications',
+      data: {
+        _token: _token,
+        notifyId: notifyId
+      },
+      success: function success(data) {
+        $("#notifyId").load(window.location.href + "  #notifyId > *");
+      }
+    });
+  });
+});
+$(document).ready(function () {
+  $(document).on('click', "#checkAll", function () {
+    var _token = $('input[name="_tokenCheck"]').val();
+
+    $.ajax({
+      type: 'POST',
+      url: '/notificationsAll',
+      data: {
+        _token: _token
+      },
+      success: function success(data) {
+        $("#notifyId").load(window.location.href + "  #notifyId > *");
+      }
+    });
   });
 });
 var message_id;

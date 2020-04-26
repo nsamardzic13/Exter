@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+
 use App\Like;
 use App\Messages;
+use App\Notifications\addedToGroup;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Http\Request;
@@ -92,6 +94,10 @@ class GroupsController extends Controller{
 
         $group->users()->syncWithoutDetaching($user->id);
         Session::flash('message', 'You have added '.$user->name.' to group '.$group->name);
+
+        //information needed for notification
+        $group_info = $group->name;
+        $user->notify(new addedToGroup($group_info));
         //return redirect('user/'.$ruser->id.'#groups')->with('message', 'You have added user to group '.$group->name);
     }
 

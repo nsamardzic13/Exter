@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -18,6 +19,12 @@ class UsersController extends Controller
 {
     public function index(User $user){
         //factory(User::class, 5)->create();
+        //dd(Auth::user()->notifications[0]['data']);
+        /*foreach (Auth::user()->notifications as $notify){
+            dd($notify['id']);
+        }*/
+
+        //dd(count((Auth::user()->unreadNotifications)));
 
         return view('user.index', compact('user'));
     }

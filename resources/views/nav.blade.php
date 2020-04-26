@@ -12,13 +12,56 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a href="/questionary" class="nav-link"><b>Questionary</b></a>
+                    <a href="/questionary" class="nav-link top"><b>Questionary</b></a>
                 </li>
                 <li class="nav-item">
-                    <a href="/events" class="nav-link"><b>Events</b></a>
+                    <a href="/events" class="nav-link top"><b>Events</b></a>
                 </li>
-            </ul>
+                @if(!Auth::guest())
+                    <div id="notifyId" class="dropdown-container">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link notify-button top heartbeat bell" data-toggle="dropdown"><i class="fas fa-bell big-bell">
+                                    <span class="badge badge-pill badge-danger" style="margin-left: -2.2px">
+                                        {{ count((Auth::user()->unreadNotifications)) }}</span>
+                                </i></a>
+                                <ul class="dropdown-menu notify-drop">
+                                    <div class="notify-drop-title">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-6"><b>Notifications ({{ count((Auth::user()->unreadNotifications)) }})</b>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                                <span id="checkAll" class="float-right checkAll">Check all</span>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <div class="drop-content">
+                                        <ul>
+                                            @if(!count(Auth::user()->unreadNotifications))
+                                                <b>There are no new notifications :(</b>
+                                            @else
+                                            @foreach(Auth::user()->unreadNotifications as $notify)
+                                                <li>
+                                                @if($notify['data']['type'] == 'groups')
+                                                    <span class="icon"><i class="fas fa-users"></i></span>
+                                                @endif
+                                                <span class="text">{{ $notify['data']['text'] }}</span>
+                                                <p class="check" style="margin-top: 8px; margin-left: 2.5px">
+                                                    <button  id="checkButton" name="checkButton" value="{{ $notify['id'] }}" type="button" class="btn btn-outline-success btn-sm">
+                                                    <i class="fas fa-check"></i>
+                                                    </button>
+                                                    <input type="hidden" value="{{csrf_token()}}" name="_tokenCheck">
+                                                </p>
+                                                </li>
+                                            @endforeach
+                                            @endif
+                                        </ul>
+                                    </div>
+                                </ul>
+                        </li>
+                    </div>
+                @endif
+            </ul>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
@@ -32,6 +75,10 @@
                         </li>
                     @endif
                 @else
+
+
+
+                    <!-- OLD PAR OF NAVBAR -->
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>

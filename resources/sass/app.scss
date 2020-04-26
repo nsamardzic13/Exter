@@ -13,6 +13,122 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+//animista css
+.ping{-webkit-animation:ping 1s ease-in-out 3 both;animation:ping 1s ease-in-out 3 both}
+.heartbeat{-webkit-animation:heartbeat 2s linear 2;animation:heartbeat 2s linear 2}
+
+@-webkit-keyframes heartbeat{from{-webkit-transform:scale(1);transform:scale(1);-webkit-transform-origin:center center;transform-origin:center center;-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}10%{-webkit-transform:scale(.91);transform:scale(.91);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}17%{-webkit-transform:scale(.98);transform:scale(.98);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}33%{-webkit-transform:scale(.87);transform:scale(.87);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}45%{-webkit-transform:scale(1);transform:scale(1);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}}@keyframes heartbeat{from{-webkit-transform:scale(1);transform:scale(1);-webkit-transform-origin:center center;transform-origin:center center;-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}10%{-webkit-transform:scale(.91);transform:scale(.91);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}17%{-webkit-transform:scale(.98);transform:scale(.98);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}33%{-webkit-transform:scale(.87);transform:scale(.87);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}45%{-webkit-transform:scale(1);transform:scale(1);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}}
+@-webkit-keyframes ping{0%{-webkit-transform:scale(.2);transform:scale(.2);opacity:.8}80%{-webkit-transform:scale(1.2);transform:scale(1.2);opacity:0}100%{-webkit-transform:scale(2.2);transform:scale(2.2);opacity:0}}@keyframes ping{0%{-webkit-transform:scale(.2);transform:scale(.2);opacity:.8}80%{-webkit-transform:scale(1.2);transform:scale(1.2);opacity:0}100%{-webkit-transform:scale(2.2);transform:scale(2.2);opacity:0}}
+
+.nav-link.top :hover{
+    opacity: 0.6;
+}
+
+//css for Notifications
+.big-bell {
+    font-size: 17px;
+}
+
+.checkAll{
+    font-weight: bold;
+    color: #1d643b;
+    cursor: pointer;
+}
+
+.checkAll:hover{
+    color: #288a51;
+}
+
+.dropdown-container {
+    position: relative;
+}
+.dropdown-menu.notify-drop {
+    min-width: 330px;
+    background-color: #fff;
+    min-height: 280px;
+    max-height: 360px;
+}
+
+.dropdown-menu.notify-drop .notify-drop-title {
+    border-bottom: 3px solid #e2e2e2;
+    //border-image-source: linear-gradient(135deg, #e32743 0%, rgba(255, 121, 63, 0.8) 100%);
+    padding: 5px 15px 10px 15px;
+}
+.dropdown-menu.notify-drop .drop-content {
+    min-height: 260px;
+    max-height: 280px;
+    overflow-y: scroll;
+}
+.dropdown-menu.notify-drop .drop-content::-webkit-scrollbar-track {
+    background: #F5F5F5;
+}
+
+.dropdown-menu.notify-drop .drop-content::-webkit-scrollbar {
+    width: 0.25rem;
+    background-color: #F5F5F5;
+}
+
+.dropdown-menu.notify-drop .drop-content::-webkit-scrollbar-thumb {
+    background: #FF8663;
+}
+
+.dropdown-menu.notify-drop .drop-content > ul {
+    left: 0;
+    margin: 0;
+    width: 100%;
+    padding: 8px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.dropdown-menu.notify-drop .drop-content > ul li {
+    list-style: none;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    padding: 8px 0px 7px 0px;
+    display: flex;
+}
+
+.dropdown-menu.notify-drop .drop-content > ul li .icon {
+    width: 28px;
+    height: 28px;
+    background: #ffebe6;
+    border-radius: 55%;
+    text-align: center;
+    line-height: 24px;
+    margin-right: 12px;
+    margin-top: 7px;
+}
+
+.dropdown-menu.notify-drop .drop-content > ul li .icon .fas {
+    color: #FF8663;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.dropdown-menu.notify-drop .drop-content > ul li .text{
+    position: relative;
+    top: 3px;
+    margin-right: 2px;
+    cursor: pointer;
+}
+
+.dropdown-menu.notify-drop .drop-content > ul li:hover .text{
+    font-weight: bold;
+}
+
+.dropdown-menu.notify-drop .drop-content > ul li:hover {
+    background-color: #fff9f5;
+}
+
+.dropdown-menu.notify-drop .drop-content > ul li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu.notify-drop .notify-drop-footer a:hover {
+    color: #333;
+}
+
+///////////////////////////////////////////////////////////////////////
 //css for scrollbar
 body::-webkit-scrollbar{
     width: 0.25rem;
@@ -211,9 +327,9 @@ hr.light-100{
     color: #4b4b4b;
 }
 
-.navbar--color--ghost .dropdown-menu {
+/*.navbar--color--ghost .dropdown-menu {
     background-color: #FF8663;
-}
+}*/
 //this is css for div under navbar so navbar can stay high in first position
 .space-for-nav{
     background-color: #f53b57;
