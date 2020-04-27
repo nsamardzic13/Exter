@@ -65,7 +65,9 @@ Route::post('/notificationsAll', 'NotificationsController@checkAll');
 
 Route::get('wall', 'MessagesController@index');
 
-
+//Routes for followings
+Route::post('/follow', 'FollowersController@follow');
+Route::post('/unFollow', 'FollowersController@unFollow');
 
 //routes for google registration
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');

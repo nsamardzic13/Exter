@@ -49709,7 +49709,7 @@ $(document).ready(function () {
   $('.alert:not(.login-alert)').fadeTo(2000, 500).slideUp(500, function () {
     $('.alert').slideUp(600);
   });
-}); //function for checking notifications
+}); //function for checking notifications independently
 
 $(document).ready(function () {
   $(document).on('click', "button#checkButton", function () {
@@ -49729,7 +49729,8 @@ $(document).ready(function () {
       }
     });
   });
-});
+}); //function for checking notifications ALL
+
 $(document).ready(function () {
   $(document).on('click', "#checkAll", function () {
     var _token = $('input[name="_tokenCheck"]').val();
@@ -49743,6 +49744,42 @@ $(document).ready(function () {
       success: function success(data) {
         $("#notifyId").load(window.location.href + "  #notifyId > *");
       }
+    });
+  });
+}); //function for following
+
+$(document).ready(function () {
+  $(document).on('click', "#follow", function () {
+    var followerId = $(this).attr('value');
+
+    var _token = $('input[name="_token"]').val();
+
+    $.ajax({
+      type: 'POST',
+      url: '/follow',
+      data: {
+        followerId: followerId,
+        _token: _token
+      },
+      success: function success(data) {}
+    });
+  });
+}); //function for unFollowing
+
+$(document).ready(function () {
+  $(document).on('click', "#unFollow", function () {
+    var followerId = $(this).attr('value');
+
+    var _token = $('input[name="_token"]').val();
+
+    $.ajax({
+      type: 'POST',
+      url: '/unFollow',
+      data: {
+        followerId: followerId,
+        _token: _token
+      },
+      success: function success(data) {}
     });
   });
 });
@@ -50019,8 +50056,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/Exter/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Exter/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Exter\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Exter\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -44,6 +44,8 @@
                                                 <li>
                                                 @if($notify['data']['type'] == 'groups')
                                                     <span class="icon"><i class="fas fa-users"></i></span>
+                                                @elseif($notify['data']['type'] == 'follower')
+                                                        <span class="icon"><i class="fas fa-arrow-alt-circle-right"></i></span>
                                                 @endif
                                                 <span class="text">{{ $notify['data']['text'] }}</span>
                                                 <p class="check" style="margin-top: 8px; margin-left: 2.5px">

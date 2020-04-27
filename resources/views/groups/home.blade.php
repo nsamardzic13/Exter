@@ -10,7 +10,14 @@
         <li class="mb-1">
 {{--            @dd($admin)--}}
             <i class="fas fa-crown"></i>  Admin: <a href="/user/{{ $admin[0]->id }}">{{ $admin[0]->name }}</a>
-
+            @if(Auth::user()->id != $admin[0]->id)
+                @if(Auth::user()->isFollowing($admin[0]))
+                    <button id="unFollow" class="btn btn-outline-quest2 btn-sm" value="{{ $admin[0]->id }}" style="margin-left: 7px"><i class="fas fa-times-circle"></i> Unfollow</button>
+                @else
+                    <button id="follow" class="btn btn-outline-quest btn-sm" value="{{ $admin[0]->id }}" style="margin-left: 7px"><i class="fas fa-arrow-alt-circle-left"></i> Follow</button>
+                @endif
+            @endif
+            <input type="hidden" value="{{csrf_token()}}" name="_token">
         </li>
         <li class="mb-1">
             <i class="fas fa-calendar-week"></i>  Part of Exter since:

@@ -232,7 +232,7 @@ $(document).ready(function() {
     });
 });
 
-//function for checking notifications
+//function for checking notifications independently
 $(document).ready(function() {
     $(document).on('click', "button#checkButton", function(){
         var notifyId = $(this).attr('value');
@@ -252,6 +252,7 @@ $(document).ready(function() {
     });
 });
 
+//function for checking notifications ALL
 $(document).ready(function() {
     $(document).on('click', "#checkAll", function(){
         var _token = $('input[name="_tokenCheck"]').val();
@@ -268,6 +269,45 @@ $(document).ready(function() {
         });
     });
 });
+
+//function for following
+$(document).ready(function() {
+    $(document).on('click', "#follow", function(){
+        var followerId = $(this).attr('value');
+        var _token = $('input[name="_token"]').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/follow',
+            data: {
+                followerId : followerId,
+                _token : _token,
+            },
+            success:function (data) {
+            }
+        });
+    });
+});
+
+//function for unFollowing
+$(document).ready(function() {
+    $(document).on('click', "#unFollow", function(){
+        var followerId = $(this).attr('value');
+        var _token = $('input[name="_token"]').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/unFollow',
+            data: {
+                followerId : followerId,
+                _token : _token,
+            },
+            success:function (data) {
+            }
+        });
+    });
+});
+
 
 
 var message_id;
