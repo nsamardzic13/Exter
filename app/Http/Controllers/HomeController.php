@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //After login it takes me to home which is page that says you are logged in
         return view('home');
     }
 }

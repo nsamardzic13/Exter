@@ -44,8 +44,8 @@
             @yield('content')
         </main>
     </div>
-    @auth()
+
     @include('footer')
-    @endauth
+
 </body>
 </html>

@@ -16,7 +16,8 @@
 //Rouse if we do
 Auth::routes(['verify' => true]);
 
-Route::get('/', 'HomeController@index')->name('home');
+//Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'LandingController@index');
 
 Route::get('/questionary', 'QuestionaryController@index');
 
