@@ -78,8 +78,6 @@
                     @endif
                 @else
 
-
-
                     <!-- OLD PAR OF NAVBAR -->
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -88,17 +86,17 @@
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a href="/user/{{ Auth::id() }}" class="dropdown-item" style="color: black">
-                                Profile
+                                <i class="fas fa-user" style="padding-right: 10px"></i>Profile
                             </a>
                             <hr class="my-0">
                             <a href="/user/{{ Auth::id() }}/edit" class="dropdown-item" style="color: black">
-                                Settings
+                                <i class="fas fa-sliders-h" style="padding-right: 10px"></i>Settings
                             </a>
                             <hr class="my-0">
                             <a class="dropdown-item" href="{{ route('logout') }}" style="color: black"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                                <i class="fas fa-sign-out-alt" style="padding-right: 10px"></i> {{ __('Logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
