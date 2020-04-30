@@ -22687,6 +22687,18 @@ a.text-dark:focus {
   color: white;
 }
 
+.icon-stack-sm {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  height: 3rem;
+  width: 3rem;
+  font-size: 1rem;
+  background-image: linear-gradient(135deg, #e32743 0%, rgba(255, 121, 63, 0.8) 100%);
+  color: white;
+}
+
 .rounded-pill {
   border-radius: 50rem !important;
 }
@@ -23292,7 +23304,7 @@ hr.light-100 {
   text-align: center;
   background: none;
   border-width: 0 0 1px 0;
-  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .signup-form .sign-button {
@@ -23324,5 +23336,57 @@ hr.light-100 {
   top: 18px;
   font-size: 7px;
   position: absolute;
+}
+
+.addon {
+  color: #999999;
+  font-size: 18px;
+  margin-top: 10px;
+  text-align: center;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  max-width: 70%;
+  font-size: 1rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.26rem 0.8rem;
+  color: #f1e5e6;
+  background-color: #d3394c;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  background-color: #bf3647;
+}
+
+.submit {
+  font-size: 16px;
+  font-weight: bold;
+  background: #19aa8d;
+  border-radius: 3px;
+  border: none;
+  min-width: 140px;
+  outline: none !important;
+}
+
+.submit:hover,
+.submit:focus {
+  background: #179b81;
 }
 

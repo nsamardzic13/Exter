@@ -86,17 +86,17 @@
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a href="/user/{{ Auth::id() }}" class="dropdown-item" style="color: black">
-                                <i class="fas fa-user" style="padding-right: 10px"></i>Profile
+                                <span class="addon"><i class="fas fa-user" style="padding-right: 7px"></i></span>Profile
                             </a>
                             <hr class="my-0">
                             <a href="/user/{{ Auth::id() }}/edit" class="dropdown-item" style="color: black">
-                                <i class="fas fa-sliders-h" style="padding-right: 10px"></i>Settings
+                                <span class="addon"><i class="fas fa-sliders-h" style="padding-right: 7px"></i></span>Settings
                             </a>
                             <hr class="my-0">
                             <a class="dropdown-item" href="{{ route('logout') }}" style="color: black"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt" style="padding-right: 10px"></i> {{ __('Logout') }}
+                                <span class="addon"><i class="fas fa-sign-out-alt" style="padding-right: 7px"></i></span> {{ __('Logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

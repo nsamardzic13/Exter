@@ -8,7 +8,7 @@
             <h2>Create Account</h2>
             <div class="form-group">
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user fa-sm"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus PLACEHOLDER="Username">
                     @error('name')
                     <span class="invalid-feedback" role="alert">
