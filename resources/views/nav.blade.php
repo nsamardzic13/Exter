@@ -69,11 +69,11 @@
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link top" href="{{ route('login') }}"><b>{{ __('Login') }}</b></a>
                     </li>
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link top" href="{{ route('register') }}"><b>{{ __('Register') }}</b></a>
                         </li>
                     @endif
                 @else
@@ -87,15 +87,15 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a href="/user/{{ Auth::id() }}" class="dropdown-item">
+                            <a href="/user/{{ Auth::id() }}" class="dropdown-item" style="color: black">
                                 Profile
                             </a>
                             <hr class="my-0">
-                            <a href="/user/{{ Auth::id() }}/edit" class="dropdown-item">
+                            <a href="/user/{{ Auth::id() }}/edit" class="dropdown-item" style="color: black">
                                 Settings
                             </a>
                             <hr class="my-0">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            <a class="dropdown-item" href="{{ route('logout') }}" style="color: black"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}

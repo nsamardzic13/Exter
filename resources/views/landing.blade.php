@@ -17,7 +17,7 @@
                        &nbsp&nbsp&nbsp Sign in with <b>Google</b></a>
                </div>
            </div>
-           <div class="col-lg-6 d-lg-block landing-image" data-aos="fade-up" data-aos-delay="50">
+           <div class="col-lg-6 landing-image" data-aos="fade-up">
                <img src="{{ asset('images/landing/having-fun2.svg') }}" style="height: 330px; width: 100%;">
            </div>
        </div>
