@@ -176,6 +176,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        //google Maps API
+        Spatie\Geocoder\GeocoderServiceProvider::class,
+        GoogleMaps\ServiceProvider\GoogleMapsServiceProvider::class,
 
     ],
 
@@ -230,6 +233,10 @@ return [
 
         //other aliases
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        //google Maps API
+        'Geocoder' => Spatie\Geocoder\Facades\Geocoder::class,
+        'GoogleMaps' => GoogleMaps\Facade\GoogleMapsFacade::class,
+
     ],
 
 ];

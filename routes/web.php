@@ -74,3 +74,6 @@ Route::post('/unFollow', 'FollowersController@unFollow');
 //routes for google registration
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 Route::get('/callback/{provider}', 'SocialController@callback');
+
+//Testing route for google api
+Route::get('/googleapi', 'GoogleApiController@index');
