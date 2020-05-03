@@ -49,6 +49,7 @@ Route::post('/autocomplete', 'AutocompleteController@fetch_names');
 Route::get('/user/{user}', 'UsersController@index');
 Route::post('/user/{user}', 'GroupsController@store');
 Route::post('/users/addPersonToGroup', 'GroupsController@update');
+Route::post('/users/addPersonToEvent', 'OccasionsController@update');
 
 Route::delete('/user/{group}', 'GroupsController@destroy');
 Route::get('user/{user}/occasion-history', 'UsersController@history');

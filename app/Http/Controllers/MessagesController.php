@@ -112,7 +112,6 @@ class MessagesController extends Controller
         $user = Auth::user();
         switch ($data['like_dislike']) {
             case 'like':
-
                 if ($this->checkIfExists($user->id, $data['message_id'])) {
                     Messages::where('id', $data['message_id'])->decrement('dislikes', 1);
                     $this->removeFromLikes($user->id, $data['message_id']);
@@ -138,7 +137,10 @@ class MessagesController extends Controller
                 break;
         }
 
-        return redirect('groups/' . $data['group_id']);
+        if (strtolower($data['type']) == 'groups') {
+            return redirect('groups/' . $data['group_id']);
+        }
+        return redirect('events/' . $data['group_id']);
     }
 
     /**

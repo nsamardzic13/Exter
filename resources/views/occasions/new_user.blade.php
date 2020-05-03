@@ -1,10 +1,10 @@
 @if($admin[0]->id == $user->id)
     <div class="row" style="margin-top: 15px; margin-bottom: 15px">
-            <p>
-                <button type="button" class="btn  btn-success float-left" data-toggle="modal" data-target="#myModal_newuser">
-                    Add New User
-                </button>
-            </p>
+        <p>
+            <button type="button" class="btn  btn-success float-left" data-toggle="modal" data-target="#myModal_newuser">
+                Add New User
+            </button>
+        </p>
     </div>
 
     <!-- Modal LIKES -->
@@ -17,10 +17,10 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/users/addPersonToGroup" method="POST" enctype="multipart/form-data">
+                    <form action="/users/addPersonToEvent" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Dodaj osobu</label>
-                            <input class="form-control" type="text" id="user_name" name="name" placeholder="Enter name of a person you want to add to this group" autocomplete="off">
+                            <input class="form-control" type="text" id="user_name" name="name" placeholder="Enter name of a person you want to add to this occasion" autocomplete="off">
                             <div id="userList"></div>
                             <div>{{ $errors->first('name') }}</div>
                         </div>
@@ -35,8 +35,8 @@
         </div>
     </div>
 @endif
-@foreach($group->users()->orderBy('name')->get() as $row)
-{{--@foreach($group->users()->orderBy('name')->paginate(1) as $row)--}}
+@foreach($occasion->users()->orderBy('name')->get() as $row)
+    {{--@foreach($group->users()->orderBy('name')->paginate(1) as $row)--}}
     <div class="row" style="margin-bottom: 5px">
         <div class="col-lg-4">
             <img src="{{ asset('storage/' .$user->profile_pic) }}" class="img-fluid rounded-circle mb-2" width="128" height="128">

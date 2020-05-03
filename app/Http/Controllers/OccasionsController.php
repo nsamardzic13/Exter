@@ -281,6 +281,26 @@ class OccasionsController extends Controller
             return view('occasions.create', compact('category', 'days', 'event'));
         }
         return view('occasions.create');
+    }
 
+    public function update(Request $request){
+        $ruser = auth()->user();
+
+        $data = request()->validate([
+            'userName' => 'required|exists:App\User,name',
+            'eventId' =>  'numeric'
+        ]);
+
+        //dd($data['groupId']);
+        $user = User::where('name', $data['userName'])->first();
+        $event = Occasion::where('id', $data['groupId'])->first();
+
+        $group->users()->syncWithoutDetaching($user->id);
+        Session::flash('message', 'You have added '.$user->name.' to group '.$group->name);
+
+        //information needed for notification
+        $group_info = $group->name;
+        $user->notify(new addedToGroup($group_info));
+        //return redirect('user/'.$ruser->id.'#groups')->with('message', 'You have added user to group '.$group->name);
     }
 }

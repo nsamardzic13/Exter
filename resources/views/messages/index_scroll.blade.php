@@ -19,13 +19,13 @@
                     <p>{{ $message->message_text }}</p>
                     <div id="likes_messages{{ $message->id }}">
                         <p class="likescroll-p">
-                            @isset($event)
-                                <input type="hidden" name="group_id" id="group_id{{ $message->id }}" value="{{ $event->id }}">
-                                <input type="hidden" name="type" id="type{{ $message->id }}" value="event">
+                            @isset($group)
+                                <input type="hidden" name="group_id" id="group_id{{ $message->id }}" value="{{ $group->id }}">
+                                <input type="hidden" name="type" id="type{{ $message->id }}" value="groups">
                             @endisset
                             @isset($occasion)
                                 <input type="hidden" name="group_id" id="group_id{{ $message->id }}" value="{{ $occasion->id }}">
-                                <input type="hidden" name="type" id="type{{ $message->id }}" value="group">
+                                <input type="hidden" name="type" id="type{{ $message->id }}" value="events">
                             @endisset
                             <input type="hidden" name="message_id" id="message_id{{ $message->id }}" value="{{ $message->id }}">
                             <input type="hidden" name="like_dislike" id="like_dislike{{ $message->id }}" value="dislike">

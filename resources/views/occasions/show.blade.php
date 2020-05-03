@@ -68,7 +68,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <button @php if($people < $occasion->max_people){
-                                                echo "onclick=\"window.location.href='/events/".$t->id."/wall'\" class=\"btn-outline-success container-fluid btn\"";
+                                                echo "onclick=\"window.location.href='/events/".$t->id."'\" class=\"btn-outline-success container-fluid btn\"";
                                             } else {
                                                 echo "class=\"btn-outline-secondary container-fluid btn\" title=\"You can't join this event.\nThis event is full\"";
                                             }@endphp>JOIN</button>
