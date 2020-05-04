@@ -226,6 +226,10 @@ class OccasionsController extends Controller
 
         $user = auth()->user();
         $admin = User::where('name', '=', $occasion->user_name)->get();
+
+        $occasion->users()->syncWithoutDetaching($user->id);
+        $joined = $occasion->users;
+
         $messages = Messages::where('event_id', '=', $occasion->id)
             ->orderByDesc('created_at')
             ->paginate(4);
