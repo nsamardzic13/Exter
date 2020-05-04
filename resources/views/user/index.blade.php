@@ -43,7 +43,7 @@
                         <ul class="list-unstyled mb-0">
                             <li class="mb-1">
                                 <i class="fas fa-home fa-1x"></i>  Lives in:
-                                {{ $user->city_name && $user->street_name ? $user->street_name.','.$user->city_name : '?'}}
+                                {{$user->street_name ? $user->street_name : '?'}}
                             </li>
                             <li class="mb-1">
                                 <i class="fas fa-envelope"></i>  Email:

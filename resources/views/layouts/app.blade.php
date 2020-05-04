@@ -25,6 +25,9 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <!-- Google maps scritp -->
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyBCWhEi-RXDFZgWkdKh9ldrlb4b3PCzd78&libraries=places&callback=initAutocomplete" type="text/javascript"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">

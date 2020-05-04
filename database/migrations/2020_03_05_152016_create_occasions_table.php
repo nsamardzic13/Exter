@@ -17,8 +17,8 @@ class CreateOccasionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('street');
-            $table->string('city');
-            $table->string('zipcode');
+            $table->decimal('lat', 8, 6)->nullable();
+            $table->decimal('lng', 8, 6)->nullable();
             $table->dateTime('start');
             $table->dateTime('end');
             $table->string('user_name'); //user_id

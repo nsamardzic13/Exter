@@ -61,24 +61,7 @@
                                 <span class="addon"><i class="fas fa-map-marked-alt"></i></span></label>
 
                                 <div class="col-md-6">
-                                    <input id="address" type="text" class="form-control" name="address" value="{{ $user->street_name }}" autocomplete="address">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="city" type="text" class="form-control" name="city" value="{{ $user->city_name }}" autocomplete="city">
-                                </div>
-                            </div>
-
-                            {{--Maybe we can remove zip code - we need to check with google maps api --}}
-                            <div class="form-group row">
-                                <label for="zip_code" class="col-md-4 col-form-label text-md-right">{{ __('Zip Code') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="zip_code" type="number" class="form-control" name="zip_code" min="0" value="{{ $user->zip_code }}" autocomplete="zip_code">
+                                    <input id="address" type="text" class="form-control" name="address" value="{{ $user->street_name }}" autocomplete="off">
                                 </div>
                             </div>
 

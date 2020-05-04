@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Spatie\Geocoder\Facades\Geocoder;
 use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -43,8 +44,6 @@ class UsersController extends Controller
             'birth_year' => 'nullable|integer',
             'address' => 'nullable',
             'name' => 'nullable|unique:App\User,name,'.$user->id,
-            'city' => 'nullable',
-            'zip_code' => 'nullable|integer',
             'phone_number' => ['nullable' , 'regex:/(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,4})/'],
             'about_me' => 'nullable',
             'profile_pic' => 'sometimes|file|image|max:4000',
@@ -56,8 +55,8 @@ class UsersController extends Controller
             'name' => $data['name'],
             'birth_year' => $data['birth_year'],
             'street_name' => $data['address'],
-            'city_name' => $data['city'],
-            'zip_code' => $data['zip_code'],
+            'lat' => Geocoder::getCoordinatesForAddress($data['address'])['lat'],
+            'lng' => Geocoder::getCoordinatesForAddress($data['address'])['lng'],
             'phone_number' => $data['phone_number'],
             'description' => $data['about_me'],
             'user_type' => $data['user_type'],

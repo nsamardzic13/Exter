@@ -49920,6 +49920,13 @@ $(document).ready(function () {
   $(".page-link").on('click', function () {
     console.log('mrs');
   });
+}); //google maps autocomplete
+
+$(document).ready(function () {
+  var input = document.getElementById('address');
+  var input1 = document.getElementById('event_address');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  var autocomplete = new google.maps.places.Autocomplete(input1);
 });
 
 /***/ }),
@@ -50056,8 +50063,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/Exter/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Exter/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\Exter\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\Exter\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

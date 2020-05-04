@@ -37,7 +37,7 @@
                                 <p> <i class="fas fa-map-marker-alt"></i> <strong>Location: </strong></p>
                             </div>
                             <div class="col-6  text-center text-orange">
-                                <p>{{ $occasion->street }}, {{ $occasion->city }}</p>
+                                <p>{{ $occasion->street }}</p>
                             </div>
                         </div>
                         <div class="container-fluid border" style="background: rgba(255, 255, 255, 0.5); max-height: calc(80vh - 210px);

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Spatie\Geocoder\Facades\Geocoder;
 use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -37,9 +38,9 @@ class OccasionsController extends Controller
 
             }
         }
-        $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, city, min(start) as start, user_name, max_people, description, category, picture'))
+        $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, min(start) as start, user_name, max_people, description, category, picture'))
             ->where('ended', 'false')
-            ->groupBy('name', 'user_name', 'street', 'city', 'category', 'description', 'max_people', 'picture')
+            ->groupBy('name', 'user_name', 'street', 'category', 'description', 'max_people', 'picture')
             ->orderBy('start')
             ->paginate(12);
 
@@ -81,8 +82,6 @@ class OccasionsController extends Controller
             $data = request()->validate([
                 'name' => 'required|min:3',
                 'street' => 'required|min:3',
-                'city' => 'required|min:3',
-                'zipcode' => 'required|min:3',
                 'when' => 'required',
                 'max_people' => 'required|numeric|min:2',
                 'description' => 'required|min:10|max:255',
@@ -108,6 +107,10 @@ class OccasionsController extends Controller
             //dd($when);
             $startdate = strtotime(request('start'));
             $enddate = $startdate + (request('repeat') * 86400);
+
+            //ako postoje old lat i lng i ako je addressa jednaka staroj
+            $lat = Geocoder::getCoordinatesForAddress($data['street'])['lat'];
+            $lng = Geocoder::getCoordinatesForAddress($data['street'])['lng'];
 
             for ($i = 1; $i <= $ntime; $i = $i + 1) {
                 $flag = 0;
@@ -135,7 +138,7 @@ class OccasionsController extends Controller
                             $sdate = Carbon::createFromFormat('Y-m-d H:i', $sdate);
                             $edate = Carbon::createFromFormat('Y-m-d H:i', $edate);
 
-                            $occasion = Occasion::create(array_merge($data, ['start' => $sdate], ['end' => $edate], ['user_name' => $user->name]));
+                            $occasion = Occasion::create(array_merge($data, ['start' => $sdate], ['end' => $edate], ['user_name' => $user->name], ['lat' => $lat], ['lng' => $lng]));
                             if(request()->has('picture')) {
                                 $occasion->update([
                                     'picture' => request()->picture->store('occassion_uploads', 'public'),
@@ -160,8 +163,6 @@ class OccasionsController extends Controller
             $data = request()->validate([
                 'name' => 'required|min:3',
                 'street' => 'required|min:3',
-                'city' => 'required|min:3',
-                'zipcode' => 'required|min:3',
                 'when' => 'required',
                 'max_people' => 'required|numeric',
                 'description' => 'required|min:10|max:255',
@@ -183,11 +184,13 @@ class OccasionsController extends Controller
 
             $startdate = request('start-one') . ' ' . request('time-start-one');
             $startdate = Carbon::createFromFormat('Y-m-d H:i', $startdate);
+            $lat = Geocoder::getCoordinatesForAddress($data['street'])['lat'];
+            $lng = Geocoder::getCoordinatesForAddress($data['street'])['lng'];
 
             $enddate = request('end-one') . ' ' . request('time-end-one');;
             $enddate = Carbon::createFromFormat('Y-m-d H:i', $enddate);
 
-            $occasion = Occasion::create(array_merge($data, ['start' => $startdate], ['end' => $enddate], ['user_name' => $user->name]));
+            $occasion = Occasion::create(array_merge($data, ['start' => $startdate], ['end' => $enddate], ['user_name' => $user->name], ['lat' => $lat], ['lng' => $lng]));
 
             if(request()->has('picture')) {
                 $occasion->update([

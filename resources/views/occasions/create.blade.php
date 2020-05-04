@@ -37,27 +37,9 @@ date_default_timezone_set('Europe/Zagreb');
                                     <div class="input-group-prepend">
                                         <span class="input-group-text text-muted bg-light" ><i class="fas fa-map-marker-alt"></i></span>
                                     </div>
-                                    <input type="text" name="street"  value="{{ old('street', $event->street ?? '')}}" class="form-control" >
+                                    <input type="text" name="street" id="event_address" value="{{ old('street', $event->street ?? '')}}" class="form-control" >
                                 </div>
                                 <div class="text-danger pb-3">{{ $errors->first('street') }}</div>
-
-                                  <label class="text-secondary"class="text-secondary" for='city'>City:</label>
-                                <div class="form-group input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text text-muted bg-light" ><i class="fas fa-city"></i></span>
-                                    </div>
-                                    <input type="text" name="city"  value="{{ old('city', $event->city ?? '')}}" class="form-control">
-                                </div>
-                                <div class="text-danger pb-3">{{ $errors->first('city') }}</div>
-
-                                 <label class="text-secondary"for='zipcode'>Zipcode:</label>
-                                <div class="form-group input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text text-muted bg-light" ><i class="fas fa-mail-bulk"></i></span>
-                                    </div>
-                                    <input type="text" name="zipcode"  value="{{ old('zipcode', $event->zipcode ?? '')}}" class="form-control">
-                                </div>
-                                <div class="text-danger pb-3">{{ $errors->first('zipcode') }}</div>
 
                                 <div class="form-group">
                                     <p>When?</p>

@@ -21,7 +21,7 @@
         </li>
         <li class="mb-1">
             <i class="fas fa-globe-europe"></i>  Location:
-            {{ $occasion->zipcode }} , {{ $occasion->city }} , {{ $occasion->street }}
+            {{ $occasion->street }}
         </li>
         <li class="mb-1">
             <i class="fas fa-calendar-week"></i>  Starting At:

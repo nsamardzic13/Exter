@@ -455,3 +455,12 @@ $(document).ready(function() {
         console.log('mrs')
     });
 });
+
+//google maps autocomplete
+$(document).ready(function() {
+   var input = document.getElementById('address');
+   var input1 = document.getElementById('event_address');
+   var autocomplete = new google.maps.places.Autocomplete(input);
+   var autocomplete = new google.maps.places.Autocomplete(input1);
+
+});
