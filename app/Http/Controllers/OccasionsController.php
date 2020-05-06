@@ -91,7 +91,7 @@ class OccasionsController extends Controller
             ]);
             unset($data['when']);
             $ntime = request('number-times');
-            //dd(request()->all());
+
             for ($i = 1; $i <= $ntime; $i = $i + 1) {
                 $when = request()->validate([
                     'repeat' => 'required',
@@ -103,14 +103,21 @@ class OccasionsController extends Controller
 
             }
 
-            //dd($data);
-            //dd($when);
             $startdate = strtotime(request('start'));
             $enddate = $startdate + (request('repeat') * 86400);
 
-            //ako postoje old lat i lng i ako je addressa jednaka staroj
-            $lat = Geocoder::getCoordinatesForAddress($data['street'])['lat'];
-            $lng = Geocoder::getCoordinatesForAddress($data['street'])['lng'];
+            $streetInDatabase = DB::table('occasions')
+                ->select('street', 'lat', 'lng')
+                ->where('street', '=', $data['street'])->first();
+            //dd(($data['street']), ($streetInDatabase->street));
+
+            if ($data['street'] == $streetInDatabase->street) {
+                $lat = $streetInDatabase->lat;
+                $lng = $streetInDatabase->lng;
+            } else {
+                $lat = Geocoder::getCoordinatesForAddress($data['street'])['lat'];
+                $lng = Geocoder::getCoordinatesForAddress($data['street'])['lng'];
+            }
 
             for ($i = 1; $i <= $ntime; $i = $i + 1) {
                 $flag = 0;
@@ -184,8 +191,21 @@ class OccasionsController extends Controller
 
             $startdate = request('start-one') . ' ' . request('time-start-one');
             $startdate = Carbon::createFromFormat('Y-m-d H:i', $startdate);
-            $lat = Geocoder::getCoordinatesForAddress($data['street'])['lat'];
-            $lng = Geocoder::getCoordinatesForAddress($data['street'])['lng'];
+
+            $streetInDatabase = DB::table('occasions')
+                ->select('street', 'lat', 'lng')
+                ->where('street', '=', $data['street'])->first();
+            //dd(($data['street']), ($streetInDatabase->street));
+
+            if ($data['street'] == $streetInDatabase->street) {
+                $lat = $streetInDatabase->lat;
+                $lng = $streetInDatabase->lng;
+            } else {
+                $lat = Geocoder::getCoordinatesForAddress($data['street'])['lat'];
+                $lng = Geocoder::getCoordinatesForAddress($data['street'])['lng'];
+            }
+
+
 
             $enddate = request('end-one') . ' ' . request('time-end-one');;
             $enddate = Carbon::createFromFormat('Y-m-d H:i', $enddate);
@@ -230,6 +250,11 @@ class OccasionsController extends Controller
         $user = auth()->user();
         $admin = User::where('name', '=', $occasion->user_name)->get();
 
+        $otherusers =  array_values($request->input())[0];
+
+        foreach ($otherusers as $otheruser){
+            $occasion->users()->syncWithoutDetaching($otheruser);
+        }
         $occasion->users()->syncWithoutDetaching($user->id);
         $joined = $occasion->users;
 
@@ -266,6 +291,12 @@ class OccasionsController extends Controller
         }
 
         return view('occasions.wall', compact(['occasion', 'user', 'messages', 'top_users', 'user_events', 'admin', ]));
+    }
+    public function join_group(Occasion $occasion){
+        $user = auth()->user();
+        $people=  $occasion->max_people - occasionsController::showPeopleForModal($occasion);
+        $joined = $occasion->users->pluck('id')->toArray();
+        return view('occasions.join_group',  compact(['user', 'occasion', 'people', 'joined']));
     }
 
     public function recreate(Occasion $occasion)

@@ -72,7 +72,78 @@ $(document).on('click', '#hideDate', function () {
 });
 
 
+////join group to event
+$(document).on('click', '[name="changegroup"]', function() {
+    $('.groupusers').each(function() {
+        this.checked = false;
+    });
+    $('.groupusers').each(function() {
+        this.disabled = false;
+    });
+    $('#selected_people').html("0");
 
+    var active_tab = $("ul.tabs li a.active").attr("id");
+    $('.tabusers').each(function() {
+            $(this).removeClass("active");
+        });
+    $('#cannot').css('display', 'none');
+    $('#options-select-users').css('display', 'initial');
+});
+
+
+$(document).on('click', '.groupusers', function() {
+    var active_tab = $("ul.tabs li a.active").attr("id");
+    var count = $("input[name='"+active_tab+"users[]']:checked").length;
+    $('#selected_people').html(count);
+
+    var people = parseInt( $('#num_people').html() );
+    if (count >= people){
+        $('.groupusers').not(':checked').each(function() {
+            this.disabled = true;
+        });
+    } else {
+        $('.groupusers').each(function() {
+            this.disabled = false;
+        });
+    }
+
+
+});
+
+
+$(document).on('click', '#checkallusers', function() {
+
+    var active_tab = $("ul.tabs li a.active").attr("id");
+    var count = $("input[name='"+active_tab+"users[]']").length;
+
+    var people = parseInt( $('#num_people').html());
+    if (count > people){
+        $('#cannot').css('display', 'initial');
+    } else {
+        $("input[name='"+active_tab+"users[]']").each(function() {
+            this.checked = true;
+        });
+        console.log($("."+active_tab+"users"));
+        $("label[name='"+active_tab+"users']").each(function() {
+            $(this).addClass("active");
+        });
+
+        $('#selected_people').html(count);
+    }
+});
+$(document).on('click', '#uncheckallusers', function() {
+
+    var active_tab = $("ul.tabs li a.active").attr("id");
+
+        $("input[name='"+active_tab+"users[]']").each(function() {
+            this.checked = false;
+        });
+        $("label[name='"+active_tab+"users']").each(function() {
+            $(this).removeClass("active");
+        });
+
+        $('#selected_people').html(0);
+});
 
 
 //code for navbar scroll

@@ -33,6 +33,7 @@ Route::get('/events/create', 'OccasionsController@create');
 Route::post('/events', 'OccasionsController@store');
 
 Route::get('/events/{occasion}', 'OccasionsController@show');
+Route::get('/events/{occasion}/join_group', 'OccasionsController@join_group');
 Route::get('/events/recreate/{occasion}', 'OccasionsController@recreate');
 
 Route::get('/groups', 'GroupsController@index');
