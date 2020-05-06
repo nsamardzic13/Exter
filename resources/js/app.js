@@ -82,11 +82,11 @@ $(document).on('click', '[name="changegroup"]', function() {
     });
     $('#selected_people').html("0");
 
-    var active_tab = $("ul.tabs li a.active").attr("id");
     $('.tabusers').each(function() {
             $(this).removeClass("active");
         });
-    $('#cannot').css('display', 'none');
+
+    $('#cannot_checkall').css('display', 'none');
     $('#options-select-users').css('display', 'initial');
 });
 
@@ -94,9 +94,11 @@ $(document).on('click', '[name="changegroup"]', function() {
 $(document).on('click', '.groupusers', function() {
     var active_tab = $("ul.tabs li a.active").attr("id");
     var count = $("input[name='"+active_tab+"users[]']:checked").length;
+
     $('#selected_people').html(count);
 
     var people = parseInt( $('#num_people').html() );
+    console.log($("input[name='"+active_tab+"users[]']:checked").length);
     if (count >= people){
         $('.groupusers').not(':checked').each(function() {
             this.disabled = true;
@@ -106,7 +108,6 @@ $(document).on('click', '.groupusers', function() {
             this.disabled = false;
         });
     }
-
 
 });
 
@@ -118,12 +119,11 @@ $(document).on('click', '#checkallusers', function() {
 
     var people = parseInt( $('#num_people').html());
     if (count > people){
-        $('#cannot').css('display', 'initial');
+        $('#cannot_checkall').css('display', 'initial');
     } else {
         $("input[name='"+active_tab+"users[]']").each(function() {
             this.checked = true;
         });
-        console.log($("."+active_tab+"users"));
         $("label[name='"+active_tab+"users']").each(function() {
             $(this).addClass("active");
         });

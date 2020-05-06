@@ -250,10 +250,12 @@ class OccasionsController extends Controller
         $user = auth()->user();
         $admin = User::where('name', '=', $occasion->user_name)->get();
 
-        $otherusers =  array_values($request->input())[0];
+        if(!empty($request->input())) {
+            $otherusers = array_values($request->input())[0];
 
-        foreach ($otherusers as $otheruser){
-            $occasion->users()->syncWithoutDetaching($otheruser);
+            foreach ($otherusers as $otheruser) {
+                $occasion->users()->syncWithoutDetaching($otheruser);
+            }
         }
         $occasion->users()->syncWithoutDetaching($user->id);
         $joined = $occasion->users;
