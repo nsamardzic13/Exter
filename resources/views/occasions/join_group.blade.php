@@ -70,7 +70,7 @@
                 </form>
             </div>
             <div class="col-5 px-5">
-                <img class="img-fluid" src="{{ asset('images/group.png') }}" >
+                <img class="img-fluid" src="{{ asset('images/group.svg') }}" >
             </div>
             @endif
         </div>
