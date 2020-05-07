@@ -21,7 +21,7 @@ date_default_timezone_set('Europe/Zagreb');
                 <div class="row">
                     <div class="col-12">
                         @auth
-                            <form action="/events" method="POST" class="pb-2">
+                            <form action="/events" method="POST" class="pb-2" enctype="multipart/form-data">
 
                                 <label class="text-secondary" for='name'>Name:</label>
                                 <div class="form-group input-group">
@@ -146,6 +146,20 @@ date_default_timezone_set('Europe/Zagreb');
                                     </div>
                                 <div class="text-danger pb-3">{{ $errors->first('max_people') }}</div>
 
+                                <label class="text-secondary"for='picture'>Choose picture or leave blank for default:</label>
+                                <div class="form-group input-group" id="length_filename" style="width: 40%">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text text-muted bg-light" ><i class="fas fa-image"></i></span>
+                                    </div>
+
+                                        <label class ="image_button form-control col" for="picture"> Upload image
+                                        <input type="file" class="inputfileevent form-control" id="picture" name="picture" autocomplete="picture">
+                                        <span id="file-upload-filename" class="col file-upload-filename" style="display: none"></span>
+
+
+                                </div>
+                                <div class="text-danger pb-3">{{ $errors->first('picture') }}</div>
+
                                  <label class="text-secondary"for='description'>Description:</label>
                                     <div class="form-group input-group">
                                         <div class="input-group-prepend">
@@ -154,7 +168,6 @@ date_default_timezone_set('Europe/Zagreb');
                                         <textarea type="text" class="form-control" name="description" rows="3">{{ old('description', $event->description ?? '')}} </textarea>
                                     </div>
                                 <div class="text-danger pb-3">{{ $errors->first('description') }}</div>
-
 
                                  <label class="text-secondary"for="category"></label>
                                 <div class="form-group input-group">

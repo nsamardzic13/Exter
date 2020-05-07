@@ -72,6 +72,33 @@ $(document).on('click', '#hideDate', function () {
 });
 
 
+
+//show filename in create event
+$("#picture").on('change', function() {
+
+    var input = document.getElementById( 'picture' );
+    var infoArea = document.getElementById( 'file-upload-filename' );
+    // the change event gives us the input it occurred in
+    var input = event.srcElement;
+
+    // the input has an array of files in the `files` property, each one has a name that you can use. We're just using the name here.
+    var fileName = input.files[0].name;
+
+    // use fileName however fits your app best, i.e. add it into a div
+    infoArea.textContent = '- ' + fileName;
+    infoArea.style.display = 'initial';
+    if (fileName.length < 15){
+        document.getElementById( 'length_filename' ).style.width = '40%';
+    } else if (fileName.length < 30) {
+        document.getElementById('length_filename').style.width = '50%';
+    } else if (fileName.length < 50) {
+        document.getElementById('length_filename').style.width = '80%';
+    } else {
+        document.getElementById('length_filename').style.width = '100%';
+    }
+});
+
+
 ////join group to event
 $(document).on('click', '[name="changegroup"]', function() {
     $('.groupusers').each(function() {
