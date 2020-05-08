@@ -23390,3 +23390,35 @@ hr.light-100 {
   background: #179b81;
 }
 
+.inputfileevent {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  top: 6px;
+  left: 0;
+  font-size: 15px;
+}
+
+.inputfileevent:focus + label {
+  outline: 2px solid;
+}
+
+.image_button {
+  display: inline-block;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #FF8663;
+  font-size: 16px;
+  color: #f1e5e6;
+}
+
+.image_button:focus .image_button:hover {
+  background-color: #f76c45;
+}
+
+.file-upload-filename {
+  background-color: #ffffff;
+  color: #FF8663;
+}
+

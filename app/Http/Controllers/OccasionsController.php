@@ -27,7 +27,7 @@ class OccasionsController extends Controller
     public function index()
     {
 
-        $user = auth()->user();
+        /*$user = auth()->user();
 
         $events = DB::table('occasions')->get();
 
@@ -42,8 +42,36 @@ class OccasionsController extends Controller
             ->where('ended', 'false')
             ->groupBy('name', 'user_name', 'street', 'category', 'description', 'max_people', 'picture')
             ->orderBy('start')
-            ->paginate(12);
+            ->paginate(12);*/
 
+        $user = auth()->user();
+        $keyss = array_keys($user->sport->getAttributes(), 'true');
+        $keysh = array_keys($user->hangout->getAttributes(), 'true');
+        $keyst = array_keys($user->availability->getAttributes(), 'true');
+
+        $keys = array_merge($keysh, $keyss);
+        $lat1 = $user->lat;
+        $lng1 = $user->lng;
+
+        $events = DB::table('occasions');
+        if(!empty($keys)) {
+            $events = $events->whereIn('category', $keys);
+        }
+        $events = $events->get();
+
+        $count = 0;
+        foreach ($events as $event) {
+            //false brisi true nastavi
+            if(!$this->checkTime($event, $keyst)){
+                $events->pull($count);
+            } else if ($lat1){
+                $event->dist = $this->getDistance($lat1, $lng1, $event->lat, $event->lng);
+            }
+            $count++;
+        }
+        //Sortiranje po dist; ali ako ima ili nema dist sortiraj po vremenu starta eventa
+        $occasions = $events->sortBy('dist')->sortBy('start');
+        //dd($occasions);
         return view('occasions.index', compact('user', 'occasions'));
     }
 
@@ -197,7 +225,7 @@ class OccasionsController extends Controller
                 ->where('street', '=', $data['street'])->first();
             //dd(($data['street']), ($streetInDatabase->street));
 
-            if ($data['street'] == $streetInDatabase->street) {
+            if ($data['street'] == !is_null($streetInDatabase) ? $streetInDatabase->street : '') {
                 $lat = $streetInDatabase->lat;
                 $lng = $streetInDatabase->lng;
             } else {
@@ -342,5 +370,56 @@ class OccasionsController extends Controller
         $group_info = $group->name;
         $user->notify(new addedToGroup($group_info));
         //return redirect('user/'.$ruser->id.'#groups')->with('message', 'You have added user to group '.$group->name);
+    }
+
+    public function checkTime(Object $event, Array $keyst) {
+        //false brisi true nastavi
+        if (empty($keyst)){
+            return true;
+        }
+        $flag = true;
+        $start_time = $event->start;
+        $start_hours = $event->start;
+        $start_hours = date('H:i');
+
+        if($this->isWeekend(date($start_time)) && in_array('weekend', $keyst)){
+            $flag = $flag && false;
+        }
+        if(!$this->isWeekend(date($start_time)) && !in_array('workday', $keyst)){
+            $flag = $flag && false;
+        }
+
+        if(!in_array($this->timeOfDay($start_hours), $keyst)){
+            $flag = $flag && false;
+        }
+        return $flag;
+    }
+
+    public function timeOfDay($start_hours) {
+        if($start_hours < 12){
+            return 'morning';
+        } else if ($start_hours >= 12 && $start_hours < 19){
+            return 'afternoon';
+        }
+        return 'evening';
+    }
+
+    public function isWeekend($date) {
+        return (date('N', strtotime($date)) >= 6);
+    }
+
+    public function getDistance(float $lat1, float $lng1, float $lat2, float $lng2){
+        $r = 6371;
+        $dlat = deg2rad($lat2-$lat1);
+        $dlng = deg2rad($lng2-$lng1);
+
+        $a = sin($dlat/2) * sin($dlat/2) +
+            cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
+            sin($dlng/2) * sin($dlng/2);
+
+        $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+        $d = $r * $c;
+
+        return $d;
     }
 }

@@ -49559,6 +49559,87 @@ $(document).on('click', '#hideDays', function () {
 $(document).on('click', '#hideDate', function () {
   document.getElementById('date').style.display = 'none';
   document.getElementById('days').style.display = 'initial';
+}); //show filename in create event
+
+$("#picture").on('change', function () {
+  var input = document.getElementById('picture');
+  var infoArea = document.getElementById('file-upload-filename'); // the change event gives us the input it occurred in
+
+  var input = event.srcElement; // the input has an array of files in the `files` property, each one has a name that you can use. We're just using the name here.
+
+  var fileName = input.files[0].name; // use fileName however fits your app best, i.e. add it into a div
+
+  infoArea.textContent = '- ' + fileName;
+  infoArea.style.display = 'initial';
+
+  if (fileName.length < 15) {
+    document.getElementById('length_filename').style.width = '40%';
+  } else if (fileName.length < 30) {
+    document.getElementById('length_filename').style.width = '50%';
+  } else if (fileName.length < 50) {
+    document.getElementById('length_filename').style.width = '80%';
+  } else {
+    document.getElementById('length_filename').style.width = '100%';
+  }
+}); ////join group to event
+
+$(document).on('click', '[name="changegroup"]', function () {
+  $('.groupusers').each(function () {
+    this.checked = false;
+  });
+  $('.groupusers').each(function () {
+    this.disabled = false;
+  });
+  $('#selected_people').html("0");
+  $('.tabusers').each(function () {
+    $(this).removeClass("active");
+  });
+  $('#cannot_checkall').css('display', 'none');
+  $('#options-select-users').css('display', 'initial');
+});
+$(document).on('click', '.groupusers', function () {
+  var active_tab = $("ul.tabs li a.active").attr("id");
+  var count = $("input[name='" + active_tab + "users[]']:checked").length;
+  $('#selected_people').html(count);
+  var people = parseInt($('#num_people').html());
+  console.log($("input[name='" + active_tab + "users[]']:checked").length);
+
+  if (count >= people) {
+    $('.groupusers').not(':checked').each(function () {
+      this.disabled = true;
+    });
+  } else {
+    $('.groupusers').each(function () {
+      this.disabled = false;
+    });
+  }
+});
+$(document).on('click', '#checkallusers', function () {
+  var active_tab = $("ul.tabs li a.active").attr("id");
+  var count = $("input[name='" + active_tab + "users[]']").length;
+  var people = parseInt($('#num_people').html());
+
+  if (count > people) {
+    $('#cannot_checkall').css('display', 'initial');
+  } else {
+    $("input[name='" + active_tab + "users[]']").each(function () {
+      this.checked = true;
+    });
+    $("label[name='" + active_tab + "users']").each(function () {
+      $(this).addClass("active");
+    });
+    $('#selected_people').html(count);
+  }
+});
+$(document).on('click', '#uncheckallusers', function () {
+  var active_tab = $("ul.tabs li a.active").attr("id");
+  $("input[name='" + active_tab + "users[]']").each(function () {
+    this.checked = false;
+  });
+  $("label[name='" + active_tab + "users']").each(function () {
+    $(this).removeClass("active");
+  });
+  $('#selected_people').html(0);
 }); //code for navbar scroll
 // grabbing the class names from the data attributes
 

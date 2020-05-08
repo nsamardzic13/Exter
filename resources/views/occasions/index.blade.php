@@ -13,6 +13,7 @@
                         <strong>Success</strong> {{ session()->get('message') }}
                     </div>
                 @endif
+
                 <div class="container-fluid d-inline-block px-4 ">
                     @if(!$occasions->isEmpty())
                         <div class="row">
@@ -25,7 +26,8 @@
                                             <h4 class="card-title p-2">{{ $event->name }}</h4>
                                             <h6 class="card-subtitle mb-2 text-muted row"><i class="fas fa-calendar-day col-sm-1"></i><p class="col-sm">{{ date('d.m.Y', strtotime($event->start))}}</p>
                                                                                           <i class="fas fa-clock pl-3 col-sm-1"></i> <p class="col-sm">{{ date('H:i', strtotime($event->start))}}</p></h6>
-                                            <h6 class="card-subtitle mb-2 text-muted row"><i class="fas fa-map-marker-alt pr-2 col-sm-1"></i><p class="col-sm-11"> {{ $event->street }}</p></h6>
+                                            <h6 class="card-subtitle mb-2 text-muted row"><i class="fas fa-map-marker-alt col-sm-1"></i><p class="col-sm"> {{ $event->street }}</p>
+                                                                                          <i class="fas fa-route pl-3 col-sm-1"></i> <p class="col-sm">{{ number_format($event->dist, 2, '.', '') }}km</p></h6>
                                             <h6 class="card-subtitle mb-2 text-muted row"><i class="fas fa-list-alt pr-2 col-sm-1"></i><p class="col-sm-11">{{ $event->category }}</p></h6>
                                             <h6 class="card-subtitle mb-2 text-muted row"><i class="fas fa-user-tie pr-2 col-sm-1"></i><p class="col-sm-11">{{ $event->user_name }}</p></h6>
                                             <p class="card-text">{{ $event->description }}</p>
@@ -50,7 +52,6 @@
                     <a href="/events/create" class="container-fluid btn btn-outline-quest2 btn-lg bg-light">Add new</a>
                 </div>
 
-                {{ $occasions->links() }}
             </div>
         </div>
     </div>

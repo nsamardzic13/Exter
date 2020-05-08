@@ -5,7 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GoogleApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GoogleApiController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OccasionsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OccasionsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Occasion.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Occasion.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_05_152016_create_occasions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_05_152016_create_occasions_table.php" afterDir="false" />
@@ -15,12 +15,8 @@
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/occasions/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/occasions/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/occasions/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/occasions/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/occasions/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/occasions/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/occasions/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/occasions/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -298,7 +294,12 @@
       <workItem from="1588532778493" duration="6000" />
       <workItem from="1588541264888" duration="1774000" />
       <workItem from="1588595217764" duration="7000" />
-      <workItem from="1588610950455" duration="6043000" />
+      <workItem from="1588610950455" duration="6149000" />
+      <workItem from="1588769906573" duration="199000" />
+      <workItem from="1588785364024" duration="6780000" />
+      <workItem from="1588842983449" duration="159000" />
+      <workItem from="1588878150608" duration="7484000" />
+      <workItem from="1588954414054" duration="5062000" />
     </task>
     <servers />
   </component>
@@ -322,11 +323,11 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="283" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1583428453242" />
-    <state x="2477" y="145" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588615635701">
+    <state x="2477" y="145" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588785851210">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="371" y="95" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1588016435734" />
-    <state x="2477" y="145" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588615635701" />
+    <state x="2477" y="145" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588785851210" />
     <state x="385" y="178" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1585081313601">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -355,12 +356,12 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1584918421268" />
-    <state x="313" y="184" key="com.intellij.ide.util.TipDialog" timestamp="1588611059154">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="2390" y="281" key="com.intellij.ide.util.TipDialog" timestamp="1588954414853">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1588611059154" />
-    <state x="2390" y="281" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1585932479558" />
-    <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1588595222022" />
+    <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1588878151234" />
+    <state x="2390" y="281" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588954414853" />
+    <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1588842987914" />
     <state x="449" y="252" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585076799179">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -375,11 +376,22 @@
     </state>
     <state x="297" y="151" key="run.anything.popup/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1588176612267" />
     <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1585321541246" />
-    <state x="2375" y="2" width="1008" height="1037" key="search.everywhere.popup" timestamp="1588615961429">
+    <state x="2375" y="2" width="1008" height="1037" key="search.everywhere.popup" timestamp="1588790143621">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1587732346485" />
-    <state x="2375" y="2" width="1008" height="1037" key="search.everywhere.popup/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588615961429" />
+    <state x="2375" y="2" width="1008" height="1037" key="search.everywhere.popup/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588790143621" />
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1588410754253" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/GoogleApiController.php</url>
+          <line>48</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

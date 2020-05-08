@@ -24,4 +24,6 @@ class Occasion extends Model
     public function messages() {
         return $this->hasMany(Messages::class);
     }
+
+
 }
