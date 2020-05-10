@@ -8,6 +8,7 @@ class SportsController extends Controller{
     public function index(){
         $user = auth()->user();
         $sportcolumns = $user->sport->getTableColumns();
+        //dd($sportcolumns);
         return view('questionary.sports.sindex', compact('user', 'sportcolumns'));
     }
 
@@ -19,6 +20,8 @@ class SportsController extends Controller{
             $user->sport->$sport = 1;
             $user->sport->save();
         }*/
+
+        //dd($request->sports);
         $sportcolumns = $user->sport->getTableColumns();
         if($request->sports) {
             foreach ($sportcolumns as $sportcolumnKey => $sportcolumn) {

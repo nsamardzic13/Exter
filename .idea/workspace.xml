@@ -3,19 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="688e5f26-aa99-400a-8e44-982ac4183f81" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GoogleApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GoogleApiController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OccasionsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OccasionsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Occasion.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Occasion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_03_05_152016_create_occasions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_03_05_152016_create_occasions_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SportsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SportsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/nav.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/occasions/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/occasions/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -299,7 +293,9 @@
       <workItem from="1588785364024" duration="6780000" />
       <workItem from="1588842983449" duration="159000" />
       <workItem from="1588878150608" duration="7484000" />
-      <workItem from="1588954414054" duration="5062000" />
+      <workItem from="1588954414054" duration="7499000" />
+      <workItem from="1589016649080" duration="21443000" />
+      <workItem from="1589108492439" duration="9418000" />
     </task>
     <servers />
   </component>
@@ -356,10 +352,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1584918421268" />
-    <state x="2390" y="281" key="com.intellij.ide.util.TipDialog" timestamp="1588954414853">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="313" y="184" key="com.intellij.ide.util.TipDialog" timestamp="1589108497315">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1588878151234" />
+    <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1589108497315" />
     <state x="2390" y="281" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588954414853" />
     <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1588842987914" />
     <state x="449" y="252" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585076799179">
@@ -371,10 +367,11 @@
     </state>
     <state x="507" y="207" width="250" height="278" key="jetbrains.javascript.buildTools.run-task-popup/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1585166943387" />
     <state x="507" y="207" width="250" height="278" key="jetbrains.javascript.buildTools.run-task-popup/0.0.1280.680@0.0.1280.680" timestamp="1583849828487" />
-    <state x="297" y="151" key="run.anything.popup" timestamp="1588176612267">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="2366" y="231" key="run.anything.popup" timestamp="1589116058875">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="297" y="151" key="run.anything.popup/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1588176612267" />
+    <state x="2366" y="231" key="run.anything.popup/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1589116058875" />
     <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1585321541246" />
     <state x="2375" y="2" width="1008" height="1037" key="search.everywhere.popup" timestamp="1588790143621">
       <screen x="1920" y="0" width="1920" height="1040" />

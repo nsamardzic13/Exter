@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Messages;
+use App\Sport;
 use App\User;
 use Carbon\Carbon;
 
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use mysql_xdevapi\Table;
 use Spatie\Geocoder\Facades\Geocoder;
 use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Console\Input\InputArgument;
@@ -24,36 +26,58 @@ use Symfony\Component\Console\Input\InputArgument;
 
 class OccasionsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-
-        /*$user = auth()->user();
-
-        $events = DB::table('occasions')->get();
-
-
-        foreach ($events as $occasion) {
-            if (strtotime($occasion->start) < time() && !$occasion->ended) {
-                DB::table('occasions')->where('id', $occasion->id)->update(['ended' => true]);
-
+        $this->eventFinished();
+        $user = auth()->user();
+        $range = 50;
+        if ($request->sports || $request->hangouts || $request->availabilities || $request->range && $request->cancelFilters == 'false') {
+            if ($request->sports) {
+                foreach ($request->sports as $sport) {
+                    $user->sport[$sport] = true;
+                }
+            }
+            if ($request->hangouts) {
+                foreach ($request->hangouts as $hangout) {
+                    $user->hangout[$hangout] = true;
+                }
+            }
+            if ($request->availabilities) {
+                foreach ($request->availabilities as $availability) {
+                    $user->availability[$availability] = true;
+                }
+            }
+            if ($request->range && $request->range != 50) {
+                $range = $request->range;
             }
         }
-        $occasions = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, min(start) as start, user_name, max_people, description, category, picture'))
-            ->where('ended', 'false')
-            ->groupBy('name', 'user_name', 'street', 'category', 'description', 'max_people', 'picture')
-            ->orderBy('start')
-            ->paginate(12);*/
 
-        $user = auth()->user();
+            if($request->cancelFilters == 'true'){
+                $range = 50;
+                $user = User::where('id', '=', $user->id)->first();
+            }
+
         $keyss = array_keys($user->sport->getAttributes(), 'true');
         $keysh = array_keys($user->hangout->getAttributes(), 'true');
         $keyst = array_keys($user->availability->getAttributes(), 'true');
 
+        //dd($keyss);
         $keys = array_merge($keysh, $keyss);
         $lat1 = $user->lat;
         $lng1 = $user->lng;
 
-        $events = DB::table('occasions');
+        //I NEED TO GIVE INDEX PAGE CATEGORIES FROM QUESTIONARY FOR FILTRATION
+        $sportColumnsAll = $user->sport->getTableColumns();
+        $hangoutsColumnsAll = $user->hangout->getTableColumns();
+        $availabilityColumnsAll = $user->availability->getTableColumns();
+
+        //removing unnecessary parts from db
+        $sportcolumns = array_slice($sportColumnsAll, 2, 12);
+        $hangoutscolumns = array_slice($hangoutsColumnsAll, 2, 8);
+        $availabilitycolumns = array_slice($availabilityColumnsAll, 2, 5);
+
+        $events = DB::table('occasions')->where('ended', '=', false);
+
         if(!empty($keys)) {
             $events = $events->whereIn('category', $keys);
         }
@@ -69,10 +93,15 @@ class OccasionsController extends Controller
             }
             $count++;
         }
-        //Sortiranje po dist; ali ako ima ili nema dist sortiraj po vremenu starta eventa
-        $occasions = $events->sortBy('dist')->sortBy('start');
-        //dd($occasions);
-        return view('occasions.index', compact('user', 'occasions'));
+
+        if(!$lat1) {
+            $occasions = $events->where('dist', '<=', $range)->sortBy('dist');
+        }else{
+            $occasions = $events->sortBy('start');
+        }
+
+
+        return view('occasions.index', compact('user', 'occasions', 'sportcolumns', 'hangoutscolumns', 'availabilitycolumns', 'range'));
     }
 
     public function create()
@@ -88,7 +117,7 @@ class OccasionsController extends Controller
 
             $category = array_diff($categories, $exclude);
 
-            $days = ['Monday', 'Tuesday', 'Wendsday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 
             return view('occasions.create', compact('category', 'days'));
@@ -382,13 +411,13 @@ class OccasionsController extends Controller
         $start_hours = $event->start;
         $start_hours = date('H:i');
 
-        if($this->isWeekend(date($start_time)) && in_array('weekend', $keyst)){
-            $flag = $flag && false;
-        }
-        if(!$this->isWeekend(date($start_time)) && !in_array('workday', $keyst)){
+        if($this->isWeekend(date($start_time)) && !in_array('weekend', $keyst)){
             $flag = $flag && false;
         }
 
+        if(!$this->isWeekend(date($start_time)) && !in_array('workday', $keyst)){
+            $flag = $flag && false;
+        }
         if(!in_array($this->timeOfDay($start_hours), $keyst)){
             $flag = $flag && false;
         }
@@ -422,4 +451,17 @@ class OccasionsController extends Controller
 
         return $d;
     }
+
+    //CHECK IF EVENTS HAVE FINISHED
+    public function eventFinished(){
+
+        $events = DB::table('occasions')->get();
+
+        foreach ($events as $occasion) {
+            if (strtotime($occasion->start) < time() && !$occasion->ended) {
+                DB::table('occasions')->where('id', $occasion->id)->update(['ended' => true]);
+            }
+        }
+    }
 }
+

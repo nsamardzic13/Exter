@@ -50008,6 +50008,22 @@ $(document).ready(function () {
   var input1 = document.getElementById('event_address');
   var autocomplete = new google.maps.places.Autocomplete(input);
   var autocomplete = new google.maps.places.Autocomplete(input1);
+}); //js for sidebar
+
+$(document).ready(function () {
+  $('#sidebarCollapse').on('click', function () {
+    $('#sidebar, #content').toggleClass('active');
+    $('.collapse.in').toggleClass('in');
+    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+  });
+});
+$(document).ready(function () {
+  $('#rangeIndicator').on('change', function (e) {
+    var id = e.target.value;
+    document.getElementById("rangeValue").innerHTML = id;
+    document.getElementById("inputRangeValue").value = id;
+  });
+  $('#rangeIndicator').change();
 });
 
 /***/ }),
