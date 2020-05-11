@@ -12,11 +12,13 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">New Comment:</h4>
+                <h5 class="modal-title">New post: </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <form action="/wall" method="POST">
             <div class="modal-body">
-                <form action="/wall" method="POST">
                     @csrf
                     <input type="hidden" name="user_id" value="{{ $user->id }}">
                     @isset($occasion)
@@ -28,16 +30,15 @@
                         <input type="hidden" name="type" value="group">
                     @endisset
                     <div class="form-group">
-                        <label for="comment">{{ __('Add Your Comment:') }}</label>
                         <textarea class="form-control" rows="5" name="comment" id="comment"></textarea>
-                        <button type="submit" class="btn btn-success float-right">
-                            {{ __('Submit Comment') }}
-                        </button>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success float-left">
+                    {{ __('Submit Comment') }}
+                </button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

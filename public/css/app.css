@@ -23009,11 +23009,44 @@ body::-webkit-scrollbar-thumb {
 }
 
 p.likescroll-p {
-  text-align: right;
+  text-align: left;
 }
 
 .likescroll-btn {
   cursor: pointer;
+  width: 50px;
+  height: 50px;
+  padding: 5px 3px 20px 5px;
+}
+
+@media (max-width: 768px) {
+  .likescroll-btn {
+    padding: 20px 25px 0px 10px;
+  }
+}
+
+.thumbs_up:hover {
+  color: green;
+}
+
+.thumbs_down:hover {
+  color: red;
+}
+
+.likes:hover {
+  border-color: green;
+  background-color: darkgreen;
+  color: whitesmoke;
+  font-weight: bold;
+  border-width: 1px;
+}
+
+.dislikes:hover {
+  border-color: red;
+  background-color: darkred;
+  color: whitesmoke;
+  font-weight: bold;
+  border-width: 1px;
 }
 
 /***************************************************/
@@ -23156,7 +23189,7 @@ hr.light-100 {
 }
 
 .navbar--color--ghost {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.18);
 }
 
 .navbar--color--ghost .navbar-brand,
