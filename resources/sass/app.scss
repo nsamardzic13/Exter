@@ -498,6 +498,14 @@ hr.light-100{
 .text-orange {
     color: #FF8663;
 }
+.background-orange {
+    color: #FF8663;
+}
+
+.bg-gradient-primary-to-secondary-2 {
+    background-color: #f53b57;
+    background-image: linear-gradient(135deg, #e32743 0%, rgba(255, 121, 63, 0.8) 100%);
+}
 
 ////////////////////////////////////////////////////////////
 //CSS FOR SIGNUP AND SIGN IN
@@ -758,7 +766,6 @@ hr.light-100{
 
 #content {
     width: calc(100% - 250px);
-    padding: 40px;
     min-height: 100vh;
     transition: all 0.3s;
     position: relative;

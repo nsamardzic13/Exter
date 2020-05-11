@@ -26,8 +26,12 @@ class UsersController extends Controller
         }*/
 
         //dd(count((Auth::user()->unreadNotifications)));
+        $myEvents = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, min(start) as start, user_name, max_people, description, category, picture'))
+            ->where('user_name', '=', $user->name)
+            ->groupBy('name', 'street', 'user_name', 'max_people', 'description', 'category', 'picture')->get();
 
-        return view('user.index', compact('user'));
+       // dd($myEvents);
+        return view('user.index', compact('user', 'myEvents'));
     }
 
 
