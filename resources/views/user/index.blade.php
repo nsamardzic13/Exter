@@ -220,24 +220,20 @@
                                     <b><i class="fas fa-crown"></i> My Events</b>
                                 </div>
                                 <ul class="list-group list-group">
-                                    @php
-                                    $lastName = '';
-                                    @endphp
-                                    @foreach($user->occasions as $event)
-                                        @if($user->name == $event->user_name && $event->name != $lastName)
+                                    @foreach($myEvents as $event)
                                             <li class="list-group-item event-column">{{ $event->name}}
                                                 <span class="float-right font-weight-bold">
+                                                     <form action="/events/{{ $event->id }}" method="POST" style="padding: 0px !important;">
+                                                        @method('DELETE')
                                                     <button type="button" class="btn btn-outline-quest2 btn-sm" data-toggle="modal" data-target="#myModal{{$event->id}}">
                                                         <i class="fas fa-info-circle"></i>
                                                     </button>
                                                     <a href="/events/recreate/{{$event->id}}" class="btn btn-outline-quest2 btn-sm" title="Repeat this event"><i class="fas fa-redo-alt"></i></a>
+                                                         @csrf<button type="submit" class="btn btn-outline-quest2 btn-sm" title="Delete this event"><i class="fas fa-trash"></i></button>
+                                                    </form>
                                                 </span>
                                             </li>
                                                 @include('occasions.show',  ['occasion' => $event])
-                                        @endif
-                                        @php
-                                        $lastName = $event->name;
-                                        @endphp
                                     @endforeach
                                 </ul>
                             </div>

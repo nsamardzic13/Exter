@@ -76,7 +76,10 @@ class OccasionsController extends Controller
         $hangoutscolumns = array_slice($hangoutsColumnsAll, 2, 8);
         $availabilitycolumns = array_slice($availabilityColumnsAll, 2, 5);
 
-        $events = DB::table('occasions')->where('ended', '=', false);
+       // $events = DB::table('occasions')->where('ended', '=', false);
+        $events = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, min(start) as start, user_name, max_people, description, category, picture'))
+            ->where('ended', 'false')
+            ->groupBy('name', 'street', 'user_name', 'max_people', 'description', 'category', 'picture');
 
         if(!empty($keys)) {
             $events = $events->whereIn('category', $keys);
@@ -99,7 +102,7 @@ class OccasionsController extends Controller
         }else{
             $occasions = $events->sortBy('start');
         }
-
+        //dd($occasions);
 
         return view('occasions.index', compact('user', 'occasions', 'sportcolumns', 'hangoutscolumns', 'availabilitycolumns', 'range'));
     }
@@ -168,9 +171,14 @@ class OccasionsController extends Controller
                 ->where('street', '=', $data['street'])->first();
             //dd(($data['street']), ($streetInDatabase->street));
 
-            if ($data['street'] == $streetInDatabase->street) {
-                $lat = $streetInDatabase->lat;
-                $lng = $streetInDatabase->lng;
+            if ($streetInDatabase) {
+                if ($data['street'] == $streetInDatabase->street) {
+                    $lat = $streetInDatabase->lat;
+                    $lng = $streetInDatabase->lng;
+                } else {
+                    $lat = Geocoder::getCoordinatesForAddress($data['street'])['lat'];
+                    $lng = Geocoder::getCoordinatesForAddress($data['street'])['lng'];
+                }
             } else {
                 $lat = Geocoder::getCoordinatesForAddress($data['street'])['lat'];
                 $lng = Geocoder::getCoordinatesForAddress($data['street'])['lng'];
@@ -254,9 +262,14 @@ class OccasionsController extends Controller
                 ->where('street', '=', $data['street'])->first();
             //dd(($data['street']), ($streetInDatabase->street));
 
-            if ($data['street'] == !is_null($streetInDatabase) ? $streetInDatabase->street : '') {
-                $lat = $streetInDatabase->lat;
-                $lng = $streetInDatabase->lng;
+            if ($streetInDatabase) {
+                if ($data['street'] == $streetInDatabase->street) {
+                    $lat = $streetInDatabase->lat;
+                    $lng = $streetInDatabase->lng;
+                } else {
+                    $lat = Geocoder::getCoordinatesForAddress($data['street'])['lat'];
+                    $lng = Geocoder::getCoordinatesForAddress($data['street'])['lng'];
+                }
             } else {
                 $lat = Geocoder::getCoordinatesForAddress($data['street'])['lat'];
                 $lng = Geocoder::getCoordinatesForAddress($data['street'])['lng'];
@@ -287,9 +300,33 @@ class OccasionsController extends Controller
         return redirect('events')->with('message', 'You have succesfuly created event');;
     }
 
+
+    public function destroy(Occasion $occasion){
+        $ruser = auth()->user();
+
+        $alltimes =  \App\Occasion::where('name', $occasion->name)->where('street', $occasion->street)
+            ->where('max_people', $occasion->max_people)->where('user_name', $occasion->user_name)
+            ->where('description', $occasion->description)->where('category', $occasion->category)
+            ->where('picture', $occasion->picture)->get();
+
+        foreach ($alltimes as $event){
+            foreach ($event->users as $user){
+                $event->users()->detach($user->id);
+            }
+
+            $event->delete();
+        }
+
+        return redirect('user/'. $ruser->id.'#events')->with('message', 'You have deleted event');
+    }
+
     public static function showTimesForModal($occasion)
     {
-        $time = DB::table('occasions')->where('name', $occasion->name)->where('ended', false)->orderBy('start')->get();
+        //dd($occasion);
+        $time =  DB::table('occasions')->where('name', $occasion->name)->where('street', $occasion->street)
+            ->where('max_people', $occasion->max_people)->where('user_name', $occasion->user_name)
+            ->where('description', $occasion->description)->where('category', $occasion->category)
+            ->where('picture', $occasion->picture)->where('ended', false)->orderBy('start')->get();
         //dd($time);
         return $time;
     }

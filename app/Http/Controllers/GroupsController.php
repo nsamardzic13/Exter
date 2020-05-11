@@ -104,6 +104,7 @@ class GroupsController extends Controller{
     public function destroy(Group $group){
         $ruser = auth()->user();
 
+        dd($group);
         foreach ($group->users as $user){
             $group->users()->detach($user->id);
         }

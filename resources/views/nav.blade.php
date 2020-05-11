@@ -11,13 +11,6 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                @if(\Request::is('events'))
-                    <li>
-                        <button type="button" id="sidebarCollapse" class="btn btn-outline-quest2">
-                            <i class="fas fa-filter"></i>
-                        </button>
-                    </li>
-                @endif
 
                 <li class="nav-item">
                     <a href="/questionary" class="nav-link top"><b>Questionary</b></a>
