@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use mysql_xdevapi\Table;
+use phpDocumentor\Reflection\Types\Boolean;
+use phpDocumentor\Reflection\Types\Integer;
 use Spatie\Geocoder\Facades\Geocoder;
 use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Console\Input\InputArgument;
@@ -77,9 +79,9 @@ class OccasionsController extends Controller
         $availabilitycolumns = array_slice($availabilityColumnsAll, 2, 5);
 
        // $events = DB::table('occasions')->where('ended', '=', false);
-        $events = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, min(start) as start, user_name, max_people, description, category, picture'))
+        $events = DB::table('occasions')->select(DB::raw('min(id) as id, name, street, lat, lng, min(start) as start, user_name, max_people, description, category, picture'))
             ->where('ended', 'false')
-            ->groupBy('name', 'street', 'user_name', 'max_people', 'description', 'category', 'picture');
+            ->groupBy('name', 'street', 'user_name', 'lat', 'lng', 'max_people', 'description', 'category', 'picture');
 
         if(!empty($keys)) {
             $events = $events->whereIn('category', $keys);
@@ -97,7 +99,7 @@ class OccasionsController extends Controller
             $count++;
         }
 
-        if(!$lat1) {
+        if($lat1) {
             $occasions = $events->where('dist', '<=', $range)->sortBy('dist');
         }else{
             $occasions = $events->sortBy('start');
@@ -445,8 +447,9 @@ class OccasionsController extends Controller
         }
         $flag = true;
         $start_time = $event->start;
-        $start_hours = $event->start;
-        $start_hours = date('H:i');
+        //$start_hours = $event->start;
+        //$start_hours = date('H:i');
+        $start_hours = date('H:i', strtotime( $event->start));
 
         if($this->isWeekend(date($start_time)) && !in_array('weekend', $keyst)){
             $flag = $flag && false;
