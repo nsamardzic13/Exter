@@ -18,7 +18,7 @@
                </div>
            </div>
            <div class="col-lg-6 landing-image" data-aos="fade-up">
-               <img src="{{ asset('images/landing/having-fun2.svg') }}" style="height: 330px; width: 100%;">
+               <img src="{{ asset('images/landing/having-fun2.svg') }}" style="height: 330px; width: 100%; margin-bottom: 100px">
            </div>
        </div>
    </div>

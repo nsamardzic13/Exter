@@ -11,7 +11,7 @@
                 <a class="nav-link" id="v-pills-settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
             </div>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-10">
             <div class="tab-content" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">@include('groups.home')</div>
                 <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">@include('messages.new_user')</div>
@@ -23,4 +23,5 @@
         </div>
     </div>
 </div>
+@include('messages.new_message')
 @endsection

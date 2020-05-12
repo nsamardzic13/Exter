@@ -42,15 +42,15 @@
                         <h5 class="h6 card-title"><b>About</b></h5>
                         <ul class="list-unstyled mb-0">
                             <li class="mb-1">
-                                <i class="fas fa-home fa-1x"></i>  Lives in:
+                                <span class="addon"><i class="fas fa-home fa-1x"></i></span>  Lives in:
                                 {{$user->street_name ? $user->street_name : '?'}}
                             </li>
                             <li class="mb-1">
-                                <i class="fas fa-envelope"></i>  Email:
+                                <span class="addon"><i class="fas fa-envelope"></i></span>  Email:
                                 {{ $user->email ? $user->email : '?'}}
                             </li>
                             <li class="mb-1">
-                                <i class="fas fa-phone-alt fa-1x"></i>  Phone number:
+                                <span class="addon"><i class="fas fa-phone-alt fa-1x"></i></span>  Phone number:
                                 {{ $user->phone_number ? $user->phone_number : '?' }}
                             </li>
                         </ul>

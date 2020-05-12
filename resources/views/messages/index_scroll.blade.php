@@ -1,9 +1,9 @@
-@foreach($messages as $message)
-    <div class="card">
+@forelse($messages as $message)
+    <div class="card mb-3 smaller-zoom">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-2">
-                    <a href="/user/{{ $message->user_id }}"><img src="{{ asset('storage/' . $message->user->profile_pic) }}" class="img-fluid rounded-circle mb-2" width="128" height="128"/></a>
+                <div class="col-md-2 text-center">
+                    <a href="/user/{{ $message->user_id }}"><img src="{{ asset('storage/' . $message->user->profile_pic) }}" class="img-fluid rounded-circle mb-2" style="max-width: 85px"/></a>
                     <p class="text-secondary text-center">{{ date('d.m.Y', strtotime($message->created_at)) }}</p>
                 </div>
                 <div class="col-md-8" style="min-height: 80px; max-height: 100px">
@@ -12,7 +12,7 @@
                         &nbsp;&nbsp;<small><b>At</b> {{ date('H:i', strtotime($message->created_at)) }}</small>
                     </p>
                     <div class="clearfix"></div>
-                    <p>{{ $message->message_text }}</p>
+                    <p style="font-size: 16px">{{ $message->message_text }}</p>
 
                 </div>
                 <div class="col-md-2" id="likes_messages{{ $message->id }}">
@@ -58,4 +58,7 @@
             </div>
         </div>
     </div>
-@endforeach
+@empty
+    <p class="text-center" style="font-size: 20px">There are no posts yet :(</p>
+@endforelse
+

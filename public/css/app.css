@@ -22699,6 +22699,18 @@ a.text-dark:focus {
   color: white;
 }
 
+.icon-stack-sm-sm {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  height: 2.5rem;
+  width: 2.5rem;
+  font-size: 1rem;
+  background-image: linear-gradient(135deg, #e32743 0%, rgba(255, 121, 63, 0.8) 100%);
+  color: white;
+}
+
 .rounded-pill {
   border-radius: 50rem !important;
 }
@@ -23025,6 +23037,12 @@ p.likescroll-p {
   }
 }
 
+.header-wall {
+  background-image: linear-gradient(135deg, #e32743 0%, rgba(255, 121, 63, 0.8) 100%);
+  font-weight: bold;
+  color: whitesmoke;
+}
+
 .thumbs_up:hover {
   color: green;
 }
@@ -23114,6 +23132,12 @@ p.likescroll-p {
 .zoom.hover {
   transform: scale(1.1);
   transition: all ease 400ms;
+  border-color: #F56942;
+  border-width: 0.9px;
+}
+
+.smaller-zoom:hover,
+.smaller-zoom.hover {
   border-color: #F56942;
   border-width: 0.9px;
 }

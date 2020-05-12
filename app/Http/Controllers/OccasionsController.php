@@ -98,9 +98,9 @@ class OccasionsController extends Controller
         }
 
         if(!$lat1) {
-            $occasions = $events->where('dist', '<=', $range)->sortBy('dist');
-        }else{
             $occasions = $events->sortBy('start');
+        }else{
+            $occasions = $events->where('dist', '<=', $range)->sortBy('dist');
         }
         //dd($occasions);
 
