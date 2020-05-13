@@ -221,7 +221,7 @@
                                 </div>
                                 <ul class="list-group list-group">
                                     @foreach($myEvents as $event)
-                                            <li class="list-group-item event-column">{{ $event->name}}
+                                       <li class="list-group-item event-column"> <a href="/events/{{$event->id}}">{{ $event->name}}</a>
                                                 <span class="float-right font-weight-bold">
                                                      <form action="/events/{{ $event->id }}" method="POST" style="padding: 0px !important;">
                                                         @method('DELETE')
@@ -244,7 +244,7 @@
                                 <ul class="list-group list-group">
                                 @foreach($user->occasions as $event)
                                     @if($event->ended = 'Upcoming')
-                                        <li class="list-group-item list-inline align-items-center event-column">{{ $event->name}}
+                                            <li class="list-group-item list-inline align-items-center event-column"> <a href="/events/{{$event->id}}">{{ $event->name}}</a>
                                             <span class="float-right font-weight-bold">
                                                 <p>starts: {{ $event->start->format('M Y') }}
                                                     <i class="fas fa-clock"></i> {{ $event->start->format(' H:i') }}</p>

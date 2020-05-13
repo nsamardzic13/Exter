@@ -1,9 +1,17 @@
 @if($admin[0]->id == $user->id)
     <div class="row" style="margin-top: 15px; margin-bottom: 15px">
-        <p>
+        <p class="px-2">
             <button type="button" class="btn  btn-success float-left" data-toggle="modal" data-target="#myModal_newuser">
                 Add New User
             </button>
+        </p>
+        <p class="px-2">
+            <a href="/events/{{$occasion->id}}/delete">
+                <button type="button" class="btn  btn-danger float-left" >
+                    Leave this event
+                </button>
+            </a>
+
         </p>
     </div>
 
@@ -34,6 +42,17 @@
             </div>
         </div>
     </div>
+@else
+<div class="row" style="margin-top: 15px; margin-bottom: 15px">
+    <p class="px-2">
+        <a href="/events/{{$occasion->id}}/delete">
+            <button type="button" class="btn  btn-danger float-left" >
+                Leave this event
+            </button>
+        </a>
+
+    </p>
+</div>
 @endif
 @foreach($occasion->users()->orderBy('name')->get() as $row)
     {{--@foreach($group->users()->orderBy('name')->paginate(1) as $row)--}}

@@ -509,5 +509,13 @@ class OccasionsController extends Controller
             }
         }
     }
+
+    public function delete_userevent(Occasion $occasion){
+        $user = auth()->user();
+
+        $occasion->users()->detach($user->id);
+        return redirect('user/'. $user->id.'#events')->with('message', 'You have left the event');
+    }
 }
+
 
