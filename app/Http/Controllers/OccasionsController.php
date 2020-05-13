@@ -299,7 +299,7 @@ class OccasionsController extends Controller
         }
 
 
-        return redirect('events')->with('message', 'You have succesfuly created event');;
+        return redirect('events')->with('message', 'You have succesfuly created event');
     }
 
 
@@ -345,17 +345,22 @@ class OccasionsController extends Controller
 
         $user = auth()->user();
         $admin = User::where('name', '=', $occasion->user_name)->get();
-
+        $flag = false;
         if(!empty($request->input())) {
             $otherusers = array_values($request->input())[0];
 
             foreach ($otherusers as $otheruser) {
+
+                if($otheruser == $user->id) $flag = true;
                 $occasion->users()->syncWithoutDetaching($otheruser);
             }
+        } else {
+            $occasion->users()->syncWithoutDetaching($user->id);
         }
-        $occasion->users()->syncWithoutDetaching($user->id);
         $joined = $occasion->users;
-
+        if(!$flag) return redirect()->action(
+            'OccasionsController@index'
+        )->with('message', 'You have succesfuly added users to event '. $occasion->name);
         $messages = Messages::where('event_id', '=', $occasion->id)
             ->orderByDesc('created_at')
             ->paginate(4);

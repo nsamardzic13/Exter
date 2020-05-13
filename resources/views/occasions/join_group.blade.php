@@ -63,7 +63,7 @@
 
 
                              <div class="container-fluid p-5 row">
-                                 <button type="submit" class="btn btn-outline-quest2 btn-lg my-2 ml-4 px-5 container-fluid bg-light">Join to event {{$occasion->name}}</button>
+                                 <button type="submit" id="join_group" class="btn btn-outline-quest2 btn-lg my-2 ml-4 px-5 container-fluid bg-light" >Join to event {{$occasion->name}}</button>
                             </div>
                         </div>
                     </div>

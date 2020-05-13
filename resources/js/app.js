@@ -115,6 +115,7 @@ $(document).on('click', '[name="changegroup"]', function() {
 
     $('#cannot_checkall').css('display', 'none');
     $('#options-select-users').css('display', 'initial');
+    $('#join_group').css('display', 'none');
 });
 
 
@@ -126,6 +127,11 @@ $(document).on('click', '.groupusers', function() {
 
     var people = parseInt( $('#num_people').html() );
     console.log($("input[name='"+active_tab+"users[]']:checked").length);
+    if (count > 0) {
+        $('#join_group').css('display', 'initial');
+    } else {
+        $('#join_group').css('display', 'none');
+    }
     if (count >= people){
         $('.groupusers').not(':checked').each(function() {
             this.disabled = true;
@@ -147,6 +153,7 @@ $(document).on('click', '#checkallusers', function() {
     var people = parseInt( $('#num_people').html());
     if (count > people){
         $('#cannot_checkall').css('display', 'initial');
+        $('#join_group').css('display', 'none');
     } else {
         $("input[name='"+active_tab+"users[]']").each(function() {
             this.checked = true;
@@ -156,6 +163,7 @@ $(document).on('click', '#checkallusers', function() {
         });
 
         $('#selected_people').html(count);
+        $('#join_group').css('display', 'initial');
     }
 });
 $(document).on('click', '#uncheckallusers', function() {
@@ -170,6 +178,7 @@ $(document).on('click', '#uncheckallusers', function() {
         });
 
         $('#selected_people').html(0);
+        $('#join_group').css('display', 'none');
 });
 
 
