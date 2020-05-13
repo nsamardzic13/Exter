@@ -356,6 +356,7 @@ class OccasionsController extends Controller
             }
         } else {
             $occasion->users()->syncWithoutDetaching($user->id);
+            $flag = true;
         }
         $joined = $occasion->users;
         if(!$flag) return redirect()->action(
