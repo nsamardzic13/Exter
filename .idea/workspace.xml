@@ -4,15 +4,7 @@
     <list default="true" id="688e5f26-aa99-400a-8e44-982ac4183f81" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OccasionsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OccasionsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/groups/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/groups/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/groups/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/groups/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/landing.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landing.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/messages/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/messages/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/messages/index_scroll.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/messages/index_scroll.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/messages/new_message.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/messages/new_message.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/occasions/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/occasions/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -357,6 +349,14 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1281" height="167" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1585080008653" />
+    <state x="2360" y="229" key="MergeDialog" timestamp="1589312325860">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2360" y="229" key="MergeDialog/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1589312325860" />
+    <state x="2584" y="226" key="MultipleFileMergeDialog" timestamp="1589312325868">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2584" y="226" key="MultipleFileMergeDialog/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1589312325868" />
     <state x="2446" y="160" width="1095" height="495" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1589215980899">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -367,12 +367,12 @@
     </state>
     <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.RecentChangeDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1589215396980" />
     <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.RecentChangeDialog/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1589215583718" />
-    <state x="313" y="184" key="com.intellij.ide.util.TipDialog" timestamp="1589296020871">
+    <state x="313" y="184" key="com.intellij.ide.util.TipDialog" timestamp="1589328534717">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1589296020871" />
     <state x="2390" y="281" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588954414853" />
-    <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1589222734074" />
+    <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1589328534717" />
     <state x="449" y="252" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585076799179">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
