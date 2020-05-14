@@ -1,10 +1,10 @@
 <!-- Trigger the modal with a button -->
 @if(Str::upper($title) == 'LIKE')
-    <button type="button" class="btn modal-btn likes" id="{{ $message->id }}" click="{{ $message->id }}" data-toggle="modal" data-target="#myModal">
+    <button type="button" class="btn modal-btn likes" id="likebutton{{ $message->id }}" click="{{ $message->id }}" data-toggle="modal" data-target="#myModal">
        LIKES<a class="likescroll-likes"> {{ $message->likes }}</a>
     </button>
 @elseif(Str::upper($title) == 'DISLIKE')
-    <button type="button" class="btn modal-btn dislikes" id="{{ $message->id }}" click="{{ $message->id }}" data-toggle="modal" data-target="#myModal">
+    <button type="button" class="btn modal-btn dislikes" id="dislikebutton{{ $message->id }}" click="{{ $message->id }}" data-toggle="modal" data-target="#myModal">
         DISLIKES <a class="likescroll-dislikes"> {{ $message->dislikes }}</a>
     </button>
 @endif

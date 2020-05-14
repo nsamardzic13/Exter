@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cdb9dcca9cf8f2c891e4a4d19d03c899",
+    "content-hash": "7515e4b7e114ff0295f99450d6b322e0",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -2222,16 +2222,16 @@
         },
         {
             "name": "spatie/geocoder",
-            "version": "3.7.0",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/geocoder.git",
-                "reference": "c349fd10442b5614bee4904663b251a411a17a37"
+                "reference": "6ff074cb0dd006266ab27178b3461e5ff2c7b85e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/geocoder/zipball/c349fd10442b5614bee4904663b251a411a17a37",
-                "reference": "c349fd10442b5614bee4904663b251a411a17a37",
+                "url": "https://api.github.com/repos/spatie/geocoder/zipball/6ff074cb0dd006266ab27178b3461e5ff2c7b85e",
+                "reference": "6ff074cb0dd006266ab27178b3461e5ff2c7b85e",
                 "shasum": ""
             },
             "require": {
@@ -2278,7 +2278,7 @@
                 "location",
                 "map"
             ],
-            "time": "2020-03-04T07:57:40+00:00"
+            "time": "2020-05-11T15:17:02+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

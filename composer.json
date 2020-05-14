@@ -17,7 +17,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^1.2",
         "overtrue/laravel-follow": "^2.1",
-        "spatie/geocoder": "^3.7"
+        "spatie/geocoder": "^3.8"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

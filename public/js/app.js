@@ -49596,6 +49596,7 @@ $(document).on('click', '[name="changegroup"]', function () {
   });
   $('#cannot_checkall').css('display', 'none');
   $('#options-select-users').css('display', 'initial');
+  $('#join_group').css('display', 'none');
 });
 $(document).on('click', '.groupusers', function () {
   var active_tab = $("ul.tabs li a.active").attr("id");
@@ -49603,6 +49604,12 @@ $(document).on('click', '.groupusers', function () {
   $('#selected_people').html(count);
   var people = parseInt($('#num_people').html());
   console.log($("input[name='" + active_tab + "users[]']:checked").length);
+
+  if (count > 0) {
+    $('#join_group').css('display', 'initial');
+  } else {
+    $('#join_group').css('display', 'none');
+  }
 
   if (count >= people) {
     $('.groupusers').not(':checked').each(function () {
@@ -49621,6 +49628,7 @@ $(document).on('click', '#checkallusers', function () {
 
   if (count > people) {
     $('#cannot_checkall').css('display', 'initial');
+    $('#join_group').css('display', 'none');
   } else {
     $("input[name='" + active_tab + "users[]']").each(function () {
       this.checked = true;
@@ -49629,6 +49637,7 @@ $(document).on('click', '#checkallusers', function () {
       $(this).addClass("active");
     });
     $('#selected_people').html(count);
+    $('#join_group').css('display', 'initial');
   }
 });
 $(document).on('click', '#uncheckallusers', function () {
@@ -49640,6 +49649,7 @@ $(document).on('click', '#uncheckallusers', function () {
     $(this).removeClass("active");
   });
   $('#selected_people').html(0);
+  $('#join_group').css('display', 'none');
 }); //code for navbar scroll
 // grabbing the class names from the data attributes
 
@@ -49896,11 +49906,13 @@ $(document).on("click", ".a_dislike", function (e) {
       //     $('#likes_messages'+no).fadeIn().delay(2000);
       // })
       $("#likes_messages" + no + " .a_dislike").addClass("dislikescroll");
-      $("#likes_messages" + no + " .likescroll-dislikes").html(parseInt($("#likes_messages" + no + " .likescroll-dislikes").html()) + 1);
+      var newhtml = parseInt($("#dislikebutton" + no + " .likescroll-dislikes").html()) + 1;
+      $("#dislikebutton" + no + " .likescroll-dislikes").html(' ' + newhtml);
 
       if ($("#likes_messages" + no + " .a_like").hasClass("likescroll")) {
-        var newhtml = parseInt($("#likes_messages" + no + " .likescroll-likes").html()) - 1;
-        $("#likes_messages" + no + " .likescroll-likes").html(newhtml);
+        var _newhtml = parseInt($("#likebutton" + no + " .likescroll-likes").html()) - 1;
+
+        $("#likebutton" + no + " .likescroll-likes").html(' ' + _newhtml);
         $("#likes_messages" + no + " .a_like").removeClass("likescroll");
       }
     }
@@ -49930,11 +49942,13 @@ $(document).on("click", ".a_like", function (e) {
       //location.reload(null, false);
       //<div id="likes_messages{{ $message->id }}
       $("#likes_messages" + no + " .a_like").addClass("likescroll");
-      $("#likes_messages" + no + " .likescroll-likes").html(parseInt($("#likes_messages" + no + " .likescroll-likes").html()) + 1);
+      var newhtml = parseInt($("#likebutton" + no + " .likescroll-likes").html()) + 1;
+      $("#likebutton" + no + " .likescroll-likes").html(' ' + newhtml);
 
       if ($("#likes_messages" + no + " .a_dislike").hasClass("dislikescroll")) {
-        var newhtml = parseInt($("#likes_messages" + no + " .likescroll-dislikes").html()) - 1;
-        $("#likes_messages" + no + " .likescroll-dislikes").html(newhtml);
+        var _newhtml2 = parseInt($("#dislikebutton" + no + " .likescroll-dislikes").html()) - 1;
+
+        $("#dislikebutton" + no + " .likescroll-dislikes").html(' ' + _newhtml2);
         $("#likes_messages" + no + " .a_dislike").removeClass("dislikescroll");
       }
     }
@@ -50160,8 +50174,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Exter\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Exter\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/Exter/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Exter/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
