@@ -16,7 +16,7 @@
         </div>
         <div class="row my-3">
             <div class="col-7">
-                <form action="/events/{{$occasion->id}}" method="get" >
+                <form action="/events/{{$occasion->id}}/join_users" method="get" >
                     <ul class="nav nav-pills mb-3 tabs nav-fill" id="pills-tab" role="tablist">
                         @foreach($user->groups as $group)
                             <li class="nav-item">

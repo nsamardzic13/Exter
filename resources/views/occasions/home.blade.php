@@ -3,6 +3,14 @@
         <img src="{{ asset('storage/' .$admin[0]->profile_pic) }}" class="img-fluid rounded-circle mb-2" width="128" height="128">
         <h4 class="card-title mb-0">{{ $occasion->name }}</h4>
         <div class="text-muted mb-2">{{ $occasion->category }}</div>
+        <div class="row">
+            <div class="text-muted mb-2 col-3"></div>
+            <div class="text-muted mb-2 col-3 border-right">{{ $occasion->start->format(' d.m.Y') }}</div>
+            <div class="text-muted mb-2 col-3">{{ $occasion->start->format(' H:i') }}</div>
+            <div class="text-muted mb-2 col-3"></div>
+
+        </div>
+        <div class="text-muted mb-2">{{ $occasion->street }}</div>
         <div class="text-muted mb-2">{{ $occasion->description }}</div>
     </div>
 
@@ -26,7 +34,7 @@
             </li>
             <li>
                 <span class="addon"><i class="fas fa-calendar-week"></i></span>  Part of Exter since:
-                {{ $occasion->created_at }}
+                {{ $occasion->created_at->format('d.m.Y') }}
             </li>
         </ul>
     </div>

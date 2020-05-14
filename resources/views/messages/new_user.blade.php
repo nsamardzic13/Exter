@@ -1,10 +1,10 @@
 @if($admin[0]->id == $user->id)
     <div class="row" style="margin-top: 15px; margin-bottom: 15px">
-            <p>
-                <button type="button" class="btn  btn-success float-left" data-toggle="modal" data-target="#myModal_newuser">
-                    Add New User
-                </button>
-            </p>
+        <p class="px-2">
+            <button type="button" class="btn  btn-success float-left" data-toggle="modal" data-target="#myModal_newuser">
+                Add New User
+            </button>
+        </p>
     </div>
 
     <!-- Modal LIKES -->
@@ -33,6 +33,17 @@
                 </div>
             </div>
         </div>
+    </div>
+@else
+    <div class="row" style="margin-top: 15px; margin-bottom: 15px">
+        <p class="px-2">
+            <a href="/groups/{{$group->id}}/leave">
+                <button type="button" class="btn  btn-danger float-left" >
+                    Leave this event
+                </button>
+            </a>
+
+        </p>
     </div>
 @endif
 @foreach($group->users()->orderBy('name')->get() as $row)

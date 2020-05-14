@@ -35,7 +35,8 @@ Route::post('/events', 'OccasionsController@store');
 
 Route::get('/events/{occasion}', 'OccasionsController@show');
 Route::get('/events/{occasion}/join_group', 'OccasionsController@join_group');
-Route::get('/events/{occasion}/delete', 'OccasionsController@delete_userevent');
+Route::get('/events/{occasion}/join_users', 'OccasionsController@join_users');
+Route::get('/events/{occasion}/leave', 'OccasionsController@leave_event');
 Route::get('/events/recreate/{occasion}', 'OccasionsController@recreate');
 Route::delete('/events/{occasion}', 'OccasionsController@destroy');
 
@@ -44,6 +45,7 @@ Route::post('/groups', 'GroupsController@store');
 Route::get('groups/{group}', 'GroupsController@show');
 Route::post('groups/{group}', 'MessagesController@update');
 Route::post('groups/{group}/edit', 'GroupsController@edit');
+Route::get('/groups/{group}/leave', 'GroupsController@leave_group');
 
 
 Route::post('messages/showLikes/{id}', 'MessagesController@showLikes');

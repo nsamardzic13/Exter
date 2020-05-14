@@ -131,7 +131,7 @@
                                     @endif
                                 </p>
                                 <h6><b>Joined</b></h6>
-                                   Part of Exter family since {{ $user-> created_at }}
+                                   Part of Exter family since  {{ $user->created_at->format('d.m.Y') }}
 
                                 @if($user->user_type)
                                     <a class="btn btn-outline-quest mt-3 mb-2" data-toggle="collapse" href="#collapseGallery" role="button" aria-expanded="false" aria-controls="collapseExample">

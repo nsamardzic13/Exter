@@ -297,9 +297,7 @@ class OccasionsController extends Controller
 
 
         }
-
-
-        return redirect('events')->with('message', 'You have succesfuly created event');
+        return redirect('events')->with('message', 'You have successfully created event');
     }
 
 
@@ -344,22 +342,7 @@ class OccasionsController extends Controller
     {
         $user = auth()->user();
         $admin = User::where('name', '=', $occasion->user_name)->get();
-        $flag = false;
-        if(!empty($request->input())) {
-//            $otherusers = array_values($request->input())[0];
-            $otherusers = array(array_values($request->input())[0]);
-            foreach ($otherusers as $otheruser) {
-                if($otheruser == $user->id) $flag = true;
-                $occasion->users()->syncWithoutDetaching($otheruser);
-            }
-        } else {
-            $occasion->users()->syncWithoutDetaching($user->id);
-            $flag = true;
-        }
-        $joined = $occasion->users;
-        if(!$flag) return redirect()->action(
-            'OccasionsController@index'
-        )->with('message', 'You have succesfuly added users to event '. $occasion->name);
+
         $messages = Messages::where('event_id', '=', $occasion->id)
             ->orderByDesc('created_at')
             ->paginate(4);
@@ -391,7 +374,6 @@ class OccasionsController extends Controller
                 'next_page' => $messages->nextPageUrl(),
             ];
         }
-
         return view('occasions.wall', compact(['occasion', 'user', 'messages', 'top_users', 'user_events', 'admin', ]));
     }
     public function join_group(Occasion $occasion){
@@ -399,6 +381,43 @@ class OccasionsController extends Controller
         $people=  $occasion->max_people - occasionsController::showPeopleForModal($occasion);
         $joined = $occasion->users->pluck('id')->toArray();
         return view('occasions.join_group',  compact(['user', 'occasion', 'people', 'joined']));
+    }
+
+    public function join_users(Occasion $occasion, Request $request){
+
+        $user = auth()->user();
+
+        if (!empty($request->input())) {
+            $flag = false;
+            $otherusers = array_values($request->input())[0];
+            foreach ($otherusers as $otheruser) {
+                if ($otheruser == $user->id) $flag = true;
+                $occasion->users()->syncWithoutDetaching($otheruser);
+            }
+            if (!$flag) {
+                return redirect()->action(
+                    'OccasionsController@index'
+                )->with('message', 'You have successfully added users to event ' . $occasion->name);
+            } else {
+                return redirect()->action(
+                    'OccasionsController@show', ['occasion' => $occasion, 'request' => $request])->with('message', 'You have successfully added users to event ' . $occasion->name);
+            }
+        } else {
+             // provjeri ako je user vec joinan na event
+            $flag = false;
+            $mess = "You have successfully joined to event ".$occasion->name;
+            $otherusers = DB::table('occasion_user')->where('occasion_id', $occasion->id)->get();
+            foreach ($otherusers as $otheruser){
+                if ($user->id == $otheruser->user_id) $flag = true;
+            }
+            //ako je joinan promijeni mess
+            if($flag) $mess = "You have already joined to this event";
+            $occasion->users()->syncWithoutDetaching($user->id);
+            return redirect()->action(
+                'OccasionsController@show', ['occasion' => $occasion, 'request' => $request])->with('message', $mess);
+
+        }
+
     }
 
     public function recreate(Occasion $occasion)
@@ -508,7 +527,7 @@ class OccasionsController extends Controller
         }
     }
 
-    public function delete_userevent(Occasion $occasion){
+    public function leave_event(Occasion $occasion){
         $user = auth()->user();
 
         $occasion->users()->detach($user->id);

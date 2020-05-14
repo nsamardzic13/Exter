@@ -137,4 +137,13 @@ class GroupsController extends Controller{
 
         return redirect('groups/' . $group->id . '#home');
     }
+
+    public function leave_group(Group $group){
+            $user = auth()->user();
+
+            $group->users()->detach($user->id);
+            return redirect('user/'. $user->id.'#groups')->with('message', 'You have left the group '. $group->name);
+    }
 }
+
+

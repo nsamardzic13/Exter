@@ -11,7 +11,13 @@
                     <a class="nav-link" id="v-pills-settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
                 </div>
             </div>
+
             <div class="col-lg-10">
+                @if(session()->has('message'))
+                    <div class="alert alert-success" role="alert" style="border-width: 1px; border-color: #27864f">
+                        <strong>Success</strong> {{ session()->get('message') }}
+                    </div>
+                @endif
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">@include('occasions.home')</div>
                     <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">@include('occasions.new_user')</div>

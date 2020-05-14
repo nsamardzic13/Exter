@@ -5,14 +5,6 @@
                 Add New User
             </button>
         </p>
-        <p class="px-2">
-            <a href="/events/{{$occasion->id}}/delete">
-                <button type="button" class="btn  btn-danger float-left" >
-                    Leave this event
-                </button>
-            </a>
-
-        </p>
     </div>
 
     <!-- Modal LIKES -->
@@ -45,7 +37,7 @@
 @else
 <div class="row" style="margin-top: 15px; margin-bottom: 15px">
     <p class="px-2">
-        <a href="/events/{{$occasion->id}}/delete">
+        <a href="/events/{{$occasion->id}}/leave">
             <button type="button" class="btn  btn-danger float-left" >
                 Leave this event
             </button>

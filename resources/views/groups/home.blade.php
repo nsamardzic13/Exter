@@ -25,7 +25,7 @@
             </li>
             <li>
                 <span class="addon"><i class="fas fa-calendar-week"></i></span>  Part of Exter since:
-                    {{ $group->created_at }}
+                {{ $group->created_at->format('d.m.Y') }}
             </li>
         </ul>
     </div>
