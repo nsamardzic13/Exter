@@ -59,13 +59,16 @@ class UsersController extends Controller
             'name' => $data['name'],
             'birth_year' => $data['birth_year'],
             'street_name' => $data['address'],
-            'lat' => Geocoder::getCoordinatesForAddress($data['address'])['lat'],
-            'lng' => Geocoder::getCoordinatesForAddress($data['address'])['lng'],
             'phone_number' => $data['phone_number'],
             'description' => $data['about_me'],
             'user_type' => $data['user_type'],
         ]);
-
+        if(!empty(request()->address)) {
+            $user->update([
+                'lat' => Geocoder::getCoordinatesForAddress($data['address'])['lat'],
+                'lng' => Geocoder::getCoordinatesForAddress($data['address'])['lng'],
+            ]);
+        }
         //check if image is submited
         if(request()->has('profile_pic')) {
             $user->update([

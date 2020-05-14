@@ -49967,7 +49967,8 @@ $(document).ready(function () {
 
         if (scroll_position_for_posts_load >= $(document).height()) {
           $.get(page, function (data) {
-            // $('.posts').html(data.messages);
+            console.log(data); // $('.posts').html(data.messages);
+
             $('.posts').append(data.messages);
             $('.endless-pagination').data('next-page', data.next_page);
           });

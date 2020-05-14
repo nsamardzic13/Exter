@@ -498,7 +498,6 @@ $(document).ready(function() {
     $(window).scroll(fetchPosts);
 
     function fetchPosts() {
-
         var page = $('.endless-pagination').data('next-page');
         if (page !== null && page != "") {
             clearTimeout($.data(this, "scrollCheck"));
@@ -508,6 +507,7 @@ $(document).ready(function() {
 
                 if (scroll_position_for_posts_load >= $(document).height()) {
                     $.get(page, function (data) {
+                        console.log(data)
                         // $('.posts').html(data.messages);
                         $('.posts').append(data.messages);
                         $('.endless-pagination').data('next-page', data.next_page);

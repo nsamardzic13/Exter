@@ -342,15 +342,13 @@ class OccasionsController extends Controller
 
     public function show(Occasion $occasion, Request $request)
     {
-
         $user = auth()->user();
         $admin = User::where('name', '=', $occasion->user_name)->get();
         $flag = false;
         if(!empty($request->input())) {
-            $otherusers = array_values($request->input())[0];
-
+//            $otherusers = array_values($request->input())[0];
+            $otherusers = array(array_values($request->input())[0]);
             foreach ($otherusers as $otheruser) {
-
                 if($otheruser == $user->id) $flag = true;
                 $occasion->users()->syncWithoutDetaching($otheruser);
             }
