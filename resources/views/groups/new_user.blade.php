@@ -18,7 +18,7 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <form action="/users/addPersonToEvent" method="POST" enctype="multipart/form-data">
+                        <form action="/users/addPersonToGroup" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Dodaj osobu</label>
                                 <input class="form-control" type="text" id="user_name" name="name" placeholder="Enter name of a person you want to add to this group" autocomplete="off">
@@ -42,7 +42,7 @@
         <div class="card card-default" id="card_contacts">
             <div id="contacts" class="panel-collapse collapse show" aria-expanded="true" style="">
                 <ul class="list-group pull-down" id="contact-list">
-                    @foreach($attending as $user_row)
+                    @foreach($members as $user_row)
                         <li class="list-group-item">
                             <div class="row w-100">
                                 <div class="col-12 col-sm-6 col-md-3 px-0">
@@ -52,10 +52,10 @@
                                     @if($admin[0]->id == $user->id and $admin[0]->id != $user_row->id)
                                         <span class="float-right pulse">
 
-                                                <form action="/users/removePersonFromEvent" method="POST" enctype="multipart/form-data">
+                                                <form action="/users/removePersonFromGroup" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <input type="hidden" name="user" value="{{ $user_row->id }}">
-                                                <input type="hidden" name="groupId" value="{{ $occasion->id }}">
+                                                <input type="hidden" name="groupId" value="{{ $group->id }}">
                                                 <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-user-minus"></i></button>
                                             </form>
                                         </span>

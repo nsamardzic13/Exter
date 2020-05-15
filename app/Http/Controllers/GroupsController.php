@@ -7,6 +7,7 @@ use App\Group;
 use App\Like;
 use App\Messages;
 use App\Notifications\addedToGroup;
+use App\Occasion;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Http\Request;
@@ -69,14 +70,15 @@ class GroupsController extends Controller{
                     ->select('message_id', 'users.id as user_id', 'users.name', 'type')
                     ->join('users', 'likes.user_id','=', 'users.id');*/
 
+        $members = $group->users()->orderBy('name')->paginate(5);
         if($request->ajax()) {
             return [
-                'messages' => view('messages.index_scroll', compact(['group', 'user', 'messages', 'top_users', 'user_events', 'admin', ]))->render(),
+                'messages' => view('messages.index_scroll', compact(['group', 'user', 'messages', 'top_users', 'user_events', 'admin', 'members',]))->render(),
                 'next_page' => $messages->nextPageUrl(),
             ];
         }
 
-        return view('groups.show', compact(['group', 'user', 'messages', 'top_users', 'user_events', 'admin', ]));
+        return view('groups.show', compact(['group', 'user', 'messages', 'top_users', 'user_events', 'admin', 'members',]));
     }
 
 
@@ -143,6 +145,16 @@ class GroupsController extends Controller{
 
             $group->users()->detach($user->id);
             return redirect('user/'. $user->id.'#groups')->with('message', 'You have left the group '. $group->name);
+    }
+
+    public function removePersonFromGroup() {
+        $data = request()->validate([
+            'user' => 'required',
+            'groupId' => 'required',
+        ]);
+        $group = Group::where('id', $data['groupId'])->first();
+        $group->users()->detach($data['user']);
+        return redirect('groups/'. $group->id .'#members')->with('message', 'You have removed person from group');
     }
 }
 

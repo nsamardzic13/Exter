@@ -14,7 +14,7 @@
         <div class="col-lg-10">
             <div class="tab-content" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">@include('groups.home')</div>
-                <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">@include('messages.new_user')</div>
+                <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">@include('groups.new_user')</div>
                 <div class="tab-pane fade" id="wall" role="tabpanel" aria-labelledby="wall-tab">@include('messages.index')</div>
                 @if($group->admin_id == $user->id)
                     <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">@include('groups.edit')</div>

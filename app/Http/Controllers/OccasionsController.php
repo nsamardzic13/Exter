@@ -368,13 +368,14 @@ class OccasionsController extends Controller
                     ->select('message_id', 'users.id as user_id', 'users.name', 'type')
                     ->join('users', 'likes.user_id','=', 'users.id');*/
 
+        $attending = $occasion->users()->orderBy('name')->paginate(5);
         if($request->ajax()) {
             return [
-                'messages' => view('messages.index_scroll', compact(['occasion', 'user', 'messages', 'top_users', 'user_events', 'admin', ]))->render(),
+                'messages' => view('messages.index_scroll', compact(['occasion', 'user', 'messages', 'top_users', 'user_events', 'admin', 'attending', ]))->render(),
                 'next_page' => $messages->nextPageUrl(),
             ];
         }
-        return view('occasions.wall', compact(['occasion', 'user', 'messages', 'top_users', 'user_events', 'admin', ]));
+        return view('occasions.wall', compact(['occasion', 'user', 'messages', 'top_users', 'user_events', 'admin', 'attending', ]));
     }
     public function join_group(Occasion $occasion){
         $user = auth()->user();
@@ -532,6 +533,16 @@ class OccasionsController extends Controller
 
         $occasion->users()->detach($user->id);
         return redirect('user/'. $user->id.'#events')->with('message', 'You have left the event');
+    }
+
+    public function removePersonFromEvent() {
+        $data = request()->validate([
+            'user' => 'required',
+            'groupId' => 'required',
+        ]);
+        $occasion = Occasion::where('id', $data['groupId'])->first();
+        $occasion->users()->detach($data['user']);
+        return redirect('events/'. $occasion->id.'#members')->with('message', 'You have left the event');
     }
 }
 
