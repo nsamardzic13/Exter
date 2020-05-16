@@ -590,3 +590,5 @@ $(document).ready(function(){
     });
     $('#rangeIndicator').change();
 });
+
+

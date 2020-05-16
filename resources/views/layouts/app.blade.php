@@ -24,6 +24,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/datepicker.js') }}" defer></script>
 
     <!-- Google maps scritp -->
     <script src="https://maps.google.com/maps/api/js?key=AIzaSyBCWhEi-RXDFZgWkdKh9ldrlb4b3PCzd78&libraries=places&callback=initAutocomplete" type="text/javascript"></script>

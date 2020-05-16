@@ -137,7 +137,7 @@ class OccasionsController extends Controller
     {
 
         $user = auth()->user();
-
+        //dd(\request()->input());
         //multiple days and times
         //1 for repetitive events
         if (request('when') == '1') {
@@ -164,8 +164,9 @@ class OccasionsController extends Controller
                 ]);
 
             }
-
-            $startdate = strtotime(request('start'));
+            $datepart = explode(".", request('start'));
+            $startdate = $datepart[2] . '-' . $datepart[1] . '-' . $datepart[0];
+            $startdate = strtotime($startdate);
             $enddate = $startdate + (request('repeat') * 86400);
 
             $streetInDatabase = DB::table('occasions')
@@ -253,10 +254,10 @@ class OccasionsController extends Controller
                 ]);
             };
             unset($data['when'], $data['start-one'], $data['end-one'], $data['time-start-one'], $data['time-end-one']);
-            //dd($data['max_people']);
-            //dd($data);
 
-            $startdate = request('start-one') . ' ' . request('time-start-one');
+            //dd($data);
+            $datepart = explode(".", request('start-one'));
+            $startdate = $datepart[2] . '-' . $datepart[1] . '-' . $datepart[0] . ' ' . request('time-start-one');
             $startdate = Carbon::createFromFormat('Y-m-d H:i', $startdate);
 
             $streetInDatabase = DB::table('occasions')
@@ -277,9 +278,8 @@ class OccasionsController extends Controller
                 $lng = Geocoder::getCoordinatesForAddress($data['street'])['lng'];
             }
 
-
-
-            $enddate = request('end-one') . ' ' . request('time-end-one');;
+            $datepart = explode(".", request('end-one'));
+            $enddate = $datepart[2] . '-' . $datepart[1] . '-' . $datepart[0] . ' ' . request('time-end-one');;
             $enddate = Carbon::createFromFormat('Y-m-d H:i', $enddate);
 
             $occasion = Occasion::create(array_merge($data, ['start' => $startdate], ['end' => $enddate], ['user_name' => $user->name], ['lat' => $lat], ['lng' => $lng]));
