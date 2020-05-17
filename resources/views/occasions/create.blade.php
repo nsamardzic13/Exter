@@ -211,4 +211,6 @@ date_default_timezone_set('Europe/Zagreb');
         </div>
     </div>
 </div>
+
+    <script src="{{ asset('js/datepicker.js') }}" defer></script>
 @endsection

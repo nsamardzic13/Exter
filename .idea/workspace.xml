@@ -3,8 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="688e5f26-aa99-400a-8e44-982ac4183f81" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OccasionsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OccasionsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/occasions/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/occasions/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/datepicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/datepicker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/occasions/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/occasions/create.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,11 +299,31 @@
       <workItem from="1589108492439" duration="9418000" />
       <workItem from="1589222731989" duration="581000" />
       <workItem from="1589296020436" duration="14260000" />
+      <workItem from="1589328532762" duration="502000" />
+      <workItem from="1589467626454" duration="161000" />
+      <workItem from="1589467803248" duration="112000" />
+      <workItem from="1589471154380" duration="783000" />
+      <workItem from="1589672450601" duration="467000" />
+      <workItem from="1589712674548" duration="1868000" />
+      <workItem from="1589718768650" duration="1056000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="izvuko nav iz app.blade try 2" />
@@ -349,14 +376,16 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1281" height="167" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1585080008653" />
-    <state x="2360" y="229" key="MergeDialog" timestamp="1589312325860">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="242" y="100" key="MergeDialog" timestamp="1589328680667">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="2360" y="229" key="MergeDialog/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1589312325860" />
-    <state x="2584" y="226" key="MultipleFileMergeDialog" timestamp="1589312325868">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="242" y="100" key="MergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1589328680667" />
+    <state x="443" y="94" key="MultipleFileMergeDialog" timestamp="1589328680683">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="2584" y="226" key="MultipleFileMergeDialog/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1589312325868" />
+    <state x="443" y="94" key="MultipleFileMergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1589328680683" />
     <state x="2446" y="160" width="1095" height="495" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1589215980899">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -367,12 +396,12 @@
     </state>
     <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.RecentChangeDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1589215396980" />
     <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.RecentChangeDialog/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1589215583718" />
-    <state x="313" y="184" key="com.intellij.ide.util.TipDialog" timestamp="1589328534717">
+    <state x="313" y="184" key="com.intellij.ide.util.TipDialog" timestamp="1589712688405">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1589296020871" />
     <state x="2390" y="281" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588954414853" />
-    <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1589328534717" />
+    <state x="313" y="184" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1589712688405" />
     <state x="449" y="252" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585076799179">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -388,12 +417,12 @@
     <state x="297" y="151" key="run.anything.popup/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1588176612267" />
     <state x="2366" y="231" key="run.anything.popup/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1589116058875" />
     <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1585321541246" />
-    <state x="2375" y="2" width="1008" height="1037" key="search.everywhere.popup" timestamp="1588790143621">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1589719113725">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1587732346485" />
     <state x="2375" y="2" width="1008" height="1037" key="search.everywhere.popup/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588790143621" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1588410754253" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1589719113725" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
