@@ -25,6 +25,7 @@
                                 <div id="userList"></div>
                                 <div>{{ $errors->first('name') }}</div>
                             </div>
+                            <input type="hidden" name="groupId" value="{{ $group->id }}">
                             <button type="submit" class="btn btn-primary">Submit</button>
                             @csrf
                         </form>

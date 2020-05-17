@@ -7,6 +7,7 @@ use App\Sport;
 use App\User;
 use Carbon\Carbon;
 
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 use \App\Occasion;
@@ -444,24 +445,25 @@ class OccasionsController extends Controller
     }
 
     public function update(Request $request){
+//        dd(request());
         $ruser = auth()->user();
 
         $data = request()->validate([
-            'userName' => 'required|exists:App\User,name',
+            'name' => 'required|exists:App\User,name',
             'eventId' =>  'numeric'
         ]);
 
         //dd($data['groupId']);
-        $user = User::where('name', $data['userName'])->first();
-        $event = Occasion::where('id', $data['groupId'])->first();
+        $user = User::where('name', $data['name'])->first();
+        $event = Occasion::where('id', $data['eventId'])->first();
 
-        $group->users()->syncWithoutDetaching($user->id);
-        Session::flash('message', 'You have added '.$user->name.' to group '.$group->name);
+        $event->users()->syncWithoutDetaching($user->id);
+//        Session::flash('message', 'You have added '.$user->name.' to event '.$event->name);
 
         //information needed for notification
-        $group_info = $group->name;
-        $user->notify(new addedToGroup($group_info));
-        //return redirect('user/'.$ruser->id.'#groups')->with('message', 'You have added user to group '.$group->name);
+//        $event_info = $event->name;
+//        $user->notify(new addedToGroup($event_info));
+        return redirect('events/'.$event->id.'#members')->with('message', 'You have added user to event '.$event->name);
     }
 
     public function checkTime(Object $event, Array $keyst) {
@@ -538,11 +540,35 @@ class OccasionsController extends Controller
     public function removePersonFromEvent() {
         $data = request()->validate([
             'user' => 'required',
-            'groupId' => 'required',
+            'eventId' => 'required',
         ]);
-        $occasion = Occasion::where('id', $data['groupId'])->first();
+        $occasion = Occasion::where('id', $data['eventId'])->first();
         $occasion->users()->detach($data['user']);
-        return redirect('events/'. $occasion->id.'#members')->with('message', 'You have left the event');
+        $user = User::where('id', $data['user'])->first();
+        return redirect('events/'. $occasion->id.'#members')->with('message', 'You have removed '.$user->name.' from event '.$occasion->name);
+    }
+
+    public function edit(Occasion $occasion) {
+        $data = request()->validate([
+            'description' => 'required|max:255',
+            'profile_pic' => 'sometimes|file|image|max:4000',
+        ]);
+
+        $occasion->update([
+            'description' => $data['description'],
+        ]);
+
+        //check if image is submited
+        if(request()->has('profile_pic')) {
+            $occasion->update([
+                'picture' => request()->profile_pic->store('uploads', 'public'),
+            ]);
+
+            //resize photo
+            $image = Image::make(public_path('storage/' . $occasion->picture))->fit(128,128);
+            $image->save();
+        }
+        return redirect('events/' . $occasion->id);
     }
 }
 

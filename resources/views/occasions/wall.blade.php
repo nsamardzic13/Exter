@@ -23,7 +23,7 @@
                     <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">@include('occasions.new_user')</div>
                     <div class="tab-pane fade" id="wall" role="tabpanel" aria-labelledby="wall-tab">@include('messages.index')</div>
                     @if($occasion->user_name == $user->name)
-                        <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">{{--@include('groups.edit')--}}</div>
+                        <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">@include('occasions.edit')</div>
                     @endif
                 </div>
             </div>

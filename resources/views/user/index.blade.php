@@ -366,11 +366,13 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group">
-                                            <input class="form-control" type="text" id="user_name" name="userName" placeholder="Enter username of a person you want to add to this group" autocomplete="off">
-                                            <div id="errorForAddingUser">{{ $errors->first('userName') }}</div>
+                                            <label for="exampleInputEmail1">Dodaj osobu</label>
+                                            <input class="form-control" type="text" id="user_name" name="name" placeholder="Enter name of a person you want to add to this group" autocomplete="off">
                                             <div id="userList"></div>
+                                            <div>{{ $errors->first('name') }}</div>
                                         </div>
-                                        <input type="hidden" id="userId" name="{{ $user->id }}" >
+                                        <input type="hidden" name="groupId" value="{{ $group->id }}">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
                                         <input type="hidden" value="{{csrf_token()}}" name="_token">
                                     </div>
                                     <div class="modal-footer">

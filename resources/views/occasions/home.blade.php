@@ -1,6 +1,6 @@
 <div class="container mt-2" style="margin-bottom: 60px">
     <div class="text-center">
-        <img src="{{ asset('storage/' .$admin[0]->profile_pic) }}" class="img-fluid rounded-circle mb-2" width="128" height="128">
+        <img src="{{ asset('storage/' .$occasion->picture) }}" class="img-fluid rounded-circle mb-2" width="128" height="128">
         <h4 class="card-title mb-0">{{ $occasion->name }}</h4>
         <div class="text-muted mb-2">{{ $occasion->category }}</div>
         <div class="row">
