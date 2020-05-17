@@ -46,7 +46,7 @@ class GroupsController extends Controller{
         $admin = User::where('id', '=', $group->admin_id)->get();
         $messages = Messages::where('group_id', '=', $group->id)
                             ->orderByDesc('created_at')
-                            ->paginate(4);
+                            ->paginate(5);
         $top_users = DB::table('messages')
             ->select('users.id as user_id', 'users.name', DB::raw('count(*) as count'))
             ->join('users', 'messages.user_id','=', 'users.id')
@@ -74,7 +74,9 @@ class GroupsController extends Controller{
         if($request->ajax()) {
             return [
                 'messages' => view('messages.index_scroll', compact(['group', 'user', 'messages', 'top_users', 'user_events', 'admin', 'members',]))->render(),
+                'members' => view('groups.new_user_scroll', compact(['group', 'user', 'messages', 'top_users', 'user_events', 'admin', 'members',]))->render(),
                 'next_page' => $messages->nextPageUrl(),
+                'next_page2' => $members->nextPageUrl(),
             ];
         }
 

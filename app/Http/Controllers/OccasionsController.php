@@ -346,7 +346,7 @@ class OccasionsController extends Controller
 
         $messages = Messages::where('event_id', '=', $occasion->id)
             ->orderByDesc('created_at')
-            ->paginate(4);
+            ->paginate(5);
         $top_users = DB::table('messages')
             ->select('users.id as user_id', 'users.name', DB::raw('count(*) as count'))
             ->join('users', 'messages.user_id','=', 'users.id')
@@ -373,7 +373,9 @@ class OccasionsController extends Controller
         if($request->ajax()) {
             return [
                 'messages' => view('messages.index_scroll', compact(['occasion', 'user', 'messages', 'top_users', 'user_events', 'admin', 'attending', ]))->render(),
+                'members' => view('occasions.new_user_scroll', compact(['occasion', 'user', 'messages', 'top_users', 'user_events', 'admin', 'attending',]))->render(),
                 'next_page' => $messages->nextPageUrl(),
+                'next_page2' => $attending->nextPageUrl(),
             ];
         }
         return view('occasions.wall', compact(['occasion', 'user', 'messages', 'top_users', 'user_events', 'admin', 'attending', ]));

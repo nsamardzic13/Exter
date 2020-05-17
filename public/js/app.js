@@ -49955,6 +49955,7 @@ $(document).on("click", ".a_like", function (e) {
 });
 $(document).ready(function () {
   $(window).scroll(fetchPosts);
+  $(window).scroll(fetchPosts2);
 
   function fetchPosts() {
     var page = $('.endless-pagination').data('next-page');
@@ -49966,8 +49967,6 @@ $(document).ready(function () {
 
         if (scroll_position_for_posts_load >= $(document).height()) {
           $.get(page, function (data) {
-            console.log(data); // $('.posts').html(data.messages);
-
             $('.posts').append(data.messages);
             $('.endless-pagination').data('next-page', data.next_page);
           });
@@ -49975,6 +49974,28 @@ $(document).ready(function () {
       }, 350));
     }
   }
+
+  ;
+
+  function fetchPosts2() {
+    var page2 = $('.endless-pagination2').data('next-page');
+
+    if (page2 !== null && page2 != "") {
+      clearTimeout($.data(this, "scrollCheck2"));
+      $.data(this, "scrollCheck2", setTimeout(function () {
+        var scroll_position_for_posts_load = $(window).height() + $(window).scrollTop() + 3000;
+
+        if (scroll_position_for_posts_load >= $(document).height()) {
+          $.get(page2, function (data) {
+            $('.posts2').append(data.members);
+            $('.endless-pagination2').data('next-page', data.next_page2);
+          });
+        }
+      }, 350));
+    }
+  }
+
+  ;
 });
 $(document).ready(function () {
   $(".modal-btn").on('click', function () {
