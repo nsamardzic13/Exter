@@ -1,4 +1,4 @@
-<div class="container-fluid pt-5">
+<!-- <div class="container-fluid pt-5">
     <div class="row text-center">
         <div class="col-12">
             <h2> Connect </h2>
@@ -10,7 +10,7 @@
             <a href="#"><i class="fab fa-youtube"></i></a>
         </div>
     </div>
-</div>
+</div> -->
 <br><br>
 <footer>
     <div class="container-fluid">

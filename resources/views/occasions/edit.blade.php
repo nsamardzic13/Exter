@@ -48,13 +48,13 @@
                     </div>
                 </div>
             </form>
-            <div class="form-group row mb-0">
+            <div class="form-group row mb-2 mt-2">
                 <div class="col-md-6 offset-md-4">
                     <form action="/user/{{ $occasion->id }}" method="POST" style="padding-top: 5px">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="btn btn-danger">
-                            Delete Event
+                            <i class="fas fa-trash-alt"></i> <b>Delete Group</b>
                         </button>
                     </form>
                 </div>

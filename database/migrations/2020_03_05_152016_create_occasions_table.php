@@ -25,7 +25,7 @@ class CreateOccasionsTable extends Migration
             $table->string('category');
             $table->integer('max_people')->default(0);
             $table->string('description');
-            $table->string('picture')->nullable();
+            $table->string('picture')->default('uploads\/user_default_pic.png');
             $table->boolean('ended')->default(0);
             $table->timestamps();
         });

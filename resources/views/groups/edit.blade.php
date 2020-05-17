@@ -43,18 +43,18 @@
                 <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-4">
                         <button type="submit" class="btn btn-success submit">
-                            Submit changes
+                            Submit
                         </button>
                     </div>
                 </div>
             </form>
-            <div class="form-group row mb-0">
+            <div class="form-group row mt-2 mb-2">
                 <div class="col-md-6 offset-md-4">
                     <form action="/user/{{ $group->id }}" method="POST" style="padding-top: 5px">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="btn btn-danger">
-                            Delete Group
+                            <i class="fas fa-trash-alt"></i> <b>Delete Group</b>
                         </button>
                     </form>
                 </div>

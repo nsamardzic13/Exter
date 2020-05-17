@@ -1,6 +1,5 @@
-<div class="container mt-2 card">
-
-    <div class="card-header header-wall">
+<div class="card mt-2">
+    <div class="card-header container-fluid header-wall">
         <h3><b>Members </b> <small>of "{{ Str::upper($group->name ?? $occasion->name) }}"</small></h3>
         @if($admin[0]->id == $user->id)
             <button type="button" class="btn btn-outline-quest rounded-pill zoom float-right" data-toggle="modal" data-target="#myModal_newuser">
@@ -33,7 +32,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Add Person</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>
@@ -53,3 +52,4 @@
         </div>
     </div>
 </div>
+

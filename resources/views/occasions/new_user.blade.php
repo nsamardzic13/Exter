@@ -1,5 +1,4 @@
-<div class="container mt-2 card">
-
+<div class="card mt-2">
     <div class="card-header header-wall">
         <h3><b>Members </b> <small>of "{{ Str::upper($occasion->name ?? $occasion->name) }}"</small></h3>
         @if($admin[0]->id == $user->id)
@@ -33,7 +32,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Add Person</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>

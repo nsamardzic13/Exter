@@ -39,7 +39,7 @@
 
 </head>
 <body>
-    <div id="app" style="min-height: 500px">
+    <div id="app" style="min-height: 650px">
         @include('nav')
         <div class="container-fluid space-for-nav"></div>
 
