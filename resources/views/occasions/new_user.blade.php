@@ -25,6 +25,7 @@
                                 <div id="userList"></div>
                                 <div>{{ $errors->first('name') }}</div>
                             </div>
+                            <input type="hidden" name="eventId" value="{{ $occasion->id }}">
                             <button type="submit" class="btn btn-primary">Submit</button>
                             @csrf
                         </form>
@@ -55,7 +56,7 @@
                                                 <form action="/users/removePersonFromEvent" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <input type="hidden" name="user" value="{{ $user_row->id }}">
-                                                <input type="hidden" name="groupId" value="{{ $occasion->id }}">
+                                                <input type="hidden" name="eventId" value="{{ $occasion->id }}">
                                                 <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-user-minus"></i></button>
                                             </form>
                                         </span>

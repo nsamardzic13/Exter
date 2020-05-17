@@ -68,6 +68,11 @@ class UsersController extends Controller
                 'lat' => Geocoder::getCoordinatesForAddress($data['address'])['lat'],
                 'lng' => Geocoder::getCoordinatesForAddress($data['address'])['lng'],
             ]);
+        } else {
+            $user->update([
+                'lat' => null,
+                'lng' => null,
+            ]);
         }
         //check if image is submited
         if(request()->has('profile_pic')) {

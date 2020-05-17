@@ -49767,22 +49767,23 @@ var groupId;
 var regUser;
 $(document).ready(function () {
   $('button[name="btnZaModal"]').click(function () {
+    console.log('aa');
     groupId = $(this).attr('id');
     regUser = $('#userId').attr('name');
   });
   $('#addFriend').click(function () {
     var userName = $('#user_name').val();
 
-    var _token = $('input[name="_token"]').val(); //console.log(userName);
+    var _token = $('input[name="_token"]').val();
 
-
+    console.log(userName);
     $.ajax({
       type: 'POST',
       url: '/users/addPersonToGroup',
       data: {
         _token: _token,
         groupId: groupId,
-        userName: userName
+        name: userName
       },
       success: function success(data) {
         $('#addUserToGroup').modal('toggle');

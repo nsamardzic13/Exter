@@ -299,6 +299,7 @@ var groupId;
 var regUser;
 $(document).ready(function(){
     $('button[name="btnZaModal"]').click(function(){
+        console.log('aa')
         groupId = $(this).attr('id');
         regUser = $('#userId').attr('name');
     });
@@ -307,7 +308,7 @@ $(document).ready(function(){
         var userName = $('#user_name').val();
         var _token = $('input[name="_token"]').val();
 
-        //console.log(userName);
+        console.log(userName);
 
         $.ajax({
             type: 'POST',
@@ -315,7 +316,7 @@ $(document).ready(function(){
             data: {
                     _token : _token,
                     groupId : groupId,
-                    userName : userName
+                    name : userName
             },
             success:function (data) {
                 $('#addUserToGroup').modal('toggle');

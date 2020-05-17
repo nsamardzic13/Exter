@@ -86,21 +86,27 @@ class GroupsController extends Controller{
         $ruser = auth()->user();
 
        $data = request()->validate([
-           'userName' => 'required|exists:App\User,name',
+           'name' => 'required|exists:App\User,name',
            'groupId' =>  'numeric'
        ]);
 
        //dd($data['groupId']);
-        $user = User::where('name', $data['userName'])->first();
+        $user = User::where('name', $data['name'])->first();
         $group = Group::where('id', $data['groupId'])->first();
 
         $group->users()->syncWithoutDetaching($user->id);
-        Session::flash('message', 'You have added '.$user->name.' to group '.$group->name);
+//        Session::flash('message', 'You have added '.$user->name.' to group '.$group->name);
 
         //information needed for notification
         $group_info = $group->name;
         $user->notify(new addedToGroup($group_info));
-        //return redirect('user/'.$ruser->id.'#groups')->with('message', 'You have added user to group '.$group->name);
+        if($request->ajax()) {
+            dd('aa');
+            Session::flash('message', 'You have added '.$user->name.' to group '.$group->name);
+        } else {
+            dd('bb');
+            return redirect('groups/'.$group->id.'#members')->with('message', 'You have added ' . $user->name . ' to group '.$group->name);
+        }
     }
 
     public function destroy(Group $group){
