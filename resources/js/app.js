@@ -318,7 +318,7 @@ $(document).ready(function(){
             success:function (data) {
                 $('#addUserToGroup').modal('toggle');
                 location.reload();
-                //window.location.href = '/user/'+regUser+'#groups';
+                // window.location.href = '/user/'+regUser+'#groups';
             },
 
             error: function(data){

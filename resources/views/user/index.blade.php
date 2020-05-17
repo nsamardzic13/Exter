@@ -3,7 +3,7 @@
 @section('content')
     @error('name')
         <div class="alert alert-danger" role="alert" style="border-width: 1px; border-color: #E32743">
-            <strong>Failed adding group</strong> {{  $errors->first('name') }}
+            <strong>Failed adding to group</strong> {{  $errors->first('name') }}
         </div>
     @enderror
 
@@ -105,7 +105,7 @@
 
             <!-- Right side of profile -->
             <div class="col-lg-8 order-lg-2">
-                <ul class="nav nav-pills nav-fill" id="tabMenu">
+                <ul class="nav nav-pills nav-fill" id="v-pills-tab">
                     <li class="nav-item">
                         <a  data-toggle="tab" href="#profile" class="nav-link active"><b>Profile</b></a>
                     </li>

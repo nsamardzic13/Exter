@@ -49785,7 +49785,7 @@ $(document).ready(function () {
       },
       success: function success(data) {
         $('#addUserToGroup').modal('toggle');
-        location.reload(); //window.location.href = '/user/'+regUser+'#groups';
+        location.reload(); // window.location.href = '/user/'+regUser+'#groups';
       },
       error: function error(data) {
         var error = data.responseJSON.errors.userName[0];

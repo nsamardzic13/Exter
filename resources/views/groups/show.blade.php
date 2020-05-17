@@ -12,6 +12,16 @@
             </div>
         </div>
         <div class="col-lg-10">
+            @if(session()->has('message'))
+                <div class="alert alert-success" role="alert" style="border-width: 1px; border-color: #27864f">
+                    <strong>Success</strong> {{ session()->get('message') }}
+                </div>
+            @endif
+            @error('name')
+            <div class="alert alert-danger" role="alert" style="border-width: 1px; border-color: #E32743">
+                <strong>Failed adding to group</strong> {{  $errors->first('name') }}
+            </div>
+            @enderror
             <div class="tab-content" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">@include('groups.home')</div>
                 <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">@include('groups.new_user')</div>
