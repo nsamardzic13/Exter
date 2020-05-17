@@ -49955,7 +49955,6 @@ $(document).on("click", ".a_like", function (e) {
 });
 $(document).ready(function () {
   $(window).scroll(fetchPosts);
-  $(window).scroll(fetchPosts2);
 
   function fetchPosts() {
     var page = $('.endless-pagination').data('next-page');
@@ -49965,7 +49964,7 @@ $(document).ready(function () {
       $.data(this, "scrollCheck", setTimeout(function () {
         var scroll_position_for_posts_load = $(window).height() + $(window).scrollTop() + 3000;
 
-        if (scroll_position_for_posts_load >= $(document).height()) {
+        if (scroll_position_for_posts_load >= $(document).height() && $('#v-pills-messages-tab').hasClass("active")) {
           $.get(page, function (data) {
             $('.posts').append(data.messages);
             $('.endless-pagination').data('next-page', data.next_page);
@@ -49976,6 +49975,7 @@ $(document).ready(function () {
   }
 
   ;
+  $(window).scroll(fetchPosts2);
 
   function fetchPosts2() {
     var page2 = $('.endless-pagination2').data('next-page');
@@ -49985,7 +49985,7 @@ $(document).ready(function () {
       $.data(this, "scrollCheck2", setTimeout(function () {
         var scroll_position_for_posts_load = $(window).height() + $(window).scrollTop() + 3000;
 
-        if (scroll_position_for_posts_load >= $(document).height()) {
+        if (scroll_position_for_posts_load >= $(document).height() && $('#v-pills-profile-tab').hasClass("active")) {
           $.get(page2, function (data) {
             $('.posts2').append(data.members);
             $('.endless-pagination2').data('next-page', data.next_page2);
