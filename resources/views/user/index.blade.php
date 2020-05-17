@@ -371,8 +371,7 @@
                                             <div id="userList"></div>
                                             <div>{{ $errors->first('name') }}</div>
                                         </div>
-                                        <input type="hidden" name="groupId" value="{{ $group->id }}">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+{{--                                        <input type="hidden" name="groupId" value="{{ $group->id }}">--}}
                                         <input type="hidden" value="{{csrf_token()}}" name="_token">
                                     </div>
                                     <div class="modal-footer">

@@ -95,18 +95,16 @@ class GroupsController extends Controller{
         $group = Group::where('id', $data['groupId'])->first();
 
         $group->users()->syncWithoutDetaching($user->id);
-//        Session::flash('message', 'You have added '.$user->name.' to group '.$group->name);
+        Session::flash('message', 'You have added '.$user->name.' to group '.$group->name);
+
 
         //information needed for notification
         $group_info = $group->name;
         $user->notify(new addedToGroup($group_info));
-        if($request->ajax()) {
-            dd('aa');
-            Session::flash('message', 'You have added '.$user->name.' to group '.$group->name);
-        } else {
-            dd('bb');
+        if(!$request->ajax()) {
             return redirect('groups/'.$group->id.'#members')->with('message', 'You have added ' . $user->name . ' to group '.$group->name);
         }
+
     }
 
     public function destroy(Group $group){

@@ -49767,7 +49767,6 @@ var groupId;
 var regUser;
 $(document).ready(function () {
   $('button[name="btnZaModal"]').click(function () {
-    console.log('aa');
     groupId = $(this).attr('id');
     regUser = $('#userId').attr('name');
   });
@@ -49776,7 +49775,6 @@ $(document).ready(function () {
 
     var _token = $('input[name="_token"]').val();
 
-    console.log(userName);
     $.ajax({
       type: 'POST',
       url: '/users/addPersonToGroup',
@@ -50176,8 +50174,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\Exter\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Exter\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/Exter/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Exter/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
