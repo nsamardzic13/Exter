@@ -5,7 +5,12 @@
             <button type="button" class="btn btn-outline-quest rounded-pill zoom float-right" data-toggle="modal" data-target="#myModal_newuser">
                 Add New User
             </button>
-
+        @else
+            <a href="/groups/{{$group->id}}/leave">
+                <button type="button" class="btn  btn-outline-quest2 rounded-pill zoom float-right" >
+                    Leave this group
+                </button>
+            </a>
         @endif
     </div>
 

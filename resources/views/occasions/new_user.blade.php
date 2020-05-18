@@ -1,11 +1,15 @@
 <div class="card mt-2">
     <div class="card-header header-wall">
         <h3><b>Members </b> <small>of "{{ Str::upper($occasion->name ?? $occasion->name) }}"</small></h3>
+        <a href="/events/{{$occasion->id}}/leave">
+            <button type="button" class="btn  btn-outline-quest2  rounded-pill zoom float-right" >
+                Leave this event
+            </button>
+        </a>
         @if($admin[0]->id == $user->id)
             <button type="button" class="btn btn-outline-quest rounded-pill zoom float-right" data-toggle="modal" data-target="#myModal_newuser">
                 Add New User
             </button>
-
         @endif
     </div>
 

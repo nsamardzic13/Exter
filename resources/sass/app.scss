@@ -288,10 +288,10 @@ p.likescroll-p {
 }
 
 .header-wall{
-    background-image: linear-gradient(135deg, #e32743 0%, rgba(255, 121, 63, 0.8) 100%);
-    font-weight: bold;
-    color: whitesmoke;
-}
+     background-image: linear-gradient(135deg, #e32743 0%, rgba(255, 121, 63, 0.8) 100%);
+     font-weight: bold;
+     color: whitesmoke;
+ }
 
 .thumbs_up:hover{
     color: green;
@@ -562,7 +562,11 @@ hr.light-100{
 .background-orange {
     color: #FF8663;
 }
-
+.header-index-events{
+    background-image: linear-gradient(135deg, rgba(255, 121, 63, 0.8) 0%, #e32743 100%);
+    font-weight: bold;
+    color: whitesmoke;
+}
 .bg-gradient-primary-to-secondary-2 {
     background-color: #f53b57;
     background-image: linear-gradient(135deg, #e32743 0%, rgba(255, 121, 63, 0.8) 100%);
@@ -762,6 +766,7 @@ hr.light-100{
 
 #sidebar.active {
     margin-left: -250px;
+
 }
 
 @media (max-width: 768px) {

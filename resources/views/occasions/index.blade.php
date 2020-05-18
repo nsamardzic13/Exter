@@ -5,7 +5,7 @@
         <!-- Sidebar -->
         <div class="sidebar-wrapper">
             <!-- Sidebar -->
-            <nav id="sidebar">
+            <nav id="sidebar" class="pt-2">
                 <div class="sidebar-header">
                     <h3><span style="color: whitesmoke"><b>Filter Events :</b></span></h3>
                 </div>
@@ -76,59 +76,60 @@
 
             </nav>
             <!-- Page Content -->
-            <div id="content" class="bg-gradient-primary-to-secondary-2" >
-                    <div style="background-color: rgb(0,0,0,0.2)">
-                        <div class="container p-5">
-                            <h1 class="text-white font-weight-bolder mb-2">Upcoming events
-                                <button type="button" id="sidebarCollapse" class="btn btn-outline-quest2">
-                                    <i class="fas fa-filter"></i>
-                                </button>
-                            </h1>
+            <div id="content" class="p-2 container-fluid " style="background-color: antiquewhite">
+                    <div class="sidebar-header pl-4 header-index-events">
+                        <h1 class="text-white font-weight-bolder p-lg-3 pl-5">Upcoming events
+                            <button type="button" id="sidebarCollapse" class="btn btn-outline-quest2">
+                                <i class="fas fa-filter"></i>
+                            </button>
+                        </h1>
+                    </div>
+
+                    @if(session()->has('message'))
+                        <div class="alert alert-success" role="alert" style="border-width: 1px; border-color: #27864f">
+                            <strong>Success</strong> {{ session()->get('message') }}
                         </div>
+                    @endif
+                    <div class="container-fluid d-inline-block px-4 ">
+                        @if(!$occasions->isEmpty())
+                            <div class="row">
+                                @foreach($occasions as $eventNmb => $event)
+                                    <div class="col-md-3 my-4" data-aos="fade-up">
+                                        <div class="card zoom " style="border-color: #FF8663; border-width: 2px; color: #2d995b;">
+                                            <img class="card-img-top img-fluid" style="height: 225px; width: 100%; display: block;" @if($event->picture) src="{{ asset('storage/' .$event->picture) }}"
+                                                 @else src="{{ url('images/hangout-sports/'.$event->category.'.png') }}"  @endif  alt="Card image cap">
+                                            <div class="card-body">
+                                                <h4 class="card-title p-2">{{ $event->name }}</h4>
+                                                <h6 class="card-subtitle mb-2 text-muted row"><i class="fas fa-calendar-day col-sm-1"></i><p class="col-sm">{{ date('d.m.Y', strtotime($event->start))}}</p>
+                                                    <i class="fas fa-clock pl-3 col-sm-1"></i> <p class="col-sm">{{ date('H:i', strtotime($event->start))}}</p></h6>
+                                                <h6 class="card-subtitle mb-2 text-muted row"><i class="fas fa-map-marker-alt col-sm-1"></i><p class="col-sm"> {{ $event->street }}</p>
+                                                    <i class="fas fa-route pl-3 col-sm-1"></i> <p class="col-sm">@if (property_exists($event, "dist")){{ number_format($event->dist, 2, '.', '') }}km @else -- km @endif</p></h6>
+                                                <h6 class="card-subtitle mb-2 text-muted row"><i class="fas fa-list-alt pr-2 col-sm-1"></i><p class="col-sm-11">{{ $event->category }}</p></h6>
+                                                <h6 class="card-subtitle mb-2 text-muted row"><i class="fas fa-user-tie pr-2 col-sm-1"></i><p class="col-sm-11">{{ $event->user_name }}</p></h6>
+                                                <p class="card-text">{{ $event->description }}</p>
+                                                <button type="button" class="btn btn-outline-success btn-lg my-2 ml-4 center-block" data-toggle="modal" data-target="#myModal{{$event->id}}">Open</button>
 
-                        @if(session()->has('message'))
-                            <div class="alert alert-success" role="alert" style="border-width: 1px; border-color: #27864f">
-                                <strong>Success</strong> {{ session()->get('message') }}
-                            </div>
-                        @endif
-                        <div class="container-fluid d-inline-block px-4 ">
-                            @if(!$occasions->isEmpty())
-                                <div class="row">
-                                    @foreach($occasions as $eventNmb => $event)
-                                        <div class="col-md-3 my-4" data-aos="fade-up">
-                                            <div class="card zoom " style="border-color: #2d995b; border-width: 1.4px; color: #2d995b;">
-                                                <img class="card-img-top img-fluid" style="height: 225px; width: 100%; display: block;" @if($event->picture) src="{{ asset('storage/' .$event->picture) }}"
-                                                     @else src="{{ url('images/hangout-sports/'.$event->category.'.png') }}"  @endif  alt="Card image cap">
-                                                <div class="card-body">
-                                                    <h4 class="card-title p-2">{{ $event->name }}</h4>
-                                                    <h6 class="card-subtitle mb-2 text-muted row"><i class="fas fa-calendar-day col-sm-1"></i><p class="col-sm">{{ date('d.m.Y', strtotime($event->start))}}</p>
-                                                        <i class="fas fa-clock pl-3 col-sm-1"></i> <p class="col-sm">{{ date('H:i', strtotime($event->start))}}</p></h6>
-                                                    <h6 class="card-subtitle mb-2 text-muted row"><i class="fas fa-map-marker-alt col-sm-1"></i><p class="col-sm"> {{ $event->street }}</p>
-                                                        <i class="fas fa-route pl-3 col-sm-1"></i> <p class="col-sm">@if (property_exists($event, "dist")){{ number_format($event->dist, 2, '.', '') }}km @else -- km @endif</p></h6>
-                                                    <h6 class="card-subtitle mb-2 text-muted row"><i class="fas fa-list-alt pr-2 col-sm-1"></i><p class="col-sm-11">{{ $event->category }}</p></h6>
-                                                    <h6 class="card-subtitle mb-2 text-muted row"><i class="fas fa-user-tie pr-2 col-sm-1"></i><p class="col-sm-11">{{ $event->user_name }}</p></h6>
-                                                    <p class="card-text">{{ $event->description }}</p>
-                                                    <button type="button" class="btn btn-outline-success btn-lg my-2 ml-4 center-block" data-toggle="modal" data-target="#myModal{{$event->id}}">Open</button>
-
-                                                </div>
                                             </div>
                                         </div>
-                                        @include('occasions.show',  ['occasion' => $event])
-                                    @endforeach
-                                </div>
-                        </div>
-                        @else
-                            <div class="container-fluid card p-5 ">
-                                <p class="mx-auto text-orange font-weight-bolder">There are no upcoming events</p>
-                                <a href="/events/create" class="btn btn-outline-quest2 btn-lg bg-light">Create one</a>
-
+                                    </div>
+                                    @include('occasions.show',  ['occasion' => $event])
+                                @endforeach
                             </div>
-                        @endif
+                    </div>
+                    @else
+                        <div class="container-fluid card p-5 ">
+                            <p class="mx-auto text-orange font-weight-bolder">There are no upcoming events</p>
+                            <a href="/events/create" class="btn btn-outline-quest2 btn-lg bg-light">Create one</a>
 
-                        <div class="container-fluid p-5">
-                            <a href="/events/create" class="container-fluid btn btn-outline-quest2 btn-lg bg-light">Add new</a>
                         </div>
-
+                    @endif
+                    <div class="container-fluid  text-white bg mb-3" style=" background-color: #d93850">
+                        <a href="/events/create" style="color: white">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Make a new event</h5>
+                                <p class="card-text"><i class="fas fa-calendar-day fa-3x"></i></p>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>

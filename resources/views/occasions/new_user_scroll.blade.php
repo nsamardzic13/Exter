@@ -12,7 +12,7 @@
                                                 @csrf
                                                 <input type="hidden" name="user" value="{{ $user_row->id }}">
                                                 <input type="hidden" name="eventId" value="{{ $occasion->id }}">
-                                                <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-user-minus"></i></button>
+                                                <button type="submit" class="btn btn-outline-danger btn-sm" title="Remove this person"><i class="fas fa-user-minus"></i></button>
                                             </form>
                                         </span>
                 @endif
