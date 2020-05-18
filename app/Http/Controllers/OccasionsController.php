@@ -552,18 +552,51 @@ class OccasionsController extends Controller
 
     public function edit(Occasion $occasion) {
         $data = request()->validate([
-            'description' => 'required|max:255',
-            'profile_pic' => 'sometimes|file|image|max:4000',
+            'street' => 'required|min:3',
+            'start' => 'required|date_format:H:i',
+            'end' => 'required|date_format:H:i',
+            'max_people' => 'required|numeric',
+            'description' => 'required|min:10|max:255',
+            'picture' => 'sometimes|file|image|max:4000',
         ]);
+
+        $streetInDatabase = DB::table('occasions')
+            ->select('street', 'lat', 'lng')
+            ->where('street', '=', $data['street'])->first();
+
+        if ($streetInDatabase) {
+            if ($data['street'] == $streetInDatabase->street) {
+                $lat = $streetInDatabase->lat;
+                $lng = $streetInDatabase->lng;
+            } else {
+                $lat = Geocoder::getCoordinatesForAddress($data['street'])['lat'];
+                $lng = Geocoder::getCoordinatesForAddress($data['street'])['lng'];
+            }
+        } else {
+            $lat = Geocoder::getCoordinatesForAddress($data['street'])['lat'];
+            $lng = Geocoder::getCoordinatesForAddress($data['street'])['lng'];
+        }
+        $startdate = $occasion->start->toDateString();
+        $enddate = $occasion->end->toDateString();
+        $start = $startdate . ' ' . $data['start'];
+        $end = $enddate . ' ' . $data['end'];
+        $start = Carbon::createFromFormat('Y-m-d H:i', $start);
+        $end = Carbon::createFromFormat('Y-m-d H:i', $end);
 
         $occasion->update([
             'description' => $data['description'],
+            'street' =>$data['street'],
+            'lat' => $lat,
+            'lng' => $lng,
+            'start' => $start,
+            'end' => $end,
+            'max_people' => $data['max_people']
         ]);
 
         //check if image is submited
-        if(request()->has('profile_pic')) {
+        if(request()->has('picture')) {
             $occasion->update([
-                'picture' => request()->profile_pic->store('uploads', 'public'),
+                'picture' => request()->picture->store('uploads', 'public'),
             ]);
 
             //resize photo
