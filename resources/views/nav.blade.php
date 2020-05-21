@@ -11,14 +11,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-
-                <li class="nav-item">
-                    <a href="/questionary" class="nav-link top"><b>Questionary</b></a>
-                </li>
-                <li class="nav-item">
-                    <a href="/events" class="nav-link top"><b>Events</b></a>
-                </li>
-                @if(!Auth::guest())
+                @if(Auth::user())
+                    @if(Auth::user()->hasVerifiedEmail())
+                    <li class="nav-item">
+                        <a href="/questionary" class="nav-link top"><b>Questionary</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/events" class="nav-link top"><b>Events</b></a>
+                    </li>
+                    @endif
+                @endif
+                @if(!Auth::guest() && Auth::user()->hasVerifiedEmail())
                     <div id="notifyId" class="dropdown-container">
                         <li class="nav-item">
                             <a href="#" class="nav-link notify-button top heartbeat bell" data-toggle="dropdown"><i class="fas fa-bell big-bell">

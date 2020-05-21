@@ -5,7 +5,7 @@
         <!-- Sidebar -->
         <div class="sidebar-wrapper">
             <!-- Sidebar -->
-            <nav id="sidebar" class="pt-2">
+            <nav id="sidebar" class="border-right border-bottom border-danger">
                 <div class="sidebar-header">
                     <h3><span style="color: whitesmoke"><b>Filter Events :</b></span></h3>
                 </div>
@@ -76,25 +76,25 @@
 
             </nav>
             <!-- Page Content -->
-            <div id="content" class="p-2 container-fluid " style="background-color: antiquewhite">
-                    <div class="sidebar-header pl-4 header-index-events">
-                        <h1 class="text-white font-weight-bolder p-lg-3 pl-5">Upcoming events
-                            <button type="button" id="sidebarCollapse" class="btn btn-outline-quest2">
-                                <i class="fas fa-filter"></i>
-                            </button>
-                        </h1>
-                    </div>
+            <div id="content" class="container-fluid pt-2" style="background-color: #f1e5e6;">
+                <h1 class="p-lg-3 pl-5 border-bottom"><span class="events-title">Upcoming events</span>
+                    <button type="button" id="sidebarCollapse" class="btn btn-outline-quest2">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                    <span class="float-right">
+                        <a href="/events/create" class="btn btn-outline-quest2 rounded-pill zoom"><i class="fas fa-edit"></i> Make new event!</a>
+                    </span>
+                </h1>
 
                     @if(session()->has('message'))
                         <div class="alert alert-success" role="alert" style="border-width: 1px; border-color: #27864f">
                             <strong>Success</strong> {{ session()->get('message') }}
                         </div>
                     @endif
-                    <div class="container-fluid d-inline-block px-4 ">
-                        @if(!$occasions->isEmpty())
-                            <div class="row">
-                                @foreach($occasions as $eventNmb => $event)
-                                    <div class="col-md-3 my-4" data-aos="fade-up">
+                @if(!$occasions->isEmpty())
+                    <div class="row pl-4">
+                    @foreach($occasions as $eventNmb => $event)
+                                    <div class="col-lg-4 col-sm-8 col-md-8 my-4" data-aos="fade-up">
                                         <div class="card zoom " style="border-color: #FF8663; border-width: 2px; color: #2d995b;">
                                             <img class="card-img-top img-fluid" style="height: 225px; width: 100%; display: block;" @if($event->picture) src="{{ asset('storage/' .$event->picture) }}"
                                                  @else src="{{ url('images/hangout-sports/'.$event->category.'.png') }}"  @endif  alt="Card image cap">
@@ -115,24 +115,16 @@
                                     @include('occasions.show',  ['occasion' => $event])
                                 @endforeach
                             </div>
-                    </div>
                     @else
-                        <div class="container-fluid card p-5 ">
-                            <p class="mx-auto text-orange font-weight-bolder">There are no upcoming events</p>
-                            <a href="/events/create" class="btn btn-outline-quest2 btn-lg bg-light">Create one</a>
-
+                        <div class="card mt-5 rounded-pill">
+                            <div class="card-body text-center">
+                                <h4 class="mx-auto text-orange font-weight-bolder">There are no upcoming events </h4>
+                                <a href="/events/create" class="btn btn-outline-quest2 rounded-pill">Create one <i class="fas fa-plus"></i></a>
+                            </div>
                         </div>
                     @endif
-                    <div class="container-fluid  text-white bg mb-3" style=" background-color: #d93850">
-                        <a href="/events/create" style="color: white">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Make a new event</h5>
-                                <p class="card-text"><i class="fas fa-calendar-day fa-3x"></i></p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
             </div>
+        </div>
 
 
 @endsection

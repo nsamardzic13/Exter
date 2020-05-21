@@ -1001,4 +1001,13 @@ hr.light-100{
     color: rgba(255, 255, 255, 0.2);
     pointer-events: none;
 }
-////
+
+.events-title{
+    background-image: linear-gradient(135deg, #e32743 0%, rgba(255, 121, 63, 0.8) 100%);
+    background-clip: text;
+    color: transparent;
+    font-size: 1em;
+    font-weight: bolder;
+    background-size: 100%;
+    text-fill-color: transparent;
+}

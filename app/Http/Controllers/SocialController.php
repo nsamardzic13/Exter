@@ -7,8 +7,8 @@ use App\Hangout;
 use App\Sport;
 use App\User;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Socialite\Facades\Socialite;
@@ -33,7 +33,7 @@ class SocialController extends Controller
 
     }
     function createUser($getInfo,$provider){
-
+        //dd(\Illuminate\Support\Carbon::now());
         $user = User::where('provider_id', $getInfo->id)->first();
 
         if (!$user) {
@@ -56,6 +56,7 @@ class SocialController extends Controller
                 'firstname' => $getInfo->user['given_name'],
                 'lastname' => $getInfo->user['family_name'],
                 'email'    => $getInfo->email,
+                'email_verified_at' => now(),
                 'user_type' => 'false',
                 'provider' => $provider,
                 'provider_id' => $getInfo->id
